@@ -1,26 +1,11 @@
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification 
 for details on configuring this project to bundle and minify static web assets. */
-body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-}
-
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
-
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
 }
 
 /* QR code generator */
@@ -34,4 +19,63 @@ body {
     .carousel-caption {
         display: none;
     }
+}
+
+/******************************************/
+/*              NavBar                    */
+/******************************************/
+
+.navbar {
+    background-color: darkorchid;
+    background-image: linear-gradient(-45deg, #b86fdc, darkorchid)
+}
+
+/******************************************/
+/*              Backdrop                  */
+/******************************************/
+
+.backdrop {
+    background-image: url('../images/Breast_Carcinoma_Male2.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100%;
+    background-position: center;
+    position: absolute;
+}
+
+.overlay {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(244, 244, 244, 0.79);
+}
+
+/******************************************/
+/*              Welcome Page              */
+/******************************************/
+
+.intro {
+    position: absolute;
+    top: 30%;
+    margin: auto;
+    padding: 3rem;
+}
+
+.intro-header {
+    color: darkorchid;
+}
+
+.intro-para {
+    color: #666;
+    font-size: 1.5rem;
+    width: 80%;
+    line-height: 1.5;
+}
+
+.intro-btn {
+    border: 1px solid #b86fdc;
+    background-color: darkorchid;
+    color: #fff;
 }

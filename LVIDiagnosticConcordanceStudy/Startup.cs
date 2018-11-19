@@ -15,6 +15,10 @@ using Microsoft.Extensions.DependencyInjection;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using LVIDiagnosticConcordanceStudy.Infrastructure.Security;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace LVIDiagnosticConcordanceStudy
 {
@@ -44,11 +48,25 @@ namespace LVIDiagnosticConcordanceStudy
             services.AddDefaultIdentity<LVIStudyUser>()
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddTransient<IUserClaimsPrincipalFactory<LVIStudyUser>, ClaimsPrincipalFactory<LVIStudyUser>>();
+
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
+            services.AddMvc(config =>
+                {
+                    var policy = new AuthorizationPolicyBuilder()
+                                    .RequireAuthenticatedUser()
+                                    .Build();
+                    config.Filters.Add(new AuthorizeFilter(policy));
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(CustomClaimTypes.IsAdmin, "true"));
+            });
 
             services.Configure<RequestLocalizationOptions>(options =>
             {

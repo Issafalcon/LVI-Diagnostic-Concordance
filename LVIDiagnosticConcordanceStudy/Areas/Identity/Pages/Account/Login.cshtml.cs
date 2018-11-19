@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 {
@@ -61,7 +63,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            //ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             ReturnUrl = returnUrl;
         }
@@ -78,6 +80,17 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    // Get the saved localization preference for the user and store in the default culture cookie
+                    LVIStudyUser user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                    string userCulture = user.Culture;
+
+                    Response.Cookies.Append(
+                        CookieRequestCultureProvider.DefaultCookieName,
+                        CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(userCulture)),
+                        new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+                    );
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

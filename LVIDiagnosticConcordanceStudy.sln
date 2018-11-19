@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LVIDiagnosticConcordanceStudy", "LVIDiagnosticConcordanceStudy\LVIDiagnosticConcordanceStudy.csproj", "{91F18CE7-0ECD-44DC-85D7-7717BAD3E815}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LVIDiagnosticConcordanceStudy", "LVIDiagnosticConcordanceStudy\LVIDiagnosticConcordanceStudy.csproj", "{91F18CE7-0ECD-44DC-85D7-7717BAD3E815}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
