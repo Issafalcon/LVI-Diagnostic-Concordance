@@ -1,0 +1,105 @@
+Data Points Per Case
+-------------------------
+
+Starting Values
+
+Column		Meaning		Formula
+------		-------		-------
+A			Row Num		Sequential Numbers
+B			Age			(Given)
+C			Size		(GIven)
+D			Grade		(Provided by user)
+E			Num LVI		(Provided by user)
+AE			LVI Present	(Boolean - 1 if LVI reported, 0 if not)
+
+Constants
+Column		Meaning								Value
+------		-------								-------
+L			PR(LVI +ve)							0.296169989506821
+M			PR(LVI -ve)							0.703830010493179
+AF			LVI Risk Pre-Test MIN				0.00192686314110848
+AG			LVI Risk Pre-Test MAX				1
+AH			????								AG - AF / 3 = 0.332691046
+AI			Interval							AG - AF / 5 = 0.199614627
+AJ			????								AH * 2 = 0.665382091
+AK			Second Interval						AI * 2 = 0.399229255
+AL			Third Interval						AI * 3 = 0.598843882
+AM			Forth Interval						AI * 4 = 0.798458509
+
+AN			Below 50yrs LVI Positive			0.500886524822695
+AO			Below 50yrs LVI Negative			0.376730265619155
+AP			Below 1cm LVI Positive				0.0767123287671233
+AQ			Below 1cm LVI Negative				0.229457364341085
+AR			1-2cm LVI Positive					0.4337899543379
+AS			1-2cm LVI Negative					0.50077519379845
+AT			2-5cm LVI Positive					0.489497716894977
+AU			2-5cm LVI Negative					0.269767441860465
+AV			Grade 1 LVI Negative				0.0741503604531411
+AW			Grade 1 LVI Positive				0.240805604203152
+AX			Grade 2 LVI Negative				0.331616889804325
+AY			Grade 2 LVI Positive				0.387040280210158
+AZ			Grade 3 LVI Positive				0.594232749742533
+BA 			Grade 3 LVI Negative				0.37215411558669
+BB			Num Images LVI=0, LVI Positive		0.04
+BC			Num Images LVI=0, LVI Negative		0.71875
+BD			Num Images LVI=1-2, LVI Positive	0.44
+BE			Num Images LVI=1-2, LVI Negative	0.25
+BF			Num Images LVI=2-3, LVI Positive	0.12
+BG			Num Images LVI=2-3, LVI Negative	0.03125
+BH			Num Images LVI > 4, LVI Positive	0.4
+BI			Num Images LVI > 4, LVI Negative	0
+
+Calculated Values
+Column		Meaning												Formula
+------		-------												-------
+J			RISK 5TIER PRE-TEST									If V < AI then "VERY LOW", else if V < AK then "LOW" else if V < AL then "INTERMEDIATE" Else if V < AM then "HIGH" else "VERY HIGH"
+K			RISK  5TIER POST-TEST								If Y < AI then "VERY LOW", else if Y < AK then "LOW" else if Y < AL then "INTERMEDIATE" Else if Y < AM then "HIGH" else "VERY HIGH"
+		
+N			PR(LVI +ve given age >=50) 							If < 51 yrs, then AN, otherwise 1-AN (0.499113475)
+0			PR(LVI -ve given age >=50							If < 51 yrs, then AO, otherwise 1-AO (0.623269734)
+P			Bayes 1 (Age) (Real chance of having LVI)			(N * L)/((N * L) + (O * M)
+		
+Q			PR(LVI +ve according to tumour size)				If Size (C) > 2 then AT Else If Size > 1 then AR Else AP
+R			PR(LVI -ve according to tumour size)				If Size (C) > 2 then AU Else If Size > 1 then AS Else AQ
+S			Bayes 2 (Size) (Real chance of having LVI)			(Q * P)/((Q * P) + (R * (1 - P)))
+		
+T			PR(LVI +ve according to grade)						If Grade (D) = 1 then AV, Else If Grade = 2 then AX, Else IF Grade = 3 then AZ
+U			PR(LVI -ve according to grade)						If Grade (D) = 1 then AW, Else If Grade = 2 then AY, Else IF Grade = 3 then BA
+V			Bayes 3 (Grade) (Real chance of having LVI)			(T * S)/((T * S) + (U * (1-S)))
+
+W			PR(LVI +ve according to num images LVI reported)	If Num LVI (E) = 0 then BB, else if E < 3 then BD, else if E < 4 then BF else BH
+X			PR(LVI -ve according to num images LVI reported)	If Num LVI (E) = 0 then BC, else if E < 3 then BE, else if E < 4 then BG else BI
+Y			Bayes 4 (Num LVI) (Real change of having LVI)		(W * V)/((W * V) + (X * (1 - V)))
+			AKA Post Test Probability
+			
+Z			Cumulative Bayes 3 score across all reports 		(i.e. Bayes 3 + bayes 3 of previous report)
+AA			Cumulative Bayes 3 score / number of reports		Z / A
+
+AB			Cumulative number of reports with LVI positive		(i.e. AE + AE of previous report)
+
+AC			Binomial Distribution(AB, A, AA, FALSE)
+
+Chart Calculations
+-------------------------
+Graph - Cumulative Probability Curve
+
+X-Axis = Number of Cases of LVI Positive
+Y - Axis = Likelihood Ratio
+
+CC = The value of AC of the most recent report (cumulative)
+CD = A (The number of reported cases i.e. Report number)
+CE = 0 based index for report numbers
+CF = The value of AA of the most recent report (cumulative)
+CG = BINOMDIST(CE, CD, CF, FALSE)
+CI = The value of AB of the most recent report (cumulative)
+CH = If CI = CE, then take the value of CC, otherwise 0 (gives the observed value for the current report)
+
+SERIES
+------
+THEORETICAL Formula =SERIES("THEORETICAL",'ENGLISH (2)'!$CE$2:$CE$101,'ENGLISH (2)'!$CG$2:$CG$101,1)
+- Takes the 0 based index (CE) of reports as the X-axis category
+- Takes the value of CG for each reported case as its value
+
+OBSERVED Formula =SERIES("OBSERVED",'ENGLISH (2)'!$CE$2:$CE$101,'ENGLISH (2)'!$CH$2:$CH$101,2)
+- Takes the 0 based index (CE) of reports
+- Takes the value of CH for each reported case (just one - the case number in question we are calculating on the fly) - FInds the 0 based index that matches to the cumulative number of reports with LVI +ve

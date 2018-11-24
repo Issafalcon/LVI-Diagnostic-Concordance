@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using LVIDiagnosticConcordanceStudy.Infrastructure.Security;
 using Microsoft.AspNetCore.Mvc.Razor;
+using LVIDiagnosticConcordanceStudy.Infrastructure.Localization;
+using System.Reflection;
 
 namespace LVIDiagnosticConcordanceStudy
 {
@@ -60,8 +62,16 @@ namespace LVIDiagnosticConcordanceStudy
                     config.Filters.Add(new AuthorizeFilter(policy));
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization();
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix, options =>
+                {
+                    options.ResourcesPath = "Resources";
+                })
+                .AddDataAnnotationsLocalization(options => 
+                {
+                    var resourceType = typeof(SharedResource);
+                    var assemblyName = new AssemblyName(resourceType.GetTypeInfo().Assembly.FullName);
+                    options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create("SharedResource", assemblyName.FullName);
+                });
 
             services.AddAuthorization(options =>
             {

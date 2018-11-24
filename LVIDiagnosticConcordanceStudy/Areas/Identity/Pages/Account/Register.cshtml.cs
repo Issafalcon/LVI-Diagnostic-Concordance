@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Localization;
+using LVIDiagnosticConcordanceStudy.Infrastructure.Localization;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 {
@@ -20,17 +22,20 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
         private readonly UserManager<LVIStudyUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IStringLocalizer<RegisterModel> _localizer;
 
         public RegisterModel(
             UserManager<LVIStudyUser> userManager,
             SignInManager<LVIStudyUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IStringLocalizer<RegisterModel> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _localizer = localizer;
         }
 
         [BindProperty]
@@ -55,6 +60,36 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required(ErrorMessage = "Error Gender")]
+            [Display(Name = "Surname")]
+            public string LastName { get; set; }
+
+            [PersonalData]
+            [Required(ErrorMessage ="Error Gender")]
+            public string Gender { get; set; }
+
+            [PersonalData]
+            public string Nationality { get; set; }
+
+            [PersonalData]
+            public string Culture { get; set; }
+
+            [PersonalData]
+            public string PlaceOfWork { get; set; }
+
+            [PersonalData]
+            public int YearsQualified { get; set; }
+
+            [PersonalData]
+            public int YearsInPath { get; set; }
+
+            [PersonalData]
+            public bool IsBreastSpecialist { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
