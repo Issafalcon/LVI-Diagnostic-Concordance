@@ -8,12 +8,16 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Migrations\20181126174242_First pass data models.cs" />
+    <Compile Remove="Migrations\20181126174242_First pass data models.Designer.cs" />
+    <Compile Remove="Migrations\20181126174812_Changed decimal to float data type for stats.cs" />
+    <Compile Remove="Migrations\20181126174812_Changed decimal to float data type for stats.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

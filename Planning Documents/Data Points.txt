@@ -34,10 +34,10 @@ AR			1-2cm LVI Positive					0.4337899543379
 AS			1-2cm LVI Negative					0.50077519379845
 AT			2-5cm LVI Positive					0.489497716894977
 AU			2-5cm LVI Negative					0.269767441860465
-AV			Grade 1 LVI Negative				0.0741503604531411
-AW			Grade 1 LVI Positive				0.240805604203152
-AX			Grade 2 LVI Negative				0.331616889804325
-AY			Grade 2 LVI Positive				0.387040280210158
+AV			Grade 1 LVI Positive				0.0741503604531411
+AW			Grade 1 LVI Negative				0.240805604203152
+AX			Grade 2 LVI Positive				0.331616889804325
+AY			Grade 2 LVI Negative				0.387040280210158
 AZ			Grade 3 LVI Positive				0.594232749742533
 BA 			Grade 3 LVI Negative				0.37215411558669
 BB			Num Images LVI=0, LVI Positive		0.04

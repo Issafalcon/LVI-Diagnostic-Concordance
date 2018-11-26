@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
+using LVIDiagnosticConcordanceStudy.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,10 @@ namespace LVIDiagnosticConcordanceStudy.Data
             : base(options)
         {
         }
+
+        public DbSet<Case> Case { get; set; }
+        public DbSet<Report> Report { get; set; }
+        public DbSet<ReportStatistics> ReportStatistics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

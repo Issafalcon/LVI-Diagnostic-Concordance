@@ -83,7 +83,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 
                     // Get the saved localization preference for the user and store in the default culture cookie
                     LVIStudyUser user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
-                    string userCulture = user.Culture;
+                    string userCulture = user?.Culture ?? "en-GB";
 
                     Response.Cookies.Append(
                         CookieRequestCultureProvider.DefaultCookieName,

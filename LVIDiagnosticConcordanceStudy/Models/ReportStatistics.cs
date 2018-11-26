@@ -11,28 +11,45 @@ namespace LVIDiagnosticConcordanceStudy.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ID { get; set; }
+        public int ReportStatisticsID { get; set; }
 
         public bool LVIPresent { get; set; }
+        [Column(TypeName = "float")]
         public decimal ProbLVIPos50Plus { get; set; }
+        [Column(TypeName = "float")]
         public decimal ProbLVINeg50Plus { get; set; }
+        [Column(TypeName = "float")]
         public decimal BayesForAge { get; set; }
+        [Column(TypeName = "float")]
         public decimal ProbLVIPosSize { get; set; }
+        [Column(TypeName = "float")]
         public decimal ProbLVINegSize { get; set; }
+        [Column(TypeName = "float")]
         public decimal BayesForSize { get; set; }
+        [Column(TypeName = "float")]
         public decimal ProbLVIPosGrade { get; set; }
+        [Column(TypeName = "float")]
         public decimal ProbLVINegGrade { get; set; }
+        [Column(TypeName = "float")]
         public decimal BayesForGrade { get; set; }
+        [Column(TypeName = "float")]
         public decimal ProbLVIPosNumberOfLVI { get; set; }
+        [Column(TypeName = "float")]
         public decimal ProbLVINegNumberOfLVI { get; set; }
+        [Column(TypeName = "float")]
         public decimal BayesForNumberOfLVI { get; set; }
 
+        [Column(TypeName = "float")]
         public decimal CumulativeBayesForSize { get; set; }
+        [Column(TypeName = "float")]
         public decimal CumulativeAverageBayesForSize { get; set; }
-        public decimal CumulativeCasesWithLVIPos { get; set; }
 
+        public int CumulativeCasesWithLVIPos { get; set; }
+
+        [Column(TypeName = "float")]
         public decimal BinomialDist { get; set; }
-        public decimal TheoreticalBinomialDist { get; set; }
+        [Column(TypeName = "float")]
+        public double TheoreticalBinomialDist { get; set; }
 
         public bool IsSubmitted { get; set; }
 
@@ -62,12 +79,28 @@ namespace LVIDiagnosticConcordanceStudy.Models
             ProbLVIPosSize = tumourSize > 2 ? DataConstants.TwoToFivecmLVIPos
                 : tumourSize > 1 ? DataConstants.OneToTwocmLVIPos
                 : DataConstants.BelowOnecmLVIPos;
-
             ProbLVINegSize = tumourSize > 2 ? DataConstants.TwoToFivecmLVINeg
                 : tumourSize > 1 ? DataConstants.OneToTwocmLVINeg
                 : DataConstants.BelowOnecmLVINeg;
-                
+            BayesForSize = CalculateBayes(BayesForAge, ProbLVIPosSize, ProbLVINegSize, 1 - BayesForAge);
 
+            ProbLVIPosGrade = (int)grade.Value == 1 ? DataConstants.GradeOneLVIPos
+                : (int)grade.Value == 2 ? DataConstants.GradeTwoLVIPos
+                : DataConstants.GradeThreeLVIPos;
+            ProbLVINegGrade = (int)grade.Value == 1 ? DataConstants.GradeOneLVINeg
+                : (int)grade.Value == 2 ? DataConstants.GradeTwoLVINeg
+                : DataConstants.GradeThreeLVINeg;
+            BayesForGrade = CalculateBayes(BayesForSize, ProbLVIPosGrade, ProbLVINegGrade, 1 - BayesForSize);
+
+            ProbLVIPosNumberOfLVI = numLVISeen == 0 ? DataConstants.ZeroLVIImagesLVIPos
+                : numLVISeen < 3 ? DataConstants.OneToTwoLVIImagesLVIPos
+                : numLVISeen < 4 ? DataConstants.TwoToThreeLVIImagesLVIPos
+                : DataConstants.FivePlusLVIImagesLVIPos;
+            ProbLVINegNumberOfLVI = numLVISeen == 0 ? DataConstants.ZeroLVIImagesLVINeg
+                : numLVISeen < 3 ? DataConstants.OneToTwoLVIImagesLVINeg
+                : numLVISeen < 4 ? DataConstants.TwoToThreeLVIImagesLVINeg
+                : DataConstants.FivePlusLVIImagesLVINeg;
+            BayesForNumberOfLVI = CalculateBayes(BayesForGrade, ProbLVIPosNumberOfLVI, ProbLVINegNumberOfLVI, 1 - BayesForGrade);
         }
 
         private decimal CalculateBayes(decimal baseProb, decimal positivePredictiveProb, decimal negativePredictiveProb, decimal baseNegativePredictiveProb)

@@ -13,7 +13,7 @@ namespace LVIDiagnosticConcordanceStudy.Models
         [Key]
         public int ReportID { get; set; }
 
-        public string UserID { get; set; }
+        public int UserReportNumber { get; set; }
 
         [Required]
         [Display(Name = "Grade")]
@@ -25,6 +25,7 @@ namespace LVIDiagnosticConcordanceStudy.Models
 
         // Navigation Properties
 
+        public string UserID { get; set; }
         [ForeignKey("UserID")]
         public LVIStudyUser User { get; set; }
 
@@ -35,7 +36,7 @@ namespace LVIDiagnosticConcordanceStudy.Models
 
     public enum Grade
     {
-        G1,
+        G1 = 1,
         G2,
         G3
     }
