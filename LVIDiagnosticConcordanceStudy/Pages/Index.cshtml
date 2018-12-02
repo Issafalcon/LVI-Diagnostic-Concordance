@@ -5,14 +5,19 @@
 }
 
 @using Microsoft.AspNetCore.Mvc.Localization
+@using Areas.Identity.Data
 
 @inject IViewLocalizer Localizer
+@inject SignInManager<LVIStudyUser> SignInManager
 
 
 
 <div class="intro">
-    <h1 class="intro-header">@Localizer["Breast Pathology Quality Assessment"]</h1>
+    <h1>@Localizer["Breast Pathology Quality Assessment"]</h1>
     <p class="intro-para">@Localizer["Welcome to Breast pathology Quality Assessment"]</p>
-    <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Login"]</a>
-    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Register"]</a>
+    @if (!SignInManager.IsSignedIn(User))
+    {
+        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Login"]</a>
+        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Register"]</a>
+    }
 </div>

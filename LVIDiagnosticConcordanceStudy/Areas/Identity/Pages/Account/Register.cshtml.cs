@@ -12,6 +12,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Localization;
 using LVIDiagnosticConcordanceStudy.Infrastructure.Localization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Builder;
+using System.Linq;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 {
@@ -23,26 +27,39 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IStringLocalizer<RegisterModel> _localizer;
+        private readonly IOptions<RequestLocalizationOptions> _locOptions;
 
         public RegisterModel(
             UserManager<LVIStudyUser> userManager,
             SignInManager<LVIStudyUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IStringLocalizer<RegisterModel> localizer)
+            IStringLocalizer<RegisterModel> localizer,
+            IOptions<RequestLocalizationOptions> locOptions)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _localizer = localizer;
+            _locOptions = locOptions;
         }
 
         [BindProperty]
         public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
-
+        
+        public List<SelectListItem> Cultures
+        {
+            get
+            {
+                return _locOptions.Value.SupportedUICultures
+                    .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+                    .ToList();
+            }
+        }
+            
         public class InputModel
         {
             [Required]
@@ -61,34 +78,42 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "FirstNameRequired_Error")]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
-            [Required(ErrorMessage = "Error Gender")]
-            [Display(Name = "Surname")]
+            [Required(ErrorMessage = "LastNameRequired_Error")]
+            [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage ="Error Gender")]
+            [Required(ErrorMessage = "GenderRequired_Error")]
             public string Gender { get; set; }
 
             [PersonalData]
+            [Required(ErrorMessage = "NationalityRequired_Error")]
             public string Nationality { get; set; }
 
             [PersonalData]
+            [Required(ErrorMessage = "Please select your preferred language")]
+            [Display(Name = "Preferred Language")]
             public string Culture { get; set; }
-
             [PersonalData]
+            [Display(Name = "Work Place (Hospital)")]
             public string PlaceOfWork { get; set; }
 
             [PersonalData]
+            [Required(ErrorMessage = "Please enter the number of years you have been qualified")]
+            [Display(Name = "Years Qualified", Description = "The number of years you have been qualified as a doctor")]
             public int YearsQualified { get; set; }
 
             [PersonalData]
+            [Required(ErrorMessage = "Please enter the number of years you have worked in histopathology")]
+            [Display(Name = "Years In Histopathology", Description = "The number of years you have been working in the specialty of histopathology")]
             public int YearsInPath { get; set; }
 
             [PersonalData]
+            [Display(Name = "Subspecialty In Breast Pathology", Description = "Check the box if you subspecialise in breast pathology")]
             public bool IsBreastSpecialist { get; set; }
         }
 
@@ -102,7 +127,9 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new LVIStudyUser { UserName = Input.Email, Email = Input.Email };
+                var user = new LVIStudyUser();
+
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

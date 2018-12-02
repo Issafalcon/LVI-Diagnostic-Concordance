@@ -4,14 +4,22 @@
     ViewData["Title"] = "Register";
 }
 
-<h2>@ViewData["Title"]</h2>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
+@{ 
+    List<SelectListItem> YesNoDropDown = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "", Text = "" },
+        new SelectListItem { Value = "true", Text = "Yes" },
+        new SelectListItem { Value = "false", Text = "No" }
+    };
+}
+<div class="row justify-content-center">
+    <div class="col-md-6 card">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="card-body">
+            <h1>Create a new account</h1>
+            <h4 class="card-subtitle mb-2 text-muted">@ViewData["Title"]</h4>
             <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
+
             <div class="form-group">
                 <label asp-for="Input.FirstName"></label>
                 <input asp-for="Input.FirstName" class="form-control" />
@@ -21,6 +29,45 @@
                 <label asp-for="Input.LastName"></label>
                 <input asp-for="Input.LastName" class="form-control" />
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Gender"></label>
+                <select asp-for="Input.Gender" class="form-control" asp-items="@Html.GetEnumSelectList<GenderEnum>()">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="Input.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Nationality"></label>
+                <input asp-for="Input.Nationality" class="form-control" />
+                <span asp-validation-for="Input.Nationality" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Culture"></label>
+                <select asp-for="Input.Culture" class="form-control" asp-items="@Model.Cultures">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="Input.Culture" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PlaceOfWork"></label>
+                <input asp-for="Input.PlaceOfWork" class="form-control" />
+                <span asp-validation-for="Input.PlaceOfWork" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.YearsQualified"></label>
+                <input asp-for="Input.YearsQualified" class="form-control" />
+                <span asp-validation-for="Input.YearsQualified" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.YearsInPath"></label>
+                <input asp-for="Input.YearsInPath" class="form-control" />
+                <span asp-validation-for="Input.YearsInPath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.IsBreastSpecialist"></label>
+                <select asp-for="Input.IsBreastSpecialist" class="form-control" asp-items="YesNoDropDown"></select>
+                <span asp-validation-for="Input.IsBreastSpecialist" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Email"></label>
@@ -37,14 +84,8 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Gender"></label>
-                <select asp-for="Input.Gender" class="form-control" asp-items="@Html.GetEnumSelectList<GenderEnum>()">
-                    <option value=""></option>
-                </select>
-                <span asp-validation-for="Input.Gender" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-default">Register</button>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <button type="submit" class="btn btn-outline-secondary btn-lg intro-btn">Register</button>
         </form>
     </div>
 </div>

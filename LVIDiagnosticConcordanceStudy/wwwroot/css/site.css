@@ -8,17 +8,14 @@ for details on configuring this project to bundle and minify static web assets. 
     padding-right: 15px;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
-}
+/******************************************/
+/*              Base                      */
+/******************************************/
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+/* Typography */
+
+h1 {
+    color: darkorchid;
 }
 
 /******************************************/
@@ -61,10 +58,6 @@ for details on configuring this project to bundle and minify static web assets. 
     top: 30%;
     margin: auto;
     padding: 3rem;
-}
-
-.intro-header {
-    color: darkorchid;
 }
 
 .intro-para {
