@@ -1,9 +1,9 @@
 ﻿@inject SignInManager<LVIStudyUser> SignInManager
-@{
-    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
-}
-<ul class="nav nav-pills nav-stacked">
-    <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-page="./Index">Profile</a></li>
-    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a id="change-password" asp-page="./ChangePassword">Password</a></li>
-    <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./PersonalData">Personal data</a></li>
-</ul>
+
+
+<div class="btn-group-lg btn-group-vertical py-2">
+    <a asp-page="./Index" class="btn btn-outline-secondary intro-btn @ManageNavPages.IndexNavClass(ViewContext)">Profile</a>
+    <a id="change-password" asp-page="./ChangePassword" class="btn btn-outline-secondary intro-btn @ManageNavPages.ChangePasswordNavClass(ViewContext)">Password</a>
+    <a asp-page="./PersonalData" class="btn btn-outline-secondary intro-btn @ManageNavPages.PersonalDataNavClass(ViewContext)">Personal data</a>
+</div>
+

@@ -5,6 +5,7 @@ using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
 using LVIDiagnosticConcordanceStudy.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LVIDiagnosticConcordanceStudy.Data
 {
@@ -25,6 +26,10 @@ namespace LVIDiagnosticConcordanceStudy.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+
+            builder.Entity<LVIStudyUser>()
+                .Property(e => e.Gender)
+                .HasConversion(new EnumToStringConverter<GenderEnum>());
         }
     }
 }

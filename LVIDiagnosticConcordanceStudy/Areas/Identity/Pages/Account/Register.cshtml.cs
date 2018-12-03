@@ -90,7 +90,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 
             [PersonalData]
             [Required(ErrorMessage = "GenderRequired_Error")]
-            public string Gender { get; set; }
+            public GenderEnum Gender { get; set; }
 
             [PersonalData]
             [Required(ErrorMessage = "NationalityRequired_Error")]

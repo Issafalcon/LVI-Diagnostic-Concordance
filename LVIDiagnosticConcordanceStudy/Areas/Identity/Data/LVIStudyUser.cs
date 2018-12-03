@@ -19,7 +19,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Data
         public string LastName { get; set; }
 
         [PersonalData]
-        public string Gender { get; set; }
+        public GenderEnum Gender { get; set; }
 
         [PersonalData]
         public string Nationality { get; set; }

@@ -72,3 +72,21 @@ h1, h2 {
     background-color: darkorchid;
     color: #fff;
 }
+
+/******************************************/
+/*              Admin Pages               */
+/******************************************/
+
+.admin {
+    position: relative;
+    top: 10%;
+    margin: auto;
+    padding: 2rem;
+}
+
+.admin-subheader {
+    color: #666;
+    font-size: 1.5rem;
+    width: 80%;
+    line-height: 1.5;
+}
