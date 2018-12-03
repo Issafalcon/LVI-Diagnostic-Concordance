@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Localization;
+using LVIDiagnosticConcordanceStudy.Infrastructure.Localization;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 {
@@ -20,11 +22,13 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<LVIStudyUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
-        public LoginModel(SignInManager<LVIStudyUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<LVIStudyUser> signInManager, ILogger<LoginModel> logger, IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [BindProperty]
@@ -74,39 +78,50 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User logged in.");
+                LVIStudyUser user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
 
-                    // Get the saved localization preference for the user and store in the default culture cookie
-                    LVIStudyUser user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
-                    string userCulture = user?.Culture ?? "en-GB";
+                if (user != null)
+                {
+                    if (!await _signInManager.UserManager.IsEmailConfirmedAsync(user))
+                    {
+                        ModelState.AddModelError(string.Empty, _sharedLocalizer["Please confirm your e-mail before logging in."]);
+                        return Page();
+                    }
 
-                    Response.Cookies.Append(
-                        CookieRequestCultureProvider.DefaultCookieName,
-                        CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(userCulture)),
-                        new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
-                    );
+                    // This doesn't count login failures towards account lockout
+                    // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                    var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("User logged in.");
 
-                    return LocalRedirect(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
+                        // Get the saved localization preference for the user and store in the default culture cookie
+                        string userCulture = user.Culture ?? "en-GB";
+
+                        Response.Cookies.Append(
+                            CookieRequestCultureProvider.DefaultCookieName,
+                            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(userCulture)),
+                            new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+                        );
+
+                        return LocalRedirect(returnUrl);
+                    }
+                    if (result.IsLockedOut)
+                    {
+                        _logger.LogWarning("User account locked out.");
+                        return RedirectToPage("./Lockout");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, _sharedLocalizer["Invalid login attempt."]);
+                        return Page();
+                    }
+                } else
                 {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                    ModelState.AddModelError(string.Empty, _sharedLocalizer["Invalid login attempt."]);
                 }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
-                }
+
+                
             }
 
             // If we got this far, something failed, redisplay form

@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Builder;
 using System.Linq;
+using System.Security.Claims;
+using LVIDiagnosticConcordanceStudy.Infrastructure.Security;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 {
@@ -27,7 +29,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IStringLocalizer<RegisterModel> _localizer;
-        private readonly IOptions<RequestLocalizationOptions> _locOptions;
+        private readonly RequestLocalizationOptions _locOptions;
 
         public RegisterModel(
             UserManager<LVIStudyUser> userManager,
@@ -42,7 +44,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _localizer = localizer;
-            _locOptions = locOptions;
+            _locOptions = locOptions.Value;
         }
 
         [BindProperty]
@@ -54,7 +56,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
         {
             get
             {
-                return _locOptions.Value.SupportedUICultures
+                return _locOptions.SupportedUICultures
                     .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
                     .ToList();
             }
@@ -98,6 +100,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "Please select your preferred language")]
             [Display(Name = "Preferred Language")]
             public string Culture { get; set; }
+
             [PersonalData]
             [Display(Name = "Work Place (Hospital)")]
             public string PlaceOfWork { get; set; }
@@ -117,6 +120,48 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             public bool IsBreastSpecialist { get; set; }
         }
 
+        private async Task RandomizeIntoGroup(LVIStudyUser newParticipant)
+        {
+            Random random = new Random();
+
+            int controlFlag = random.Next(0, 2);
+            var participants = await _userManager.GetUsersForClaimAsync(new Claim(CustomClaimTypes.IsAdmin, "false"));
+
+            switch (controlFlag)
+            {
+                case 0:
+                    int controlGroupCount = (from participant in participants
+                                             where participant.InControlGroup == true
+                                             select participant).Count();
+                    if (controlGroupCount >= 10)
+                    {
+                        newParticipant.InControlGroup = false;
+                    }
+                    else
+                    {
+                        newParticipant.InControlGroup = true;
+                    }
+
+                    break;
+                case 1:
+                    int interventionGroupCount = (from participant in participants
+                                                 where participant.InControlGroup == false
+                                                 select participant).Count();
+                    if (interventionGroupCount >= 10)
+                    {
+                        newParticipant.InControlGroup = true;
+                    }
+                    else
+                    {
+                        newParticipant.InControlGroup = false;
+                    }
+
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public void OnGet(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
@@ -129,6 +174,11 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             {
                 var user = new LVIStudyUser();
 
+                await TryUpdateModelAsync<LVIStudyUser>(user, "input");
+
+                await RandomizeIntoGroup(user);
+
+                user.UserName = user.Email;
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
@@ -145,7 +195,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    // await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)

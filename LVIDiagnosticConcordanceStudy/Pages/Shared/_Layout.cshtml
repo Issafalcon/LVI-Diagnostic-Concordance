@@ -7,7 +7,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - LVIDiagnosticConcordanceStudy</title>
+    <meta name="author" content="Dr. Adam Figgins" />
+    <meta name="description" content="Data collection tool for the Breast Pathology Quality Assurance Study" />
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>@ViewData["Title"] - Breast Pathology QA</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -49,12 +53,6 @@
     <div class="backdrop container-fluid">
         <div class="overlay"></div>
         <div class="body-content" style="margin-top:60px">
-            @if (!SignInManager.IsSignedIn(User))
-            {
-                <div class="row justify-content-md-end">
-                    @await Html.PartialAsync("_SelectLanguagePartial")
-                </div>
-            }
 
             @RenderBody()
 

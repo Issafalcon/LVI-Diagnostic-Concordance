@@ -21,6 +21,8 @@ using LVIDiagnosticConcordanceStudy.Infrastructure.Security;
 using Microsoft.AspNetCore.Mvc.Razor;
 using LVIDiagnosticConcordanceStudy.Infrastructure.Localization;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using LVIDiagnosticConcordanceStudy.Services;
 
 namespace LVIDiagnosticConcordanceStudy
 {
@@ -47,8 +49,12 @@ namespace LVIDiagnosticConcordanceStudy
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<LVIStudyUser>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<LVIStudyUser>(options =>
+            {
+                options.SignIn.RequireConfirmedEmail = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddTransient<IUserClaimsPrincipalFactory<LVIStudyUser>, ClaimsPrincipalFactory<LVIStudyUser>>();
 
@@ -90,6 +96,9 @@ namespace LVIDiagnosticConcordanceStudy
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
+
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<SendGridOptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

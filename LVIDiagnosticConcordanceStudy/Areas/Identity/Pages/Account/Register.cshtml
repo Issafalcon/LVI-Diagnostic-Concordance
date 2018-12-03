@@ -4,15 +4,25 @@
     ViewData["Title"] = "Register";
 }
 
+@inject SignInManager<LVIStudyUser> SignInManager
 
-@{ 
+@{
     List<SelectListItem> YesNoDropDown = new List<SelectListItem>
     {
-        new SelectListItem { Value = "", Text = "" },
-        new SelectListItem { Value = "true", Text = "Yes" },
-        new SelectListItem { Value = "false", Text = "No" }
+    new SelectListItem { Value = "", Text = "" },
+    new SelectListItem { Value = "true", Text = "Yes" },
+    new SelectListItem { Value = "false", Text = "No" }
     };
 }
+
+
+@if (!SignInManager.IsSignedIn(User))
+{
+    <div class="row justify-content-md-end">
+        @await Html.PartialAsync("_SelectLanguagePartial")
+    </div>
+}
+
 <div class="row justify-content-center">
     <div class="col-md-6 card">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="card-body">

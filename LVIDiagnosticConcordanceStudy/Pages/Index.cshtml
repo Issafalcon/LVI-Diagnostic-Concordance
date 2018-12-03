@@ -11,8 +11,15 @@
 @inject SignInManager<LVIStudyUser> SignInManager
 
 
+@if (!SignInManager.IsSignedIn(User))
+{
+    <div class="row justify-content-md-end">
+        @await Html.PartialAsync("_SelectLanguagePartial")
+    </div>
+}
 
 <div class="intro">
+
     <h1>@Localizer["Breast Pathology Quality Assessment"]</h1>
     <p class="intro-para">@Localizer["Welcome to Breast pathology Quality Assessment"]</p>
     @if (!SignInManager.IsSignedIn(User))

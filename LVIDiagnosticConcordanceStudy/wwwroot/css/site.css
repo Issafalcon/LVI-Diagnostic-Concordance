@@ -14,7 +14,7 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* Typography */
 
-h1 {
+h1, h2 {
     color: darkorchid;
 }
 
@@ -32,7 +32,7 @@ h1 {
 /******************************************/
 
 .backdrop {
-    background-image: url('../images/Breast_Carcinoma_Male2.jpg');
+    background-image: url('../images/microscope-316556_1280.jpg');
     background-attachment: fixed;
     background-size: cover;
     min-height: 100%;
