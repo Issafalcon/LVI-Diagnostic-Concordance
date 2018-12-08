@@ -18,13 +18,17 @@
     </div>
 }
 
-<div class="intro">
+    <div class="intro">
 
-    <h1>@Localizer["Breast Pathology Quality Assessment"]</h1>
-    <p class="intro-para">@Localizer["Welcome to Breast pathology Quality Assessment"]</p>
-    @if (!SignInManager.IsSignedIn(User))
-    {
-        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Login"]</a>
-        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Register"]</a>
-    }
-</div>
+        <h1>@Localizer["Breast Pathology Quality Assessment"]</h1>
+        <p class="intro-para">@Localizer["Welcome to Breast pathology Quality Assessment"]</p>
+        @if (!SignInManager.IsSignedIn(User))
+        {
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Login"]</a>
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Register"]</a>
+        }
+        else
+        {
+            <a asp-page="/Account/Login" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Cases"]</a>
+        }
+    </div>

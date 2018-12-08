@@ -5,6 +5,7 @@ using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
 using LVIDiagnosticConcordanceStudy.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LVIDiagnosticConcordanceStudy.Data
@@ -18,7 +19,6 @@ namespace LVIDiagnosticConcordanceStudy.Data
 
         public DbSet<Case> Case { get; set; }
         public DbSet<Report> Report { get; set; }
-        public DbSet<ReportStatistics> ReportStatistics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -27,9 +27,32 @@ namespace LVIDiagnosticConcordanceStudy.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
 
-            builder.Entity<LVIStudyUser>()
-                .Property(e => e.Gender)
+            builder.Entity<LVIStudyUser>(ConfigureLVIStudyUser);
+            builder.Entity<Case>(ConfigureCase);
+            builder.Entity<Report>(ConfigureReport);
+        }
+
+        private void ConfigureLVIStudyUser(EntityTypeBuilder<LVIStudyUser> builder)
+        {
+            builder.ToTable("LVIStudyUser");
+
+            builder.Property(u => u.Gender)
                 .HasConversion(new EnumToStringConverter<GenderEnum>());
+        }
+
+        private void ConfigureCase(EntityTypeBuilder<Case> builder)
+        {
+            builder.ToTable("Cases");
+        }
+
+        private void ConfigureReport(EntityTypeBuilder<Report> builder)
+        {
+            builder.ToTable("Reports");
+
+            builder.OwnsOne(r => r.Statistics, rs =>
+            {
+                rs.ToTable("ReportStatistics");
+            });
         }
     }
 }
