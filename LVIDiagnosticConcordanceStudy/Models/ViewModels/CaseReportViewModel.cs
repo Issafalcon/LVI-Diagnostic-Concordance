@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LVIDiagnosticConcordanceStudy.Models.ViewModels
 {
-    public class CaseVM
+    public class CaseReportViewModel
     {
         [Display(Name = "Age")]
         public int PatientAge { get; set; }

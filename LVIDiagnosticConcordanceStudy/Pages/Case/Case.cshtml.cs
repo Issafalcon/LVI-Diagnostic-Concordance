@@ -11,6 +11,7 @@ using LVIDiagnosticConcordanceStudy.Models;
 using LVIDiagnosticConcordanceStudy.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
+using LVIDiagnosticConcordanceStudy.Services.ViewModel;
 
 namespace LVIDiagnosticConcordanceStudy.Pages
 {
@@ -18,19 +19,22 @@ namespace LVIDiagnosticConcordanceStudy.Pages
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<LVIStudyUser> _userManager;
+        private readonly ICaseReportViewModelService _caseReportService;
 
         public CaseModel(
             ApplicationDbContext context,
-            UserManager<LVIStudyUser> userManager)
+            UserManager<LVIStudyUser> userManager,
+            ICaseReportViewModelService caseReportService)
         {
             _context = context;
             _userManager = userManager;
+            _caseReportService = caseReportService;
         }
 
         public LVIStudyUser CurrentUser { get; set; }
 
         [BindProperty]
-        public CaseVM CaseViewModel { get; set; }
+        public CaseReportViewModel CaseReportViewModel { get; set; }
         public int CaseId { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -40,27 +44,11 @@ namespace LVIDiagnosticConcordanceStudy.Pages
                 return NotFound();
             }
 
-            CaseViewModel = new CaseVM();
-            Case currentCase = await _context.Case.FindAsync(id);
+            CaseReportViewModel = await _caseReportService.GetCaseReportForUser(_userManager.GetUserId(User), id.Value);
 
-            if (currentCase == null)
+            if (CaseReportViewModel == null)
             {
                 return NotFound();
-            }
-
-            Report currentUserReport = await _context.Report
-                                            .FirstOrDefaultAsync(r => r.UserID == _userManager.GetUserId(User) && r.Case.CaseID == id);
-
-            CaseViewModel = new CaseVM
-            {
-                PatientAge = currentCase.PatientAge,
-                TumourSize = currentCase.TumourSize
-            };
-
-            if (currentUserReport != null)
-            {
-                CaseViewModel.TumourGrade = currentUserReport.TumourGrade;
-                CaseViewModel.NumberofLVI = currentUserReport.NumberofLVI;
             }
 
             return Page();

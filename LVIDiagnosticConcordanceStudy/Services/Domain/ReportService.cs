@@ -10,18 +10,29 @@ namespace LVIDiagnosticConcordanceStudy.Services
     public class ReportService : IReportService
     {
         private readonly IAsyncRepository<Report> _reportRepository;
+        private readonly IAsyncRepository<Case> _caseRepository;
 
-        public ReportService(IAsyncRepository<Report> reportRepository)
+        public ReportService(
+            IAsyncRepository<Report> reportRepository,
+            IAsyncRepository<Case> caseRepository)
         {
             _reportRepository = reportRepository;
+            _caseRepository = caseRepository;
+        }
+        
+        public async Task CreateCaseReport(Report report)
+        {
+            await CalculateStatistics(report);
+            await _reportRepository.AddAsync(report);
         }
 
-        private void CalculateStatistics(Report report)
+        private async Task CalculateStatistics(Report report)
         {
+            Case relatedCase = await _caseRepository.GetByIdAsync()
             int? ptAge = report.Case?.PatientAge;
             decimal? tumourSize = report?.Case?.TumourSize;
-            Grade? grade = Report?.TumourGrade;
-            int? numLVISeen = Report?.NumberofLVI;
+            Grade? grade = report.TumourGrade;
+            int? numLVISeen = report.NumberofLVI;
 
             if (!ptAge.HasValue || !tumourSize.HasValue || !grade.HasValue || !numLVISeen.HasValue)
             {

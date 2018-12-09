@@ -29,6 +29,7 @@ namespace LVIDiagnosticConcordanceStudy.Models
 
         public Grade TumourGrade { get; set; }
         public int NumberofLVI { get; set; }
+        public bool IsSubmitted { get; set; }
         public int CaseId { get; set; }
         public Case Case { get; set; }
     }
