@@ -14,13 +14,14 @@ namespace LVIDiagnosticConcordanceStudy.Models
         public int UserReportNumber { get; private set; }
         public ReportStatistics Statistics { get; private set; }
         public string UserID { get; private set; }
+        public int CaseId { get; private set; }
 
         public Report()
         {
             // Required by EF
         }
 
-        public Report(int userReportNumber, string userId, ReportStatistics statistics)
+        public Report(int userReportNumber, string userId, int caseId, ReportStatistics statistics)
         {
             UserReportNumber = UserReportNumber;
             UserID = userId;
@@ -29,8 +30,6 @@ namespace LVIDiagnosticConcordanceStudy.Models
 
         public Grade TumourGrade { get; set; }
         public int NumberofLVI { get; set; }
-        public bool IsSubmitted { get; set; }
-        public int CaseId { get; set; }
         public Case Case { get; set; }
     }
 

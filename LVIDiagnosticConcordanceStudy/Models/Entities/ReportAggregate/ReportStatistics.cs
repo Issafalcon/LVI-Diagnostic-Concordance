@@ -44,8 +44,6 @@ namespace LVIDiagnosticConcordanceStudy.Models
 
         [Column(TypeName = "float")]
         public decimal BinomialDist { get; set; }
-        [Column(TypeName = "float")]
-        public double TheoreticalBinomialDist { get; set; }
 
     }
 }

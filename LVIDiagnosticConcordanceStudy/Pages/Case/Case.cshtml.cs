@@ -45,6 +45,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             }
 
             CaseReportViewModel = await _caseReportService.GetCaseReportForUser(_userManager.GetUserId(User), id.Value);
+            CaseId = id.Value;
 
             if (CaseReportViewModel == null)
             {
@@ -61,30 +62,9 @@ namespace LVIDiagnosticConcordanceStudy.Pages
                 return Page();
             }
 
-            _context.Attach(CaseViewModel).State = EntityState.Modified;
+            await _caseReportService.CreateCaseReport(CaseReportViewModel, CaseId, _userManager.GetUserId(User));
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CaseExists(CaseId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
-        }
-
-        private bool CaseExists(int id)
-        {
-            return _context.Case.Any(e => e.CaseID == id);
+            return RedirectToPage(CaseId + 1);
         }
     }
 }

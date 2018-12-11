@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LVIDiagnosticConcordanceStudy.Data;
@@ -23,6 +18,9 @@ using LVIDiagnosticConcordanceStudy.Infrastructure.Localization;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using LVIDiagnosticConcordanceStudy.Services;
+using LVIDiagnosticConcordanceStudy.Data.Repository;
+using LVIDiagnosticConcordanceStudy.Services.ViewModel;
+using LVIDiagnosticConcordanceStudy.Services.Domain;
 
 namespace LVIDiagnosticConcordanceStudy
 {
@@ -97,6 +95,11 @@ namespace LVIDiagnosticConcordanceStudy
                 options.SupportedUICultures = supportedCultures;
             });
 
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
+            services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
+            services.AddScoped<ICaseService, CaseService>();
+            services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<ICaseReportViewModelService, CaseReportViewModelService>();
             services.AddSingleton<IEmailSender, EmailSender>();
             services.Configure<SendGridOptions>(Configuration);
         }

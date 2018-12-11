@@ -5,7 +5,13 @@
     ViewData["Title"] = "Case";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-
+@* TODO: 
+    1. Set the route values to use case ID - Get the most recenty cached case (? in cookies) if no value is passed in
+    2. Populate a list of navigation buttons with 'Case ...' along the side of the screen (or bottom)
+    3. Add in the remaining fields for the case report view model
+    4. Style the form using a card for the form etc.
+    5. Test it all the way through for one case to see if stats calculated correctly
+    *@
 <h2>Case</h2>
 
 <h4>Case</h4>
@@ -16,14 +22,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CaseId" />
             <div class="form-group">
-                <label asp-for="CaseViewModel.PatientAge" class="control-label"></label>
-                <input asp-for="CaseViewModel.PatientAge" class="form-control" />
-                <span asp-validation-for="CaseViewModel.PatientAge" class="text-danger"></span>
+                <label asp-for="CaseReportViewModel.PatientAge" class="control-label"></label>
+                <input asp-for="CaseReportViewModel.PatientAge" class="form-control" />
+                <span asp-validation-for="CaseReportViewModel.PatientAge" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CaseViewModel.TumourSize" class="control-label"></label>
-                <input asp-for="CaseViewModel.TumourSize" class="form-control" />
-                <span asp-validation-for="CaseViewModel.TumourSize" class="text-danger"></span>
+                <label asp-for="CaseReportViewModel.TumourSize" class="control-label"></label>
+                <input asp-for="CaseReportViewModel.TumourSize" class="form-control" />
+                <span asp-validation-for="CaseReportViewModel.TumourSize" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

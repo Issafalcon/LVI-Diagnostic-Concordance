@@ -6,6 +6,7 @@ using LVIDiagnosticConcordanceStudy.Data.Repository;
 using LVIDiagnosticConcordanceStudy.Infrastructure.Specifications;
 using LVIDiagnosticConcordanceStudy.Models;
 using LVIDiagnosticConcordanceStudy.Models.ViewModels;
+using LVIDiagnosticConcordanceStudy.Services.Domain;
 
 namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
 {
@@ -13,13 +14,16 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
     {
         private readonly IAsyncRepository<Case> _caseRepository;
         private readonly IRepository<Report> _reportRepository;
+        private readonly IReportService _reportService;
 
         public CaseReportViewModelService(
             IAsyncRepository<Case> caseRepository,
-            IRepository<Report> reportRepository)
+            IRepository<Report> reportRepository,
+            IReportService reportService)
         {
             _caseRepository = caseRepository;
             _reportRepository = reportRepository;
+            _reportService = reportService;
         }
 
         public async Task<CaseReportViewModel> GetCaseReportForUser(string userId, int caseId)
@@ -49,10 +53,15 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
             return caseReport;
         }
 
-        public async Task CreateCaseReport(CaseReportViewModel caseReport)
+        public async Task CreateCaseReport(CaseReportViewModel caseReport, int caseId, string userId)
         {
             // TODO:
-            // 1. Craete new report
+            // 1. Craete new report from the view model
+            // 2. Insert the relevant CaseId for the report so they can link
+            // 3. Update the isSubmitted field
+            // 4. Pass
+            Case currentCase = await _caseRepository.GetByIdAsync(caseId);
+            await _reportService.CreateReportFromCase(currentCase, caseReport.TumourGrade, caseReport.NumberofLVI, userId);
         }
     }
 }
