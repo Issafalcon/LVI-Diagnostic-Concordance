@@ -1,8 +1,5 @@
 ﻿using LVIDiagnosticConcordanceStudy.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
 
 namespace LVIDiagnosticConcordanceStudy.Infrastructure.Specifications
 {

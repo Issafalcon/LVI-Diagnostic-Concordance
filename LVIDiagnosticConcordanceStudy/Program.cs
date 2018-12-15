@@ -31,7 +31,7 @@ namespace LVIDiagnosticConcordanceStudy
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex.Message, "An error occurred creating the initial user");
+                    logger.LogError(ex.Message, "An error occurred while seeding the initial data");
                 }
             }
 

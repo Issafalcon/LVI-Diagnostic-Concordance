@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
+﻿using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
 using LVIDiagnosticConcordanceStudy.Models;
+using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -43,6 +41,9 @@ namespace LVIDiagnosticConcordanceStudy.Data
         private void ConfigureCase(EntityTypeBuilder<Case> builder)
         {
             builder.ToTable("Cases");
+
+            builder.Property(c => c.Id)
+                .ValueGeneratedNever();
         }
 
         private void ConfigureReport(EntityTypeBuilder<Report> builder)

@@ -10,5 +10,6 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
     {
         Task<CaseReportViewModel> GetCaseReportForUser(string userId, int caseId);
         Task CreateCaseReport(CaseReportViewModel caseReport, int caseId, string userId);
+        Task<int> GetCaseCount();
     }
 }

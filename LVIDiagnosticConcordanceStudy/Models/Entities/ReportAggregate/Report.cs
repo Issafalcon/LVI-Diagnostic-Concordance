@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LVIDiagnosticConcordanceStudy.Models
+namespace LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate
 {
     public class Report : BaseEntity
     {

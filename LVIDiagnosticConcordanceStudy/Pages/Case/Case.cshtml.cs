@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LVIDiagnosticConcordanceStudy.Data;
-using LVIDiagnosticConcordanceStudy.Models;
+using LVIDiagnosticConcordanceStudy.Models.Entities;
 using LVIDiagnosticConcordanceStudy.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
 using LVIDiagnosticConcordanceStudy.Services.ViewModel;
+using LVIDiagnosticConcordanceStudy.Data.Repository;
 
 namespace LVIDiagnosticConcordanceStudy.Pages
 {
@@ -35,7 +36,8 @@ namespace LVIDiagnosticConcordanceStudy.Pages
 
         [BindProperty]
         public CaseReportViewModel CaseReportViewModel { get; set; }
-        public int CaseId { get; set; }
+        public int CaseId { get; private set; }
+        public int CaseCount { get; private set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -45,6 +47,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             }
 
             CaseReportViewModel = await _caseReportService.GetCaseReportForUser(_userManager.GetUserId(User), id.Value);
+            CaseCount = await _caseReportService.GetCaseCount();
             CaseId = id.Value;
 
             if (CaseReportViewModel == null)

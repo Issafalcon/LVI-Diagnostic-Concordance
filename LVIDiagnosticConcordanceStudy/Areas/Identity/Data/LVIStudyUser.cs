@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using LVIDiagnosticConcordanceStudy.Models;
+using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
 using Microsoft.AspNetCore.Identity;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Data

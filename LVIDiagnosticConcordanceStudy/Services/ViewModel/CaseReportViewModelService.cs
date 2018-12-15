@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Threading.Tasks;
 using LVIDiagnosticConcordanceStudy.Data.Repository;
 using LVIDiagnosticConcordanceStudy.Infrastructure.Specifications;
 using LVIDiagnosticConcordanceStudy.Models;
+using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
 using LVIDiagnosticConcordanceStudy.Models.ViewModels;
 using LVIDiagnosticConcordanceStudy.Services.Domain;
 
@@ -55,13 +54,14 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
 
         public async Task CreateCaseReport(CaseReportViewModel caseReport, int caseId, string userId)
         {
-            // TODO:
-            // 1. Craete new report from the view model
-            // 2. Insert the relevant CaseId for the report so they can link
-            // 3. Update the isSubmitted field
-            // 4. Pass
             Case currentCase = await _caseRepository.GetByIdAsync(caseId);
             await _reportService.CreateReportFromCase(currentCase, caseReport.TumourGrade, caseReport.NumberofLVI, userId);
+        }
+
+        public async Task<int> GetCaseCount()
+        {
+            var allCasesSpecification = new CaseFilterSpecification(null);
+            return await _caseRepository.CountAsync(allCasesSpecification);
         }
     }
 }

@@ -40,6 +40,12 @@
                 <li class="nav-item">
                     <a asp-page="/About" class="nav-link text-left">About</a>
                 </li>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <a asp-page="/Case/Case" asp-route-id="1" class="nav-link text-left">Cases</a>
+                    </li>
+                }
                 <partial name="_LoginPartial" />
             </ul>
         </div>

@@ -1,4 +1,5 @@
 ﻿using LVIDiagnosticConcordanceStudy.Models;
+using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;

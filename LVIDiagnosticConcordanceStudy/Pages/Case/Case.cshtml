@@ -1,8 +1,10 @@
-﻿@page
+﻿@page "{id:int?}"
+
+@using Models.Entities.ReportAggregate
 @model LVIDiagnosticConcordanceStudy.Pages.CaseModel
 
 @{
-    ViewData["Title"] = "Case";
+    ViewData["Title"] = "Cases";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 @* TODO: 
@@ -16,9 +18,11 @@
 
 <h4>Case</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
+
+<div class="row justify-content-center pb-3">
+    <div class="card col-md-3">
+        <h1>@ViewData["Title"]</h1>
+        <form class="card-body" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CaseId" />
             <div class="form-group">
@@ -32,11 +36,35 @@
                 <span asp-validation-for="CaseReportViewModel.TumourSize" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <label asp-for="CaseReportViewModel.TumourGrade" class="control-label"></label>
+                <select asp-for="CaseReportViewModel.TumourGrade" class="form-control" asp-items="@Html.GetEnumSelectList<Grade>()">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="CaseReportViewModel.TumourGrade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CaseReportViewModel.NumberofLVI" class="control-label"></label>
+                <input asp-for="CaseReportViewModel.NumberofLVI" class="form-control" />
+                <span asp-validation-for="CaseReportViewModel.NumberofLVI" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-outline-secondary intro-btn" />
             </div>
         </form>
     </div>
 </div>
+
+<div class="row justify-content-center">
+    <div class="btn-toolbar mr-3" role="toolbar" aria-label="Toolbar with case button links">
+        <div class="btn-group" role="group" aria-label="Case buttons">
+            @for (var i = 1; i <= Model.CaseCount; i++)
+            {
+                <a asp-route-id="@i" class="btn btn-outline-secondary btn-lg intro-btn">@i</a>
+            }
+        </div>
+    </div>
+</div>
+
 
 <div>
     <a asp-page="./Index">Back to List</a>
