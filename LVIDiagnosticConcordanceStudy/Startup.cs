@@ -97,6 +97,7 @@ namespace LVIDiagnosticConcordanceStudy
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
             services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
+            services.AddScoped<IReportRepository, ReportRepository>();
             services.AddScoped<ICaseService, CaseService>();
             services.AddScoped<IReportService, ReportService>();
             services.AddScoped<ICaseReportViewModelService, CaseReportViewModelService>();

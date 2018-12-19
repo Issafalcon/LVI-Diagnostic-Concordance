@@ -36,7 +36,6 @@ namespace LVIDiagnosticConcordanceStudy.Pages
 
         [BindProperty]
         public CaseReportViewModel CaseReportViewModel { get; set; }
-        public int CaseId { get; private set; }
         public int CaseCount { get; private set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -48,7 +47,6 @@ namespace LVIDiagnosticConcordanceStudy.Pages
 
             CaseReportViewModel = await _caseReportService.GetCaseReportForUser(_userManager.GetUserId(User), id.Value);
             CaseCount = await _caseReportService.GetCaseCount();
-            CaseId = id.Value;
 
             if (CaseReportViewModel == null)
             {
@@ -58,16 +56,16 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            await _caseReportService.CreateCaseReport(CaseReportViewModel, CaseId, _userManager.GetUserId(User));
+            await _caseReportService.CreateCaseReport(CaseReportViewModel, id.Value, _userManager.GetUserId(User));
 
-            return RedirectToPage(CaseId + 1);
+            return RedirectToPage(id.Value + 1);
         }
     }
 }

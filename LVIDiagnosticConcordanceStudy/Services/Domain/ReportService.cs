@@ -13,12 +13,11 @@ namespace LVIDiagnosticConcordanceStudy.Services
 {
     public class ReportService : IReportService
     {
-        private readonly IAsyncRepository<Report> _reportRepository;
-        private readonly IRepository<Report> _synchronousReportRepository;
+        private readonly IReportRepository _reportRepository;
         private readonly IAsyncRepository<Case> _caseRepository;
 
         public ReportService(
-            IAsyncRepository<Report> reportRepository,
+            IReportRepository reportRepository,
             IAsyncRepository<Case> caseRepository)
         {
             _reportRepository = reportRepository;
@@ -27,7 +26,7 @@ namespace LVIDiagnosticConcordanceStudy.Services
         
         public async Task<IReadOnlyList<Report>> GetUserReports(string userId)
         {
-            var reportFilter = new ReportFilterSpecification(userId);
+            var reportFilter = new ReportFilterSpecification(userId, null);
 
             return await _reportRepository.ListAsync(reportFilter);
         }
@@ -111,8 +110,10 @@ namespace LVIDiagnosticConcordanceStudy.Services
         private Report GetPreviousUserReport(string userId)
         {
             // Only base cumulative calculations off reports that have been completely submitted
-            var reportFilter = new ReportFilterSpecification(userId, orderByReportNumberDesc: true);
-            return _synchronousReportRepository.GetSingleBySpec(reportFilter);
+            var reportFilter = new ReportFilterSpecification(userId, null, orderByReportNumberDesc: false);
+            Report previousReport = _reportRepository.GetPreviousReportForUser(userId);
+
+            return previousReport;
         }
     }
 }

@@ -46,6 +46,7 @@ namespace LVIDiagnosticConcordanceStudy.Data.Repository
         {
             return ApplySpecification(spec).AsEnumerable();
         }
+
         public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)
         {
             return await ApplySpecification(spec).ToListAsync();

@@ -4,7 +4,7 @@
 @model LVIDiagnosticConcordanceStudy.Pages.CaseModel
 
 @{
-    ViewData["Title"] = "Cases";
+    ViewData["Title"] = "Case" + RouteData.Values["id"];
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 @* TODO: 
@@ -14,17 +14,12 @@
     4. Style the form using a card for the form etc.
     5. Test it all the way through for one case to see if stats calculated correctly
     *@
-<h2>Case</h2>
-
-<h4>Case</h4>
-<hr />
 
 <div class="row justify-content-center pb-3">
     <div class="card col-md-3">
-        <h1>@ViewData["Title"]</h1>
+        <h2>@ViewData["Title"]</h2>
         <form class="card-body" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CaseId" />
             <div class="form-group">
                 <label asp-for="CaseReportViewModel.PatientAge" class="control-label"></label>
                 <input asp-for="CaseReportViewModel.PatientAge" class="form-control" />
