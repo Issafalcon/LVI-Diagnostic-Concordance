@@ -32,7 +32,7 @@ namespace LVIDiagnosticConcordanceStudy.Data
             var user = await userManager.FindByNameAsync(UserName);
             if (user == null)
             {
-                user = new LVIStudyUser { UserName = UserName, IsAdmin = true, Email = UserName };
+                user = new LVIStudyUser { UserName = UserName, IsAdmin = true, Email = UserName, EmailConfirmed = true };
                 var result = await userManager.CreateAsync(user, testUserPw);
             }
         }

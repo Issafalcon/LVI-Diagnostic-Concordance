@@ -6,7 +6,7 @@ namespace LVIDiagnosticConcordanceStudy.Infrastructure.Specifications
     public class ReportFilterSpecification : BaseSpecification<Report>
     {
         public ReportFilterSpecification(string userId, int? caseId, bool orderByReportNumberDesc = false)
-            : base(r => (string.IsNullOrEmpty(userId) || r.UserID == userId) && 
+            : base(r => (string.IsNullOrEmpty(userId) || r.LVIStudyUserID == userId) && 
             (!caseId.HasValue || r.CaseId == caseId))
         {
             if (orderByReportNumberDesc)

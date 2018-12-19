@@ -13,7 +13,7 @@ namespace LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate
     {
         public int UserReportNumber { get; private set; }
         public ReportStatistics Statistics { get; private set; }
-        public string UserID { get; private set; }
+        public string LVIStudyUserID { get; private set; }
         public int CaseId { get; private set; }
 
         public Report()
@@ -23,13 +23,16 @@ namespace LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate
 
         public Report(int userReportNumber, string userId, int caseId, ReportStatistics statistics)
         {
-            UserReportNumber = UserReportNumber;
-            UserID = userId;
+            UserReportNumber = userReportNumber;
+            LVIStudyUserID = userId;
+            CaseId = caseId;
             Statistics = statistics;
         }
 
         public Grade TumourGrade { get; set; }
         public int NumberofLVI { get; set; }
+
+        public LVIStudyUser LVIStudyUser { get; set; }
         public Case Case { get; set; }
     }
 

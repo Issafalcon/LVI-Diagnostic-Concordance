@@ -4,14 +4,16 @@ using LVIDiagnosticConcordanceStudy.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LVIDiagnosticConcordanceStudy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181219184609_corrected cumulative statistic column name")]
+    partial class correctedcumulativestatisticcolumnname
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,11 +116,13 @@ namespace LVIDiagnosticConcordanceStudy.Migrations
 
                     b.Property<int>("CaseId");
 
-                    b.Property<string>("LVIStudyUserID");
+                    b.Property<string>("LVIStudyUserId");
 
                     b.Property<int>("NumberofLVI");
 
                     b.Property<int>("TumourGrade");
+
+                    b.Property<string>("UserID");
 
                     b.Property<int>("UserReportNumber");
 
@@ -126,7 +130,7 @@ namespace LVIDiagnosticConcordanceStudy.Migrations
 
                     b.HasIndex("CaseId");
 
-                    b.HasIndex("LVIStudyUserID");
+                    b.HasIndex("LVIStudyUserId");
 
                     b.ToTable("Reports");
                 });
@@ -252,9 +256,9 @@ namespace LVIDiagnosticConcordanceStudy.Migrations
                         .HasForeignKey("CaseId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("LVIDiagnosticConcordanceStudy.Areas.Identity.Data.LVIStudyUser", "LVIStudyUser")
+                    b.HasOne("LVIDiagnosticConcordanceStudy.Areas.Identity.Data.LVIStudyUser")
                         .WithMany("Reports")
-                        .HasForeignKey("LVIStudyUserID");
+                        .HasForeignKey("LVIStudyUserId");
 
                     b.OwnsOne("LVIDiagnosticConcordanceStudy.Models.ReportStatistics", "Statistics", b1 =>
                         {

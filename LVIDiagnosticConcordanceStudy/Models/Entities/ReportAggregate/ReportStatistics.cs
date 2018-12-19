@@ -36,9 +36,9 @@ namespace LVIDiagnosticConcordanceStudy.Models
         public decimal BayesForNumberOfLVI { get; set; }
 
         [Column(TypeName = "float")]
-        public decimal CumulativeBayesForSize { get; set; }
+        public decimal CumulativeBayesForGrade { get; set; }
         [Column(TypeName = "float")]
-        public decimal CumulativeAverageBayesForSize { get; set; }
+        public decimal CumulativeAverageBayesForGrade { get; set; }
 
         public int CumulativeCasesWithLVIPos { get; set; }
 

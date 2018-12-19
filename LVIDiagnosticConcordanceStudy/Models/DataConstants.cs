@@ -24,12 +24,14 @@ namespace LVIDiagnosticConcordanceStudy.Models
         internal const decimal OneToTwocmLVINeg = 0.50077519379845m;
         internal const decimal TwoToFivecmLVIPos = 0.489497716894977m;
         internal const decimal TwoToFivecmLVINeg = 0.269767441860465m;
-        internal const decimal GradeOneLVIPos = 0.0741503604531411m;
-        internal const decimal GradeOneLVINeg = 0.240805604203152m;
-        internal const decimal GradeTwoLVIPos = 0.331616889804325m;
-        internal const decimal GradeTwoLVINeg = 0.387040280210158m;
+
+        // Might have numbers for grade constants back to front ? Ask Pablo
+        internal const decimal GradeOneLVINeg = 0.0741503604531411m;
+        internal const decimal GradeOneLVIPos = 0.240805604203152m;
+        internal const decimal GradeTwoLVINeg = 0.331616889804325m;
+        internal const decimal GradeTwoLVIPos = 0.387040280210158m;
         internal const decimal GradeThreeLVIPos = 0.594232749742533m;
-        internal const decimal GradeThreeLVINeg = 0.376730265619155m;
+        internal const decimal GradeThreeLVINeg = 0.37215411558669m;
         internal const decimal ZeroLVIImagesLVIPos = 0.04m;
         internal const decimal ZeroLVIImagesLVINeg = 0.71875m;
         internal const decimal OneToTwoLVIImagesLVIPos = 0.44m;

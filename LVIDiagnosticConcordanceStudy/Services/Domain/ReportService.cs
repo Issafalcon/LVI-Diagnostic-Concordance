@@ -36,7 +36,11 @@ namespace LVIDiagnosticConcordanceStudy.Services
             Report previousReport = GetPreviousUserReport(userId);
             ReportStatistics statistics = await Task.Run(() => CalculateStatistics(currentCase.PatientAge, currentCase.TumourSize, grade, numberOfLVI, previousReport));
 
-            Report newReport = new Report(previousReport.UserReportNumber + 1, userId, currentCase.Id, statistics);
+            int newReportNumber = previousReport != null ? previousReport.UserReportNumber + 1 : 1;
+            Report newReport = new Report(newReportNumber, userId, currentCase.Id, statistics);
+
+            newReport.TumourGrade = grade;
+            newReport.NumberofLVI = numberOfLVI;
             await _reportRepository.AddAsync(newReport);
         }
 
@@ -91,12 +95,23 @@ namespace LVIDiagnosticConcordanceStudy.Services
                  1 - statistics.BayesForGrade);
 
             // Calculate the cumulative values based on results of previously submitted cases
-            statistics.CumulativeBayesForSize = previousReport.Statistics.BayesForSize + statistics.BayesForSize;
-            statistics.CumulativeAverageBayesForSize = statistics.CumulativeBayesForSize / (previousReport.UserReportNumber + 1);
-            statistics.CumulativeCasesWithLVIPos = previousReport.Statistics.CumulativeCasesWithLVIPos + (statistics.LVIPresent ? 1 : 0);
+            int numberOfUserReports = previousReport != null ? previousReport.UserReportNumber + 1 : 1;
 
-            var binomDist = new BinomialDistribution((previousReport.UserReportNumber + 1), (double)statistics.CumulativeAverageBayesForSize);
-            statistics.BinomialDist = (decimal)binomDist.DistributionFunction(statistics.CumulativeCasesWithLVIPos);
+            if (previousReport != null)
+            {
+                statistics.CumulativeBayesForGrade = previousReport.Statistics.BayesForGrade + statistics.BayesForGrade;
+                statistics.CumulativeAverageBayesForGrade = statistics.CumulativeBayesForGrade / numberOfUserReports;
+                statistics.CumulativeCasesWithLVIPos = previousReport.Statistics.CumulativeCasesWithLVIPos + (statistics.LVIPresent ? 1 : 0);             
+            }
+            else
+            {                
+                statistics.CumulativeBayesForGrade = statistics.BayesForGrade;
+                statistics.CumulativeAverageBayesForGrade = statistics.CumulativeBayesForGrade / numberOfUserReports;
+                statistics.CumulativeCasesWithLVIPos = statistics.LVIPresent ? 1 : 0;
+            }
+
+            BinomialDistribution binomDist = new BinomialDistribution(numberOfUserReports, (double)statistics.CumulativeBayesForGrade);
+            statistics.BinomialDist = (decimal)binomDist.ProbabilityMassFunction(statistics.CumulativeCasesWithLVIPos);
             return statistics;
         }
 

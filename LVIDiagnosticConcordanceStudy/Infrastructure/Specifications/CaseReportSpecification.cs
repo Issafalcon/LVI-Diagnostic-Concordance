@@ -11,7 +11,7 @@ namespace LVIDiagnosticConcordanceStudy.Infrastructure.Specifications
         public CaseReportSpecification(int caseId, string userId)
             : base(c => c.Id == caseId)
         {
-            AddInclude(c => c.Reports.Where(r => r.UserID == userId));
+            AddInclude(c => c.Reports.Where(r => r.LVIStudyUserID == userId));
         }
     }
 }

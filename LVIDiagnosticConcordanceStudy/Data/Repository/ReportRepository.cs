@@ -16,7 +16,7 @@ namespace LVIDiagnosticConcordanceStudy.Data.Repository
         public Report GetPreviousReportForUser(string userId)
         {
             var userReports = from report in _dbContext.Report
-                              where report.UserID == userId
+                              where report.LVIStudyUserID == userId
                               orderby report.UserReportNumber descending
                               select report;
 
