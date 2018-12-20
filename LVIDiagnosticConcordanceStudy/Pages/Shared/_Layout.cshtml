@@ -43,7 +43,7 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item">
-                        <a asp-page="/Case/Case" asp-route-id="1" class="nav-link text-left">Cases</a>
+                        <a asp-page="/Case/Index" asp-route-id="1" class="nav-link text-left">Cases</a>
                     </li>
                 }
                 <partial name="_LoginPartial" />

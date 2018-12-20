@@ -110,7 +110,7 @@ namespace LVIDiagnosticConcordanceStudy.Services
                 statistics.CumulativeCasesWithLVIPos = statistics.LVIPresent ? 1 : 0;
             }
 
-            BinomialDistribution binomDist = new BinomialDistribution(numberOfUserReports, (double)statistics.CumulativeBayesForGrade);
+            BinomialDistribution binomDist = new BinomialDistribution(numberOfUserReports, (double)statistics.CumulativeAverageBayesForGrade);
             statistics.BinomialDist = (decimal)binomDist.ProbabilityMassFunction(statistics.CumulativeCasesWithLVIPos);
             return statistics;
         }

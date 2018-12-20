@@ -4,30 +4,37 @@
 @model LVIDiagnosticConcordanceStudy.Pages.CaseModel
 
 @{
-    ViewData["Title"] = "Case" + RouteData.Values["id"];
+    ViewData["Title"] = "Cases";
+    ViewData["SubTitle"] = "Case" + RouteData.Values["id"];
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-@* TODO: 
-    1. Set the route values to use case ID - Get the most recenty cached case (? in cookies) if no value is passed in
-    2. Populate a list of navigation buttons with 'Case ...' along the side of the screen (or bottom)
-    3. Add in the remaining fields for the case report view model
-    4. Style the form using a card for the form etc.
-    5. Test it all the way through for one case to see if stats calculated correctly
-    *@
 
-<div class="row justify-content-center pb-3">
-    <div class="card col-md-3">
-        <h2>@ViewData["Title"]</h2>
+<div class="row p-3 justify-content-center">
+    <div class="btn-toolbar mr-3" role="toolbar" aria-label="Toolbar with case button links">
+        <div class="btn-group" role="group" aria-label="Case buttons">
+            @for (var i = 1; i <= Model.CaseCount; i++)
+            {
+                <a asp-route-id="@i" class="btn btn-outline-secondary btn-lg intro-btn">@i</a>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="row pb-3 justify-content-center sticky-top">
+    <div class="card col-md-6">
         <form class="card-body" method="post">
+            <h1>@ViewData["Title"]</h1>
+            <h4 class="card-subtitle mb-2 text-muted">@ViewData["SubTitle"]</h4>
+            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="CaseReportViewModel.PatientAge" class="control-label"></label>
-                <input asp-for="CaseReportViewModel.PatientAge" class="form-control" />
+                <input asp-for="CaseReportViewModel.PatientAge" class="form-control" readonly />
                 <span asp-validation-for="CaseReportViewModel.PatientAge" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CaseReportViewModel.TumourSize" class="control-label"></label>
-                <input asp-for="CaseReportViewModel.TumourSize" class="form-control" />
+                <input asp-for="CaseReportViewModel.TumourSize" class="form-control" readonly />
                 <span asp-validation-for="CaseReportViewModel.TumourSize" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -49,21 +56,6 @@
     </div>
 </div>
 
-<div class="row justify-content-center">
-    <div class="btn-toolbar mr-3" role="toolbar" aria-label="Toolbar with case button links">
-        <div class="btn-group" role="group" aria-label="Case buttons">
-            @for (var i = 1; i <= Model.CaseCount; i++)
-            {
-                <a asp-route-id="@i" class="btn btn-outline-secondary btn-lg intro-btn">@i</a>
-            }
-        </div>
-    </div>
-</div>
-
-
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

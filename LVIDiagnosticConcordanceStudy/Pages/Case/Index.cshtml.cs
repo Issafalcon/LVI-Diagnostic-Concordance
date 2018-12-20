@@ -65,7 +65,8 @@ namespace LVIDiagnosticConcordanceStudy.Pages
 
             await _caseReportService.CreateCaseReport(CaseReportViewModel, id.Value, _userManager.GetUserId(User));
 
-            return RedirectToPage(id.Value + 1);
+            // TODO: Fix the redirect - Not working currently
+            return RedirectToPage("Case/Case/" + (id.Value + 1).ToString());
         }
     }
 }
