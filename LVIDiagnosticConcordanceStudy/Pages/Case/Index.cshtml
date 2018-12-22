@@ -11,7 +11,9 @@
 
 <div class="row p-3 justify-content-center">
     <div class="btn-toolbar mr-3" role="toolbar" aria-label="Toolbar with case button links">
-        <div class="btn-group" role="group" aria-label="Case buttons">
+        <div class="btn-group flex-wrap" role="group" aria-label="Case buttons">
+            @* TODO:
+                1. Add a checkbox item underneath each case number when IsSubmitted = true*@
             @for (var i = 1; i <= Model.CaseCount; i++)
             {
                 <a asp-route-id="@i" class="btn btn-outline-secondary btn-lg intro-btn">@i</a>
@@ -37,6 +39,8 @@
                 <input asp-for="CaseReportViewModel.TumourSize" class="form-control" readonly />
                 <span asp-validation-for="CaseReportViewModel.TumourSize" class="text-danger"></span>
             </div>
+            @* TODO:
+                1. Create a tag helper that accepts the value of 'IsSubmitted' for the report, and makes the inputs below readonly as a result or not*@
             <div class="form-group">
                 <label asp-for="CaseReportViewModel.TumourGrade" class="control-label"></label>
                 <select asp-for="CaseReportViewModel.TumourGrade" class="form-control" asp-items="@Html.GetEnumSelectList<Grade>()">
@@ -49,9 +53,28 @@
                 <input asp-for="CaseReportViewModel.NumberofLVI" class="form-control" />
                 <span asp-validation-for="CaseReportViewModel.NumberofLVI" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-outline-secondary intro-btn" />
-            </div>
+            @if (Model.CurrentUser.InControlGroup)
+            {
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-outline-secondary intro-btn" />
+                </div>
+            }
+            else
+            {
+                // TODO: 
+                //  1. Create this second button which doesn't submit the form
+                //  2. New JS file to handle click which validates the form first https://swedecoder.wordpress.com/2012/10/18/unobtrusive-validation-in-mvc-trigger-it-clientside/
+                //  3. If form is not valid, then perform regular submission, which will run through normal OnPostAsync code (returning invalid form page with messages)
+                //  4. If form is valid show a modal coded on this page with placeholder for the body of the modal
+                //      https://stackoverflow.com/questions/11404711/how-can-i-trigger-a-bootstrap-modal-programmatically
+                //      https://stackoverflow.com/questions/962229/asp-net-mvc-submit-a-form-using-javascript
+                //  5. Using Ajax, populate this placeholder with the view component by calling a method on the /case controller, which in turn will return the Chart view component
+                //      http://www.binaryintellect.net/articles/218ca630-ba50-48fe-af6e-6f754b5894aa.aspx
+                //  6. By calling the method on the same Case page model, we can use the values submitted to perform complex logic in the component by passing them down
+                <div class="form-group">
+                    <button type="button" class="btn btn-outline-secondary intro-btn" />
+                </div>
+            }
         </form>
     </div>
 </div>

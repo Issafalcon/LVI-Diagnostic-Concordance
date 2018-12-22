@@ -45,7 +45,14 @@ namespace LVIDiagnosticConcordanceStudy.Pages
                 return NotFound();
             }
 
-            CaseReportViewModel = await _caseReportService.GetCaseReportForUser(_userManager.GetUserId(User), id.Value);
+            CurrentUser = await _userManager.GetUserAsync(User);
+
+            if (CurrentUser == null)
+            {
+                return NotFound();
+            }
+
+            CaseReportViewModel = await _caseReportService.GetCaseReportForUser(CurrentUser.Id, id.Value);
             CaseCount = await _caseReportService.GetCaseCount();
 
             if (CaseReportViewModel == null)
@@ -63,10 +70,15 @@ namespace LVIDiagnosticConcordanceStudy.Pages
                 return Page();
             }
 
-            await _caseReportService.CreateCaseReport(CaseReportViewModel, id.Value, _userManager.GetUserId(User));
+            await _caseReportService.CreateCaseReport(CaseReportViewModel, id.Value, CurrentUser.Id);
 
             // TODO: Fix the redirect - Not working currently
-            return RedirectToPage("Case/Case/" + (id.Value + 1).ToString());
+            return RedirectToPage("Case/" + (id.Value + 1).ToString());
+        }
+
+        public async Task<IActionResult> OnGetChartVC(int id)
+        {
+            return ViewComponent("Chart", new { caseReportViewModel = CaseReportViewModel, caseId = id, userId = CurrentUser.Id });
         }
     }
 }
