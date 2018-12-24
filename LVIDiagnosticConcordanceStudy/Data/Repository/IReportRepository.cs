@@ -8,6 +8,6 @@ namespace LVIDiagnosticConcordanceStudy.Data.Repository
 {
     public interface IReportRepository : IRepository<Report>, IAsyncRepository<Report>
     {
-        Report GetPreviousReportForUser(string userId);
+        Report GetPreviousSubmittedReportForUser(string userId);
     }
 }

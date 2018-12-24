@@ -13,17 +13,14 @@ namespace LVIDiagnosticConcordanceStudy.Data.Repository
 
         }
 
-        public Report GetPreviousReportForUser(string userId)
+        public Report GetPreviousSubmittedReportForUser(string userId)
         {
-            //TODO:
-            //  1. Include a IsSubmitted clause into the report
             var userReports = from report in _dbContext.Report
-                              where report.LVIStudyUserID == userId
+                              where report.LVIStudyUserID == userId && report.IsSubmitted == true
                               orderby report.UserReportNumber descending
                               select report;
 
-            return userReports.FirstOrDefault();
-                              
+            return userReports.FirstOrDefault();                              
         }
     }
 }

@@ -10,6 +10,8 @@ namespace LVIDiagnosticConcordanceStudy.Services.Domain
     public interface IReportService
     {
         Task<IReadOnlyList<Report>> GetUserReports(string userId);
-        Task CreateReportFromCase(Case currentCase, Grade grade, int numberOfLVI, string userId);
+        Report GetPreviousUserReport(string userId);
+        Task CreateOrUpdateReportFromCase(Case currentCase, Report report, Grade grade, int numberOfLVI, string userId, bool isSubmitted = false);
+        ReportStatistics CalculateStatistics(int ptAge, decimal tumourSize, Grade grade, int numLVISeen, Report previousReport);
     }
 }

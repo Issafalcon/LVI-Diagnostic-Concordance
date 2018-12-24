@@ -24,5 +24,7 @@ namespace LVIDiagnosticConcordanceStudy.Models.ViewModels
         [Required]
         [Display(Name = "Number Of LVI")]
         public int NumberofLVI { get; set; }
+
+        public bool IsSubmitted { get; set; }
     }
 }

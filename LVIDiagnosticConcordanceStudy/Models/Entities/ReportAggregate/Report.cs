@@ -12,7 +12,7 @@ namespace LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate
     public class Report : BaseEntity
     {
         public int UserReportNumber { get; private set; }
-        public ReportStatistics Statistics { get; private set; }
+        public ReportStatistics Statistics { get; internal set; }
         public string LVIStudyUserID { get; private set; }
         public int CaseId { get; private set; }
 
@@ -21,16 +21,18 @@ namespace LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate
             // Required by EF
         }
 
-        public Report(int userReportNumber, string userId, int caseId, ReportStatistics statistics)
+        public Report(int userReportNumber, string userId, int caseId, ReportStatistics statistics, bool isSubmitted = false)
         {
             UserReportNumber = userReportNumber;
             LVIStudyUserID = userId;
             CaseId = caseId;
             Statistics = statistics;
+            IsSubmitted = isSubmitted;
         }
 
         public Grade TumourGrade { get; set; }
         public int NumberofLVI { get; set; }
+        public bool IsSubmitted { get; set; }
 
         public LVIStudyUser LVIStudyUser { get; set; }
         public Case Case { get; set; }

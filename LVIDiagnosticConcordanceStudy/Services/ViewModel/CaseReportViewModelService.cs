@@ -27,10 +27,10 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
 
         public async Task<CaseReportViewModel> GetCaseReportForUser(string userId, int caseId)
         {
-            var reportFilter = new ReportFilterSpecification(userId, caseId);
+            
             Case currentCase = await _caseRepository.GetByIdAsync(caseId);
 
-            Report report = _reportRepository.GetSingleBySpec(reportFilter);
+            Report report = GetExistingReport(userId, caseId);
 
             if (currentCase == null)
             {
@@ -47,15 +47,22 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
             {
                 caseReport.TumourGrade = report.TumourGrade;
                 caseReport.NumberofLVI = report.NumberofLVI;
+                caseReport.IsSubmitted = report.IsSubmitted;
             }
 
             return caseReport;
         }
 
-        public async Task CreateCaseReport(CaseReportViewModel caseReport, int caseId, string userId)
+        public Report GetExistingReport (string userId, int caseId)
+        {
+            var reportFilter = new ReportFilterSpecification(userId, caseId);
+            return _reportRepository.GetSingleBySpec(reportFilter);
+        }
+
+        public async Task CreateOrUpdateCaseReport(CaseReportViewModel caseReport, Report existingReport, int caseId, string userId, bool isSubmitted = false)
         {
             Case currentCase = await _caseRepository.GetByIdAsync(caseId);
-            await _reportService.CreateReportFromCase(currentCase, caseReport.TumourGrade, caseReport.NumberofLVI, userId);
+            await _reportService.CreateOrUpdateReportFromCase(currentCase, existingReport, caseReport.TumourGrade, caseReport.NumberofLVI, userId, isSubmitted);
         }
 
         public async Task<int> GetCaseCount()

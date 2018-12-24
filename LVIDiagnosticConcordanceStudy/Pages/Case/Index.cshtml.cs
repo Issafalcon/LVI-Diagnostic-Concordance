@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
 using LVIDiagnosticConcordanceStudy.Services.ViewModel;
 using LVIDiagnosticConcordanceStudy.Data.Repository;
+using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
 
 namespace LVIDiagnosticConcordanceStudy.Pages
 {
@@ -37,6 +38,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages
         [BindProperty]
         public CaseReportViewModel CaseReportViewModel { get; set; }
         public int CaseCount { get; private set; }
+        public bool SubmitOnPost { get; set; } = false;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -70,13 +72,21 @@ namespace LVIDiagnosticConcordanceStudy.Pages
                 return Page();
             }
 
-            await _caseReportService.CreateCaseReport(CaseReportViewModel, id.Value, CurrentUser.Id);
+            Report existingReport = _caseReportService.GetExistingReport(CurrentUser.Id, id.Value);
+
+            await _caseReportService.CreateOrUpdateCaseReport(CaseReportViewModel, existingReport, id.Value, CurrentUser.Id, SubmitOnPost);
 
             // TODO: Fix the redirect - Not working currently
             return RedirectToPage("Case/" + (id.Value + 1).ToString());
         }
 
-        public async Task<IActionResult> OnGetChartVC(int id)
+        public async Task<IActionResult> OnPostSubmittedAsync(int? id)
+        {
+            SubmitOnPost = true;
+            return await OnPostAsync(id);
+        }
+
+        public IActionResult OnGetChartVC(int id)
         {
             return ViewComponent("Chart", new { caseReportViewModel = CaseReportViewModel, caseId = id, userId = CurrentUser.Id });
         }

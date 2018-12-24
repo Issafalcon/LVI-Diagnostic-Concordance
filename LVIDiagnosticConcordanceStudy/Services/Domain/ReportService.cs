@@ -31,20 +31,36 @@ namespace LVIDiagnosticConcordanceStudy.Services
             return await _reportRepository.ListAsync(reportFilter);
         }
 
-        public async Task CreateReportFromCase(Case currentCase, Grade grade, int numberOfLVI, string userId)
+        public async Task CreateOrUpdateReportFromCase(Case currentCase, Report report, Grade grade, int numberOfLVI, string userId, bool isSubmitted = false)
         {
             Report previousReport = GetPreviousUserReport(userId);
-            ReportStatistics statistics = await Task.Run(() => CalculateStatistics(currentCase.PatientAge, currentCase.TumourSize, grade, numberOfLVI, previousReport));
+            ReportStatistics statistics = null;
 
-            int newReportNumber = previousReport != null ? previousReport.UserReportNumber + 1 : 1;
-            Report newReport = new Report(newReportNumber, userId, currentCase.Id, statistics);
+            if (isSubmitted)
+            {
+               statistics  = await Task.Run(() => CalculateStatistics(currentCase.PatientAge, currentCase.TumourSize, grade, numberOfLVI, previousReport));
+            }
 
-            newReport.TumourGrade = grade;
-            newReport.NumberofLVI = numberOfLVI;
-            await _reportRepository.AddAsync(newReport);
+            if (report == null)
+            {
+                int newReportNumber = previousReport != null ? previousReport.UserReportNumber + 1 : 1;
+                Report newReport = new Report(newReportNumber, userId, currentCase.Id, statistics, isSubmitted);
+
+                newReport.TumourGrade = grade;
+                newReport.NumberofLVI = numberOfLVI;
+                await _reportRepository.AddAsync(newReport);
+            }
+            else
+            {
+                report.TumourGrade = grade;
+                report.NumberofLVI = numberOfLVI;
+                report.Statistics = statistics;
+                await _reportRepository.UpdateAsync(report);
+            }
+            
         }
 
-        private ReportStatistics CalculateStatistics(int ptAge, decimal tumourSize, Grade grade, int numLVISeen, Report previousReport)
+        public ReportStatistics CalculateStatistics(int ptAge, decimal tumourSize, Grade grade, int numLVISeen, Report previousReport)
         {
             ReportStatistics statistics = new ReportStatistics();
 
@@ -122,11 +138,10 @@ namespace LVIDiagnosticConcordanceStudy.Services
             return (posTimesBase) / (posTimesBase + (negativePredictiveProb * baseNegativePredictiveProb));
         }
 
-        private Report GetPreviousUserReport(string userId)
+        public Report GetPreviousUserReport(string userId)
         {
             // Only base cumulative calculations off reports that have been completely submitted
-            var reportFilter = new ReportFilterSpecification(userId, null, orderByReportNumberDesc: false);
-            Report previousReport = _reportRepository.GetPreviousReportForUser(userId);
+            Report previousReport = _reportRepository.GetPreviousSubmittedReportForUser(userId);
 
             return previousReport;
         }
