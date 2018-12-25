@@ -38,6 +38,7 @@ h1, h2 {
     min-height: 100%;
     background-position: center;
     position: absolute;
+    z-index: -2;
 }
 
 .overlay {
@@ -47,6 +48,7 @@ h1, h2 {
     left: 0;
     top: 0;
     background: rgba(244, 244, 244, 0.79);
+    z-index: -1;
 }
 
 /******************************************/

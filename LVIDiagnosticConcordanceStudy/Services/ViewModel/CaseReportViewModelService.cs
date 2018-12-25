@@ -12,12 +12,12 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
     public class CaseReportViewModelService : ICaseReportViewModelService
     {
         private readonly IAsyncRepository<Case> _caseRepository;
-        private readonly IRepository<Report> _reportRepository;
+        private readonly IReportRepository _reportRepository;
         private readonly IReportService _reportService;
 
         public CaseReportViewModelService(
             IAsyncRepository<Case> caseRepository,
-            IRepository<Report> reportRepository,
+            IReportRepository reportRepository,
             IReportService reportService)
         {
             _caseRepository = caseRepository;
@@ -40,7 +40,8 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
             CaseReportViewModel caseReport = new CaseReportViewModel
             {
                 PatientAge = currentCase.PatientAge,
-                TumourSize = currentCase.TumourSize
+                TumourSize = currentCase.TumourSize,
+                IsSubmitted = false
             };
 
             if (report != null)
@@ -69,6 +70,11 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
         {
             var allCasesSpecification = new CaseFilterSpecification(null);
             return await _caseRepository.CountAsync(allCasesSpecification);
+        }
+
+        public int[] GetSubmittedCaseReportIds(string userId)
+        {
+            return _reportRepository.GetSubmittedReportIdsForUser(userId);
         }
     }
 }

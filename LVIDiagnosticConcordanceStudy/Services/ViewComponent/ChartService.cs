@@ -15,13 +15,6 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewComponent
 {
     public class ChartService : IChartService
     {
-        // TODO: Add create chart method that:
-        //      1. Gets the previous report values (last submitted)
-        //      2. Uses this and other passed in params to calculate statistics for current report on the fly
-        //      3. Calculate the cumulative value for the chart stats for theortical series and insert into arrays (x an y values)
-        //      4. Calculate the observed x and y value
-        //      5. Pass all data back in a 'Chart Series' object and create a chart in the pagemodel
-
         private readonly IReportService _reportService;
         private readonly IReportRepository _reportRepository;
 
@@ -38,7 +31,7 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewComponent
             decimal observedYValue;
             int observedXValue;
 
-            int currentReportNumber = previousReport.UserReportNumber + 1;
+            int currentReportNumber = previousReport != null ? previousReport.UserReportNumber + 1 : 1; ;
 
             // Calculate statistics for the current case report on the fly
             ReportStatistics currentStatistics = await Task.Run(() =>_reportService.CalculateStatistics(
@@ -53,16 +46,16 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewComponent
             chartXAxis = new int[currentReportNumber];
 
             BinomialDistribution binomDist = new BinomialDistribution(currentReportNumber, (double)currentStatistics.CumulativeAverageBayesForGrade);
-            for (int i = 0; i <= previousReport.UserReportNumber; i++)
+            for (int i = 0; i <= currentReportNumber - 1; i++)
             {                
                 theoreticalYSeries.Append((decimal)binomDist.ProbabilityMassFunction(i));
                 chartXAxis.Append(i);
             }
 
-            if (currentStatistics.CumulativeCasesWithLVIPos == previousReport.UserReportNumber)
+            if (currentStatistics.CumulativeCasesWithLVIPos == currentReportNumber - 1 || previousReport == null)
             {
                 observedYValue = currentStatistics.BinomialDist;
-                observedXValue = previousReport.UserReportNumber;
+                observedXValue = currentReportNumber - 1;
             }
             else
             {

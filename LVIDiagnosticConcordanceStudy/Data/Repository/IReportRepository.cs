@@ -9,5 +9,6 @@ namespace LVIDiagnosticConcordanceStudy.Data.Repository
     public interface IReportRepository : IRepository<Report>, IAsyncRepository<Report>
     {
         Report GetPreviousSubmittedReportForUser(string userId);
+        int[] GetSubmittedReportIdsForUser(string userId);
     }
 }

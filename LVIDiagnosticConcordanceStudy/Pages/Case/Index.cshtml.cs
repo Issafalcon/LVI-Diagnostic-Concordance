@@ -38,8 +38,12 @@ namespace LVIDiagnosticConcordanceStudy.Pages
         [BindProperty]
         public CaseReportViewModel CaseReportViewModel { get; set; }
         public int CaseCount { get; private set; }
+        public int[] SubmittedReports { get; private set; }
         public bool SubmitOnPost { get; set; } = false;
 
+        // TODO:
+        //     1. Add initial call to a cached service to get all cases
+        //     2. On get async, retrieve a list of all submitted cases for the user to help populate a select dropdown for the cases
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -56,6 +60,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages
 
             CaseReportViewModel = await _caseReportService.GetCaseReportForUser(CurrentUser.Id, id.Value);
             CaseCount = await _caseReportService.GetCaseCount();
+            SubmittedReports = _caseReportService.GetSubmittedCaseReportIds(CurrentUser.Id);
 
             if (CaseReportViewModel == null)
             {
@@ -86,9 +91,10 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             return await OnPostAsync(id);
         }
 
-        public IActionResult OnGetChartVC(int id)
+        public IActionResult OnPostChartVC(int id, [FromBody]CaseReportViewModel caseReportData)
         {
-            return ViewComponent("Chart", new { caseReportViewModel = CaseReportViewModel, caseId = id, userId = CurrentUser.Id });
+
+            return ViewComponent("Chart", new { caseReportViewModel = caseReportData, caseId = id, userId = _userManager.GetUserId(User) });
         }
     }
 }

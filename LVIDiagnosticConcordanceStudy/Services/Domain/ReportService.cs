@@ -31,6 +31,11 @@ namespace LVIDiagnosticConcordanceStudy.Services
             return await _reportRepository.ListAsync(reportFilter);
         }
 
+        public int[] GetSubmittedUserReportIds(string userId)
+        {
+            return _reportRepository.GetSubmittedReportIdsForUser(userId);
+        }
+
         public async Task CreateOrUpdateReportFromCase(Case currentCase, Report report, Grade grade, int numberOfLVI, string userId, bool isSubmitted = false)
         {
             Report previousReport = GetPreviousUserReport(userId);

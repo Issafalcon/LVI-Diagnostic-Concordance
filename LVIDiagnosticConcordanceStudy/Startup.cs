@@ -21,6 +21,7 @@ using LVIDiagnosticConcordanceStudy.Services;
 using LVIDiagnosticConcordanceStudy.Data.Repository;
 using LVIDiagnosticConcordanceStudy.Services.ViewModel;
 using LVIDiagnosticConcordanceStudy.Services.Domain;
+using LVIDiagnosticConcordanceStudy.Services.ViewComponent;
 
 namespace LVIDiagnosticConcordanceStudy
 {
@@ -101,6 +102,7 @@ namespace LVIDiagnosticConcordanceStudy
             services.AddScoped<ICaseService, CaseService>();
             services.AddScoped<IReportService, ReportService>();
             services.AddScoped<ICaseReportViewModelService, CaseReportViewModelService>();
+            services.AddScoped<IChartService, ChartService>();
             services.AddSingleton<IEmailSender, EmailSender>();
             services.Configure<SendGridOptions>(Configuration);
         }

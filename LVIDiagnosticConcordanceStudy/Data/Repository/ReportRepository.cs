@@ -22,5 +22,15 @@ namespace LVIDiagnosticConcordanceStudy.Data.Repository
 
             return userReports.FirstOrDefault();                              
         }
+
+        public int[] GetSubmittedReportIdsForUser(string userId)
+        {
+            var userReports = from report in _dbContext.Report
+                              where report.LVIStudyUserID == userId && report.IsSubmitted == true
+                              orderby report.UserReportNumber descending
+                              select report.CaseId;
+
+            return userReports.ToArray();
+        }
     }
 }

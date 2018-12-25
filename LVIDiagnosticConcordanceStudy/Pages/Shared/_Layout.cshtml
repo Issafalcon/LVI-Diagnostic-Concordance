@@ -25,6 +25,8 @@
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+
+    @RenderSection("Stylesheets", required: false)
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -54,17 +56,15 @@
     <partial name="_CookieConsentPartial" />
     
     <div class="backdrop container-fluid">
-        <div class="overlay"></div>
-        <div class="body-content" style="margin-top:60px">
+        <div class="overlay"></div>    
+    </div>
+    <div class="body-content" style="margin-top:60px">
 
-            @RenderBody()
+        @RenderBody()
 
-            <hr>
-            <footer>
-                
-            </footer>
-        </div>
-    </div>    
+        <hr>
+        <footer></footer>
+    </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
