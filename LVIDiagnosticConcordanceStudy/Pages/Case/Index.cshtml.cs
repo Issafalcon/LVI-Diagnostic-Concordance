@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using LVIDiagnosticConcordanceStudy.Data;
-using LVIDiagnosticConcordanceStudy.Models.Entities;
 using LVIDiagnosticConcordanceStudy.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
 using LVIDiagnosticConcordanceStudy.Services.ViewModel;
-using LVIDiagnosticConcordanceStudy.Data.Repository;
 using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
+using LVIDiagnosticConcordanceStudy.Models;
+using System.Net;
+using Newtonsoft.Json;
 
 namespace LVIDiagnosticConcordanceStudy.Pages
 {
@@ -91,10 +87,18 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             return await OnPostAsync(id);
         }
 
-        public IActionResult OnPostChartVC(int id, [FromBody]CaseReportViewModel caseReportData)
+        public async Task<ContentResult> OnPostChartVC(int id, [FromBody]CaseReportViewModel caseReportData)
         {
+            ChartValues chartValues = await _caseReportService.GetChartValuesForCaseReport(caseReportData, id, _userManager.GetUserId(User));
 
-            return ViewComponent("Chart", new { caseReportViewModel = caseReportData, caseId = id, userId = _userManager.GetUserId(User) });
+            ContentResult result = new ContentResult()
+            {
+                ContentType = "application/json",
+                Content = JsonConvert.SerializeObject(chartValues),
+                StatusCode = chartValues != null ? (int)HttpStatusCode.OK : (int)HttpStatusCode.BadRequest
+            };
+
+            return result;
         }
     }
 }

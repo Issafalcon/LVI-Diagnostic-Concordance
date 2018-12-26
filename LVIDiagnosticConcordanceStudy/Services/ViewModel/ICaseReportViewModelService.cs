@@ -1,8 +1,6 @@
-﻿using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
+﻿using LVIDiagnosticConcordanceStudy.Models;
+using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
 using LVIDiagnosticConcordanceStudy.Models.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
@@ -14,5 +12,6 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
         Task CreateOrUpdateCaseReport(CaseReportViewModel caseReport, Report existingReport, int caseId, string userId, bool isSubmitted = false);
         Task<int> GetCaseCount();
         int[] GetSubmittedCaseReportIds(string userId);
+        Task<ChartValues> GetChartValuesForCaseReport(CaseReportViewModel caseReportViewModel, int caseId, string userId);
     }
 }
