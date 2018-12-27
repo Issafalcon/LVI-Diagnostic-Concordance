@@ -66,7 +66,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             return Page();
         }
 
-        public async Task<JsonResult> OnGetInterventionDataAsync(int? id, [FromQuery]CaseReportViewModel caseReportData)
+        public async Task<IActionResult> OnGetInterventionDataAsync(int? id, [FromQuery]CaseReportViewModel caseReportData)
         {
             InterventionData interventionData = await _caseReportService.GetInterventionDataForCaseReport(caseReportData, id.Value, _userManager.GetUserId(User));
 
@@ -85,25 +85,31 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             return ViewComponent("Intervention", new { preTestProbability = preTestProb, postTestProbability = postTestProb, observed = observedValue });
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? id, bool isFromClient = false)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            Report existingReport = _caseReportService.GetExistingReport(CurrentUser.Id, id.Value);
+            Report existingReport = _caseReportService.GetExistingReport(_userManager.GetUserId(User), id.Value);
 
-            await _caseReportService.CreateOrUpdateCaseReport(CaseReportViewModel, existingReport, id.Value, CurrentUser.Id, SubmitOnPost);
+            await _caseReportService.CreateOrUpdateCaseReport(CaseReportViewModel, existingReport, id.Value, _userManager.GetUserId(User), SubmitOnPost);
 
-            // TODO: Fix the redirect - Not working currently
-            return RedirectToPage("Case/" + (id.Value + 1).ToString());
+            if (isFromClient)
+            {
+                // Calling in from ajax, we need to return a redirect url so we can redirect from the client
+                // as redirects do not get handled in ajax callback functions
+                return new JsonResult(new { redirectUrl = "/Case/" + (id.Value + 1).ToString() });
+            }
+
+            return RedirectToPage("/Case/" + (id.Value + 1).ToString());
         }
 
-        public async Task<IActionResult> OnPostSubmittedAsync(int? id)
+        public async Task<IActionResult> OnPostSubmittedAsync(int? id, [FromQuery]bool isFromClient = false)
         {
             SubmitOnPost = true;
-            return await OnPostAsync(id);
+            return await OnPostAsync(id, isFromClient);
         }
     }
 }

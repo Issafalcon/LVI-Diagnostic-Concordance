@@ -14,7 +14,7 @@
 
 <!-- Intervention Group Additional Information Modal -->
 <div class="modal fade" id="interventionGroupModal" tabindex="-1" role="dialog" aria-labelledby="interventionGroupModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="interventionGroupModalTitle">LVI Probabilities</h5>
@@ -33,11 +33,14 @@
                 <br />
                 <hr />
                 <br />
-                <canvas id="probabilityChartPlaceholder" width="1000" height="800"></canvas>
+                <canvas id="probabilityChartPlaceholder" width="2000" height="2000"></canvas>
                 <hr />
-                <div class="row pb-3 justify-content-center">
-                    <form id="discordantForm" asp-page="@(Context.Request.Path)" asp-page-handler="Submitted"
-                          method="post" role="form">
+                <div class="row p-3 text-center">
+                    @{
+                        string requestPath = Context.Request.Path.ToString();
+                        string caseId = requestPath.Substring(requestPath.LastIndexOf("/") + 1);
+                    }
+                    <div>
                         @if (Model.ConcordanceCriteriaMet == 2)
                         {
                             <p class="p-2">
@@ -48,7 +51,7 @@
                         }
                         @if (Model.ConcordanceCriteriaMet < 2)
                         {
-                            string code = new Guid().ToString().Replace("-", string.Empty).Substring(0, 10);
+                            string code = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 10);
 
                             <p class="p-2">
                                 @Localizer["According to our calculations, the tumour grade and LVI " +
@@ -56,18 +59,18 @@
                                         "change your answer. Othrwise, re-enter the following code and confim submission"]
                             </p>
                             <p class="text-center h5">
-                                @Localizer["Code:"] @code
+                                @Localizer["Code:"] <span id="confirmationCode">@code</span>
                             </p>
                             <div class="form-group">
-                                <label for="CodeInput" class="control-label"></label>
-                                <input for="CaseReportViewModel.NumberofLVI" class="form-control" />
+                                <input id="codeInput" class="form-control" />
+                                <span class="text-danger" id="codeInputError"></span>
                             </div>
                         }
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                            <button type="button" class="btn btn-primary">Confirm Submission</button>
+                            <input id="interventionSubmit" type="submit" value="Confirm Submission" class="btn btn-outline-secondary intro-btn" />
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

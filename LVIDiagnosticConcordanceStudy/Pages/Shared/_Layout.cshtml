@@ -56,15 +56,16 @@
     <partial name="_CookieConsentPartial" />
     
     <div class="backdrop container-fluid">
-        <div class="overlay"></div>    
-    </div>
-    <div class="body-content" style="margin-top:60px">
+        <div class="backdrop-shade"></div>
+        <div class="body-content"  style="margin-top:60px">
 
-        @RenderBody()
+            @RenderBody()
 
-        <hr>
-        <footer></footer>
+            <hr>
+            <footer></footer>
+        </div>
     </div>
+    
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

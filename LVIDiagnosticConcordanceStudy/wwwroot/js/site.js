@@ -11,6 +11,9 @@
     */
 
     $("#probabilityInfo").click(function (e) {
+
+        // First, clear out the modal to reset with new data
+        $("#interventionGroupModalPlaceholder").empty();
         var $caseReportForm = $("#caseReport");
         
         checkNumberOfLVI();
@@ -99,14 +102,46 @@
             type: "GET",
             url: caseUrl + "?handler=InterventionViewComponent&" + jQuery.param(probabilityData)
         }).done(function (res) {
-            $("#interventionGroupModalPlaceholder").replaceWith(res);
+            $("#interventionGroupModalPlaceholder").append(res);
             $("#interventionGroupModal").modal("show");
             populateProbabilityChart(data);
+
+            // Add the final submission click handler to submit the original form
+            $("#interventionSubmit").click(confirmSubmission);
+        });
+    }
+
+    function confirmSubmission() {
+        if ($("#confirmationCode").length) {
+            if ($("#codeInput").val() === $("#confirmationCode").text()) {
+                submitCaseReport();
+            } else {
+                $("#codeInputError").text("The code does not match. Please try again.");
+            }
+        } else {
+            submitCaseReport();
+        }
+    }
+
+    function submitCaseReport() {
+        var caseReportFormData = $("#caseReport").serialize();
+        var caseUrl = window.location.pathname;
+        $.ajax({
+            type: "POST",
+            url: caseUrl + "?handler=Submitted&" + jQuery.param({ isFromClient: true }),
+            data: caseReportFormData,
+            headers: {
+                RequestVerificationToken:
+                    $('input:hidden[name="__RequestVerificationToken"]').val()
+            }
+        }).done(function (res) {
+            window.location.href = res.redirectUrl;
         });
     }
 
     function populateProbabilityChart(data) {
         var ctx = document.getElementById("probabilityChartPlaceholder").getContext("2d");
+
         var probabilityChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -127,6 +162,7 @@
                 }]
             },
             options: {
+                responsive: true,
                 title: {
                     display: true,
                     text: "Probability Based On Cumulative LVI"
