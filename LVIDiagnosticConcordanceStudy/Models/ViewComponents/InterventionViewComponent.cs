@@ -28,6 +28,8 @@ namespace LVIDiagnosticConcordanceStudy.Models.ViewComponents
                 criteriaMet += this.PreTest < DataConstants.SecondInterval ? 0 : 1;
                 criteriaMet += this.PostTest < DataConstants.SecondInterval ? 0 : 1;
                 criteriaMet += this.Observed < 0.2m ? 0 : 1;
+
+                //ConcordanceCriteriaMet = criteriaMet;
             }
         }
 

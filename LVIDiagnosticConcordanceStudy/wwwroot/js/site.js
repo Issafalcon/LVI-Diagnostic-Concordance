@@ -39,11 +39,8 @@
                 //        $('input:hidden[name="__RequestVerificationToken"]').val()
                 //}
             }).done(function (res) {
-                populateProbabilityChart(res);
+                getInterventionViewComponent(res);
             });
-
-            $("#interventionGroupModal").modal("show");
-
         } else {
             // Errors with the form - send to OnPostAsync method, which will reload page with errors
             //$caseReportForm.submit();
@@ -79,22 +76,51 @@
         return $(element)[0].dataset.isForced !== "true";
     });
 
-    function populateProbabilityChart(chartData) {
+    function getInterventionViewComponent(data) {
+        var observedValue;
+
+        for (var i = 0; i < data.observedYValues.length; i++) {
+            // There will only be one observed value not equal to 0 in our oberved series
+            // so break once we have it
+            if (data.observedYValues[i] !== 0) {
+                observedValue = data.observedYValues[i];
+                break;
+            }
+        }
+
+        var caseUrl = window.location.pathname;
+        var probabilityData = {
+            preTestProb: data.preTestProbability,
+            postTestProb: data.postTestProbability,
+            observedValue: observedValue
+        };
+
+        $.ajax({
+            type: "GET",
+            url: caseUrl + "?handler=InterventionViewComponent&" + jQuery.param(probabilityData)
+        }).done(function (res) {
+            $("#interventionGroupModalPlaceholder").replaceWith(res);
+            $("#interventionGroupModal").modal("show");
+            populateProbabilityChart(data);
+        });
+    }
+
+    function populateProbabilityChart(data) {
         var ctx = document.getElementById("probabilityChartPlaceholder").getContext("2d");
         var probabilityChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: chartData.chartXAxis,
+                labels: data.chartXAxis,
                 datasets: [{
                     label: 'Theoretical Probability of LVI',
-                    data: chartData.theoreticalYValues,
+                    data: data.theoreticalYValues,
                     backgroundColor: 'rgba(34, 167, 240, 0.5)',
                     borderColor: 'rgba(34, 167, 240, 0.5)',
                     borderWidth: 1
                 },
                 {
                     label: 'Observed Probability of LVI',
-                    data: chartData.observedYValues,
+                    data: data.observedYValues,
                     backgroundColor: 'rgba(165, 55, 253, 0.5)',
                     borderColor: 'rgba(165, 55, 253, 0.5)',
                     borderWidth: 1

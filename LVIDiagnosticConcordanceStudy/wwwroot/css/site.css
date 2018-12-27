@@ -43,6 +43,7 @@ h1, h2 {
 
 .overlay {
     position: absolute;
+    background-size: cover;
     min-height: 100%;
     min-width: 100%;
     left: 0;

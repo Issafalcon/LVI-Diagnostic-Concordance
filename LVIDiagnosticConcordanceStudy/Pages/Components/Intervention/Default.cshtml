@@ -33,14 +33,14 @@
                 <br />
                 <hr />
                 <br />
-                <canvas id="probabilityChartPlaceholder"></canvas>
+                <canvas id="probabilityChartPlaceholder" width="1000" height="800"></canvas>
                 <hr />
                 <div class="row pb-3 justify-content-center">
                     <form id="discordantForm" asp-page="@(Context.Request.Path)" asp-page-handler="Submitted"
                           method="post" role="form">
                         @if (Model.ConcordanceCriteriaMet == 2)
                         {
-                            <p>
+                            <p class="p-2">
                                 @Localizer["According to our calculations, the tumour grade and LVI " +
                                         "number you have provided are unlikely. We recommend you " +
                                         "change your answer. Othrwise, please confirm"]
@@ -50,13 +50,13 @@
                         {
                             string code = new Guid().ToString().Replace("-", string.Empty).Substring(0, 10);
 
-                            <p>
+                            <p class="p-2">
                                 @Localizer["According to our calculations, the tumour grade and LVI " +
                                         "number you have provided are VERY unlikely. We recommend you " +
                                         "change your answer. Othrwise, re-enter the following code and confim submission"]
                             </p>
                             <p class="text-center h5">
-                                @Localizer["Code:"] + code
+                                @Localizer["Code:"] @code
                             </p>
                             <div class="form-group">
                                 <label for="CodeInput" class="control-label"></label>
