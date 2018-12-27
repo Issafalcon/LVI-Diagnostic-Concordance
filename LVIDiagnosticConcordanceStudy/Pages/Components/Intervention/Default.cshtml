@@ -1,0 +1,75 @@
+﻿@using LVIDiagnosticConcordanceStudy.Models.ViewComponents
+@using Models
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@model InterventionViewComponent.Probabilities
+
+@{
+    int preTestPercentage = Convert.ToInt32(Model.PreTest * 100);
+    int postTestPercentage = Convert.ToInt32(Model.PostTest * 100);
+    string preTestBadgeClass = Model.PreTest < DataConstants.SecondInterval ? "badge-danger" : "badge-success";
+    string postTestBadgeClass = Model.PostTest < DataConstants.SecondInterval ? "badge-danger" : "badge-success";
+}
+
+<!-- Intervention Group Additional Information Modal -->
+<div class="modal fade" id="interventionGroupModal" tabindex="-1" role="dialog" aria-labelledby="interventionGroupModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="interventionGroupModalTitle">LVI Probabilities</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                    Pre-Test Probability <span class="badge @(preTestBadgeClass)">@(preTestPercentage.ToString())%</span>
+                </button>
+                <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                    Post-Test Probability <span class="badge @(postTestBadgeClass)">@(postTestPercentage.ToString())%</span>
+                </button>
+
+                <br />
+                <hr />
+                <br />
+                <canvas id="probabilityChartPlaceholder"></canvas>
+                <hr />
+                <div class="row pb-3 justify-content-center">
+                    <form id="discordantForm" asp-page="@(Context.Request.Path)" asp-page-handler="Submitted"
+                          method="post" role="form">
+                        @if (Model.ConcordanceCriteriaMet == 2)
+                        {
+                            <p>
+                                @Localizer["According to our calculations, the tumour grade and LVI " +
+                                        "number you have provided are unlikely. We recommend you " +
+                                        "change your answer. Othrwise, please confirm"]
+                            </p>
+                        }
+                        @if (Model.ConcordanceCriteriaMet < 2)
+                        {
+                            string code = new Guid().ToString().Replace("-", string.Empty).Substring(0, 10);
+
+                            <p>
+                                @Localizer["According to our calculations, the tumour grade and LVI " +
+                                        "number you have provided are VERY unlikely. We recommend you " +
+                                        "change your answer. Othrwise, re-enter the following code and confim submission"]
+                            </p>
+                            <p class="text-center h5">
+                                @Localizer["Code:"] + code
+                            </p>
+                            <div class="form-group">
+                                <label for="CodeInput" class="control-label"></label>
+                                <input for="CaseReportViewModel.NumberofLVI" class="form-control" />
+                            </div>
+                        }
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                            <button type="button" class="btn btn-primary">Confirm Submission</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

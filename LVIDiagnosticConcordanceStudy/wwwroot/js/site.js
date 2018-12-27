@@ -27,16 +27,17 @@
             };
 
             $.ajax({
-                type: "POST",
-                url: caseUrl + "?handler=ChartVC",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(caseReportData),
+                type: "GET",
+                url: caseUrl + "?handler=InterventionData&" +  jQuery.param(caseReportData),
+                contentType: "application/json",
+                dataType: "json"
+                //data: JSON.stringify(caseReportData),
                 
-                // Need to add this for .NET Core Pages for posting otherwise will return 400
-                headers: {
-                    RequestVerificationToken:
-                        $('input:hidden[name="__RequestVerificationToken"]').val()
-                }
+                //// Need to add this for .NET Core Pages for posting otherwise will return 400
+                //headers: {
+                //    RequestVerificationToken:
+                //        $('input:hidden[name="__RequestVerificationToken"]').val()
+                //}
             }).done(function (res) {
                 populateProbabilityChart(res);
             });
@@ -78,69 +79,22 @@
         return $(element)[0].dataset.isForced !== "true";
     });
 
-    function setError(name, message) {
-        const span = $(`span[data-valmsg-for="${name}"]`);
-        const input = $(`input[name="${name}"]`);
-        if (span && span.length > 0) {
-            $(span).html(message);
-            if (message) {
-                $(input).addClass("input-validation-error");
-                $(input).attr("aria-invalid", true);
-                $(span).removeClass("field-validation-valid");
-                $(span).addClass("field-validation-error");
-            } else {
-                $(input).removeClass("input-validation-error");
-                $(span).removeClass("field-validation-error");
-                $(span).addClass("field-validation-valid");
-            }
-        }
-    }
-
-    function displayInterventionInfo() {
-        // If we have no jQuery validation errors on the form, then display additional probability data
-        // to intervention group.
-        var caseUrl = window.location.pathname;
-        var caseReportData = {
-            PatientAge: $("#CaseReportViewModel_PatientAge")[0].value,
-            TumourSize: $("#CaseReportViewModel_TumourSize")[0].value,
-            TumourGrade: $("#CaseReportViewModel_TumourGrade")[0].value,
-            NumberofLVI: $("#CaseReportViewModel_NumberofLVI")[0].value
-        };
-
-        $.ajax({
-            type: "POST",
-            url: caseUrl + "?handler=ChartVC",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(caseReportData),
-
-            // Need to add this for .NET Core Pages for posting otherwise will return 400
-            headers: {
-                RequestVerificationToken:
-                    $('input:hidden[name="__RequestVerificationToken"]').val()
-            }
-        }).done(function (res) {
-            populateProbabilityChart(res);
-        });
-
-        $("#interventionGroupModal").modal("show");
-    }
-
     function populateProbabilityChart(chartData) {
         var ctx = document.getElementById("probabilityChartPlaceholder").getContext("2d");
         var probabilityChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: chartData.ChartXAxis,
+                labels: chartData.chartXAxis,
                 datasets: [{
                     label: 'Theoretical Probability of LVI',
-                    data: chartData.TheoreticalYValues,
+                    data: chartData.theoreticalYValues,
                     backgroundColor: 'rgba(34, 167, 240, 0.5)',
                     borderColor: 'rgba(34, 167, 240, 0.5)',
                     borderWidth: 1
                 },
                 {
                     label: 'Observed Probability of LVI',
-                    data: chartData.ObservedYValues,
+                    data: chartData.observedYValues,
                     backgroundColor: 'rgba(165, 55, 253, 0.5)',
                     borderColor: 'rgba(165, 55, 253, 0.5)',
                     borderWidth: 1

@@ -66,6 +66,25 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             return Page();
         }
 
+        public async Task<JsonResult> OnGetInterventionDataAsync(int? id, [FromQuery]CaseReportViewModel caseReportData)
+        {
+            InterventionData interventionData = await _caseReportService.GetInterventionDataForCaseReport(caseReportData, id.Value, _userManager.GetUserId(User));
+
+            ContentResult result = new ContentResult()
+            {
+                ContentType = "application/json",
+                Content = JsonConvert.SerializeObject(interventionData),
+                StatusCode = interventionData != null ? (int)HttpStatusCode.OK : (int)HttpStatusCode.BadRequest
+            };
+
+            return new JsonResult(interventionData);
+        }
+
+        public IActionResult OnGetInterventionViewComponentAsync(decimal preTestProb, decimal postTestProb, decimal observedValue)
+        {
+            return ViewComponent("Intervention", new { preTestProbability = preTestProb, postTestProbability = postTestProb, observed = observedValue });
+        }
+
         public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
@@ -85,20 +104,6 @@ namespace LVIDiagnosticConcordanceStudy.Pages
         {
             SubmitOnPost = true;
             return await OnPostAsync(id);
-        }
-
-        public async Task<ContentResult> OnPostChartVC(int id, [FromBody]CaseReportViewModel caseReportData)
-        {
-            ChartValues chartValues = await _caseReportService.GetChartValuesForCaseReport(caseReportData, id, _userManager.GetUserId(User));
-
-            ContentResult result = new ContentResult()
-            {
-                ContentType = "application/json",
-                Content = JsonConvert.SerializeObject(chartValues),
-                StatusCode = chartValues != null ? (int)HttpStatusCode.OK : (int)HttpStatusCode.BadRequest
-            };
-
-            return result;
         }
     }
 }

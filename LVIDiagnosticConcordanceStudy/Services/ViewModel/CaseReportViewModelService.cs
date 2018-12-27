@@ -78,7 +78,7 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
             return _reportRepository.GetSubmittedReportIdsForUser(userId);
         }
 
-        public async Task<ChartValues> GetChartValuesForCaseReport(CaseReportViewModel caseReportViewModel, int caseId, string userId)
+        public async Task<InterventionData> GetInterventionDataForCaseReport(CaseReportViewModel caseReportViewModel, int caseId, string userId)
         {
             int[] chartXAxis;
             decimal[] theoreticalYValues;
@@ -97,44 +97,20 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
                 previousReport));
 
             // Get the theoretical series values (x and y) 
-            theoreticalYValues = new decimal[currentReportNumber];
-            observedYValues = new decimal[currentReportNumber];
-            chartXAxis = new int[currentReportNumber];
+            theoreticalYValues = new decimal[currentReportNumber + 1];
+            observedYValues = new decimal[currentReportNumber + 1];
+            chartXAxis = new int[currentReportNumber + 1];
 
             BinomialDistribution binomDist = new BinomialDistribution(currentReportNumber, (double)currentStatistics.CumulativeAverageBayesForGrade);
 
-            if (currentReportNumber == 1)
+            for (int i = 0; i <= currentReportNumber; i++)
             {
-                // If we only have one cumulative value, then theoretical should be the same as observed
-                theoreticalYValues[0] = (decimal)binomDist.ProbabilityMassFunction(1);
-                observedYValues[0] = currentStatistics.BinomialDist;
+                theoreticalYValues[i] = (decimal)binomDist.ProbabilityMassFunction(i);
+                observedYValues[i] = currentStatistics.CumulativeCasesWithLVIPos == i ? currentStatistics.BinomialDist : 0;
+                chartXAxis[i] = i;
             }
-            else
-            {
-                for (int i = 0; i < currentReportNumber; i++)
-                {
-                    theoreticalYValues[i] = (decimal)binomDist.ProbabilityMassFunction(i);
-                    observedYValues[i] = currentStatistics.CumulativeCasesWithLVIPos == i ? currentStatistics.BinomialDist : 0;
-                    chartXAxis[i] = i;
-                }
-            }
-            
 
-            //if (currentStatistics.CumulativeCasesWithLVIPos == currentReportNumber - 1 || previousReport == null)
-            //{
-            //    observedYValue = currentStatistics.BinomialDist;
-            //    observedXValue = currentReportNumber - 1;
-            //}
-            //else
-            //{
-            //    var observedReportFilter = new ChartObservedReportValuesSpecification(currentStatistics.CumulativeCasesWithLVIPos);
-            //    Report observedReportValue = _reportRepository.GetSingleBySpec(observedReportFilter);
-
-            //    observedYValue = observedReportValue.Statistics.BinomialDist;
-            //    observedXValue = observedReportValue.UserReportNumber - 1;
-            //}
-
-            return new ChartValues(theoreticalYValues, chartXAxis, observedYValues);
+            return new InterventionData(theoreticalYValues, chartXAxis, observedYValues, currentStatistics.BayesForGrade, currentStatistics.BayesForNumberOfLVI);
         }
     }
 }

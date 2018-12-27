@@ -26,8 +26,6 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Models\ViewComponents\" />
-    <Folder Include="Pages\Components\" />
     <Folder Include="Resources\Areas\Identity\Pages\Account\" />
   </ItemGroup>
 
