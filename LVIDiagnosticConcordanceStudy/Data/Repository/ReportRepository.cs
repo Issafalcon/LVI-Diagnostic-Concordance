@@ -1,4 +1,6 @@
 ﻿using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
+using LVIDiagnosticConcordanceStudy.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

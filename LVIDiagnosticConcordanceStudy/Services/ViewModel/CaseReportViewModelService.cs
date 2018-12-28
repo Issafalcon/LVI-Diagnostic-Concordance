@@ -1,12 +1,15 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Accord.Statistics.Distributions.Univariate;
+using LVIDiagnosticConcordanceStudy.Data;
 using LVIDiagnosticConcordanceStudy.Data.Repository;
 using LVIDiagnosticConcordanceStudy.Infrastructure.Specifications;
 using LVIDiagnosticConcordanceStudy.Models;
 using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
 using LVIDiagnosticConcordanceStudy.Models.ViewModels;
 using LVIDiagnosticConcordanceStudy.Services.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
 {

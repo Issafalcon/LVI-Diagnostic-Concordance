@@ -8,10 +8,13 @@ namespace LVIDiagnosticConcordanceStudy.Infrastructure.Specifications
 {
     public class CaseFilterSpecification : BaseSpecification<Case>
     {
-        public CaseFilterSpecification(int? caseId)
+        public CaseFilterSpecification(int? caseId, bool includeReports = false)
             : base(c => (!caseId.HasValue || c.Id == caseId))
         {
-
+            if (includeReports)
+            {
+                AddInclude(c => c.Reports);
+            }
         }
     }
 }

@@ -24,9 +24,9 @@ namespace LVIDiagnosticConcordanceStudy.Services
             _caseRepository = caseRepository;
         }
         
-        public async Task<IReadOnlyList<Report>> GetUserReports(string userId)
+        public async Task<IReadOnlyList<Report>> GetUserReports(string userId, bool includeCase = false)
         {
-            var reportFilter = new ReportFilterSpecification(userId, null);
+            var reportFilter = new ReportFilterSpecification(userId, null, includeCase: includeCase);
 
             return await _reportRepository.ListAsync(reportFilter);
         }

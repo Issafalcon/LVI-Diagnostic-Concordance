@@ -34,6 +34,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages
         [BindProperty]
         public CaseReportViewModel CaseReportViewModel { get; set; }
         public int CaseCount { get; private set; }
+        public int CaseId { get; set; }
         public int[] SubmittedReports { get; private set; }
         public bool SubmitOnPost { get; set; } = false;
 
@@ -48,6 +49,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             }
 
             CurrentUser = await _userManager.GetUserAsync(User);
+            CaseId = id.HasValue ? id.Value : 0;
 
             if (CurrentUser == null)
             {
@@ -103,7 +105,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages
                 return new JsonResult(new { redirectUrl = "/Case/" + (id.Value + 1).ToString() });
             }
 
-            return RedirectToPage("/Case/" + (id.Value + 1).ToString());
+            return RedirectToPage("/Case/Index", new { id = id.Value + 1 });
         }
 
         public async Task<IActionResult> OnPostSubmittedAsync(int? id, [FromQuery]bool isFromClient = false)
