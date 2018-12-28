@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Builder;
 using System.Linq;
 using System.Security.Claims;
 using LVIDiagnosticConcordanceStudy.Infrastructure.Security;
+using LVIDiagnosticConcordanceStudy.Areas.Identity.Services;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 {
@@ -26,6 +27,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<LVIStudyUser> _signInManager;
         private readonly UserManager<LVIStudyUser> _userManager;
+        private readonly IUserService _userService;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IStringLocalizer<RegisterModel> _localizer;
@@ -34,6 +36,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
         public RegisterModel(
             UserManager<LVIStudyUser> userManager,
             SignInManager<LVIStudyUser> signInManager,
+            IUserService userService,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             IStringLocalizer<RegisterModel> localizer,
@@ -41,6 +44,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _userService = userService;
             _logger = logger;
             _emailSender = emailSender;
             _localizer = localizer;
@@ -125,7 +129,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             Random random = new Random();
 
             int controlFlag = random.Next(0, 2);
-            var participants = await _userManager.GetUsersForClaimAsync(new Claim(CustomClaimTypes.IsAdmin, "false"));
+            var participants = await _userService.GetUserList();
 
             switch (controlFlag)
             {
@@ -179,6 +183,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
                 await RandomizeIntoGroup(user);
 
                 user.UserName = user.Email;
+                user.IsAdmin = false;
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

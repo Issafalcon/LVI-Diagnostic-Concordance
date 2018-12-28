@@ -13,32 +13,35 @@
             </tr>
         </thead>
         <tbody>
+            @{
+                int reportCount = 0;
+            }
+
             @for (int i = 0; i < Model.CaseCount; i++)
             {
-                int reportCount = 0;
-            <tr>
-                <th scope="row">@(i + 1)</th>
-                @if (Model.SubmittedReports.Contains(i))
-                {
-                    <td>@Model.Reports[reportCount].TumourGrade</td>
-                    <td>@Model.Reports[reportCount].NumberofLVI</td>
-                    @if (Model.Reports[reportCount].IsSubmitted)
+                <tr>
+                    <th scope="row">@(i + 1)</th>
+                    @if (Model.SubmittedReports.Contains(i))
                     {
-                        <th scope="row" class="text-success">Submitted</th>
+                        <td>@Model.Reports[reportCount].TumourGrade</td>
+                        <td>@Model.Reports[reportCount].NumberofLVI</td>
+                        @if (Model.Reports[reportCount].IsSubmitted)
+                        {
+                            <th scope="row" class="text-success">Submitted</th>
+                        }
+                        else
+                        {
+                            <th scope="row" class="text-primary">Incomplete</th>
+                        }
+                        reportCount++;
                     }
                     else
                     {
+                        <td></td>
+                        <td></td>
                         <th scope="row" class="text-primary">Incomplete</th>
                     }
-                    reportCount++;
-                }
-                else
-                {
-                    <td></td>
-                    <td></td>
-                    <th scope="row" class="text-primary">Incomplete</th>
-                }
-            </tr>
+                </tr>
             }
         </tbody>
     </table>

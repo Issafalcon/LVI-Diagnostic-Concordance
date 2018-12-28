@@ -36,6 +36,10 @@ namespace LVIDiagnosticConcordanceStudy.Data
 
             builder.Property(u => u.Gender)
                 .HasConversion(new EnumToStringConverter<GenderEnum>());
+
+            builder.HasMany(u => u.Reports)
+                .WithOne(r => r.LVIStudyUser)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         private void ConfigureCase(EntityTypeBuilder<Case> builder)

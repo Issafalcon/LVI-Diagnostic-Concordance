@@ -7,6 +7,6 @@ namespace LVIDiagnosticConcordanceStudy.Infrastructure.Security
 {
     public class CustomClaimTypes
     {
-        public const string IsAdmin = "https://lvidiagnosticstudy.com/claims/isadmin";
+        public const string IsAdmin = "http://localhost:51877/claims/isadmin";
     }
 }

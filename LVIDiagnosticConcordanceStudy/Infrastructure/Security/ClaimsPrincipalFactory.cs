@@ -16,6 +16,7 @@ namespace LVIDiagnosticConcordanceStudy.Infrastructure.Security
         {
 
         }
+
         protected override async Task<ClaimsIdentity> GenerateClaimsAsync(TUser user)
         {
             var id = await base.GenerateClaimsAsync(user);

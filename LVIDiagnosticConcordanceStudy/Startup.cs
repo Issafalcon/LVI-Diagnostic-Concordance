@@ -21,6 +21,7 @@ using LVIDiagnosticConcordanceStudy.Services;
 using LVIDiagnosticConcordanceStudy.Data.Repository;
 using LVIDiagnosticConcordanceStudy.Services.ViewModel;
 using LVIDiagnosticConcordanceStudy.Services.Domain;
+using LVIDiagnosticConcordanceStudy.Areas.Identity.Services;
 
 namespace LVIDiagnosticConcordanceStudy
 {
@@ -54,8 +55,6 @@ namespace LVIDiagnosticConcordanceStudy
                 options.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddTransient<IUserClaimsPrincipalFactory<LVIStudyUser>, ClaimsPrincipalFactory<LVIStudyUser>>();
-
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
             services.AddMvc(config =>
@@ -82,6 +81,8 @@ namespace LVIDiagnosticConcordanceStudy
                 options.AddPolicy("AdminOnly", policy => policy.RequireClaim(CustomClaimTypes.IsAdmin, "true"));
             });
 
+            services.AddTransient<IUserClaimsPrincipalFactory<LVIStudyUser>, ClaimsPrincipalFactory<LVIStudyUser>>();
+
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 var supportedCultures = new[]
@@ -100,6 +101,7 @@ namespace LVIDiagnosticConcordanceStudy
             services.AddScoped<IReportRepository, ReportRepository>();
             services.AddScoped<ICaseService, CaseService>();
             services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICaseReportViewModelService, CaseReportViewModelService>();
             services.AddSingleton<IEmailSender, EmailSender>();
             services.Configure<SendGridOptions>(Configuration);
