@@ -136,6 +136,16 @@ namespace LVIDiagnosticConcordanceStudy.Services
             return statistics;
         }
 
+        public void CalculateAgeBasedStatistics(ReportStatistics statistics, int ptAge)
+        {
+            statistics.ProbLVIPos50Plus = ptAge < 51 ? DataConstants.BelowFiftyYearsLVIPos : 1 - DataConstants.BelowFiftyYearsLVIPos;
+            statistics.ProbLVINeg50Plus = ptAge < 51 ? DataConstants.BelowFiftyYearsLVINeg : 1 - DataConstants.BelowFiftyYearsLVINeg;
+            statistics.BayesForAge = CalculateBayes(DataConstants.ProbLVIPos,
+                statistics.ProbLVIPos50Plus,
+                statistics.ProbLVINeg50Plus,
+                DataConstants.ProbLVINeg);
+        }
+
         private decimal CalculateBayes(decimal baseProb, decimal positivePredictiveProb, decimal negativePredictiveProb, decimal baseNegativePredictiveProb)
         {
             decimal posTimesBase = positivePredictiveProb * baseProb;
