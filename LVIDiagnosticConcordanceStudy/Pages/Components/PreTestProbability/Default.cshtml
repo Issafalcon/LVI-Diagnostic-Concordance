@@ -1,0 +1,15 @@
+﻿@using LVIDiagnosticConcordanceStudy.Models.ViewComponents
+@using Models
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@model PreTestProbabilityViewComponent.PreTestProbability
+
+@{
+    int preTestPercentage = Convert.ToInt32(Model.PreTest * 100);
+    string preTestBadgeClass = Model.PreTest < DataConstants.SecondInterval ? "badge-danger" : "badge-success";
+}
+
+<button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content=@Localizer["Probability of having LVI given the supplied Grade of the tumour."]>
+    @Localizer["Pre-Test Probability"] <span class="badge @(preTestBadgeClass)">@(preTestPercentage.ToString())%</span>
+</button>

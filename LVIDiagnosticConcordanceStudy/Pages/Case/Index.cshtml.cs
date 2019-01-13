@@ -87,6 +87,11 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             return ViewComponent("Intervention", new { preTestProbability = preTestProb, postTestProbability = postTestProb, observed = observedValue });
         }
 
+        public IActionResult OnGetPreTestProbabilityViewComponentAsync(decimal preTestProb)
+        {
+            return ViewComponent("PreTestProbability", new { preTestProbability = preTestProb });
+        }
+
         public async Task<IActionResult> OnPostAsync(int? id, bool isFromClient = false)
         {
             if (!ModelState.IsValid)

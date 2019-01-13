@@ -43,9 +43,12 @@
 
 <div class="row pb-3 justify-content-center">
     <div class="card col-md-4">
-        <form id="caseReport" asp-page-handler="Submitted" class="card-body" method="post">
+        <div class="card-header">
             <h1>@ViewData["Title"]</h1>
             <h4 class="card-subtitle mb-2 text-muted">@ViewData["SubTitle"]</h4>
+            <div id="preTestProbabilityPlaceholder"></div>
+        </div>
+        <form id="caseReport" asp-page-handler="Submitted" class="card-body" method="post">
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">

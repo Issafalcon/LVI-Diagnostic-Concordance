@@ -69,51 +69,14 @@ namespace LVIDiagnosticConcordanceStudy.Services
         {
             ReportStatistics statistics = new ReportStatistics();
 
-            statistics.LVIPresent = numLVISeen > 0;
-            statistics.ProbLVIPos50Plus = ptAge < 51 ? DataConstants.BelowFiftyYearsLVIPos : 1 - DataConstants.BelowFiftyYearsLVIPos;
-            statistics.ProbLVINeg50Plus = ptAge < 51 ? DataConstants.BelowFiftyYearsLVINeg : 1 - DataConstants.BelowFiftyYearsLVINeg;
-            statistics.BayesForAge = CalculateBayes(DataConstants.ProbLVIPos,
-                DataConstants.BelowFiftyYearsLVIPos,
-                DataConstants.BelowFiftyYearsLVINeg,
-                DataConstants.ProbLVINeg);
+            // The four sets of Bayes theorum calculations need to be performed sequentially for the entire statistics set to be correct
+            CalculateAgeBasedStatistics(statistics, ptAge);
 
-            statistics.ProbLVIPosSize = tumourSize > 2 ? DataConstants.TwoToFivecmLVIPos
-                : tumourSize > 1 ? DataConstants.OneToTwocmLVIPos
-                : DataConstants.BelowOnecmLVIPos;
-            statistics.ProbLVINegSize = tumourSize > 2 ? DataConstants.TwoToFivecmLVINeg
-                : tumourSize > 1 ? DataConstants.OneToTwocmLVINeg
-                : DataConstants.BelowOnecmLVINeg;
-            statistics.BayesForSize = CalculateBayes
-                (statistics.BayesForAge, 
-                 statistics.ProbLVIPosSize,
-                 statistics.ProbLVINegSize, 
-                 1 - statistics.BayesForAge);
+            CalculateSizeBasedStatistics(statistics, tumourSize);
 
-            statistics.ProbLVIPosGrade = (int)grade == 1 ? DataConstants.GradeOneLVIPos
-                : (int)grade == 2 ? DataConstants.GradeTwoLVIPos
-                : DataConstants.GradeThreeLVIPos;
-            statistics.ProbLVINegGrade = (int)grade == 1 ? DataConstants.GradeOneLVINeg
-                : (int)grade == 2 ? DataConstants.GradeTwoLVINeg
-                : DataConstants.GradeThreeLVINeg;
-            statistics.BayesForGrade = CalculateBayes
-                (statistics.BayesForSize,
-                 statistics.ProbLVIPosGrade,
-                 statistics.ProbLVINegGrade, 
-                 1 - statistics.BayesForSize);
+            CalculatePreTestProbability(statistics, grade);
 
-            statistics.ProbLVIPosNumberOfLVI = numLVISeen == 0 ? DataConstants.ZeroLVIImagesLVIPos
-                : numLVISeen < 3 ? DataConstants.OneToTwoLVIImagesLVIPos
-                : numLVISeen < 4 ? DataConstants.TwoToThreeLVIImagesLVIPos
-                : DataConstants.FivePlusLVIImagesLVIPos;
-            statistics.ProbLVINegNumberOfLVI = numLVISeen == 0 ? DataConstants.ZeroLVIImagesLVINeg
-                : numLVISeen < 3 ? DataConstants.OneToTwoLVIImagesLVINeg
-                : numLVISeen < 4 ? DataConstants.TwoToThreeLVIImagesLVINeg
-                : DataConstants.FivePlusLVIImagesLVINeg;
-            statistics.BayesForNumberOfLVI = CalculateBayes
-                (statistics.BayesForGrade,
-                 statistics.ProbLVIPosNumberOfLVI,
-                 statistics.ProbLVINegNumberOfLVI, 
-                 1 - statistics.BayesForGrade);
+            CalculatePostTestProbability(statistics, numLVISeen);
 
             // Calculate the cumulative values based on results of previously submitted cases
             int numberOfUserReports = previousReport != null ? previousReport.UserReportNumber + 1 : 1;
@@ -144,6 +107,55 @@ namespace LVIDiagnosticConcordanceStudy.Services
                 statistics.ProbLVIPos50Plus,
                 statistics.ProbLVINeg50Plus,
                 DataConstants.ProbLVINeg);
+        }
+
+        public void CalculateSizeBasedStatistics(ReportStatistics statistics, decimal tumourSize)
+        {
+            statistics.ProbLVIPosSize = tumourSize > (decimal)2 ? DataConstants.TwoToFivecmLVIPos
+                : tumourSize > (decimal)1 ? DataConstants.OneToTwocmLVIPos
+                : DataConstants.BelowOnecmLVIPos;
+            statistics.ProbLVINegSize = tumourSize > (decimal)2 ? DataConstants.TwoToFivecmLVINeg
+                : tumourSize > (decimal)1 ? DataConstants.OneToTwocmLVINeg
+                : DataConstants.BelowOnecmLVINeg;
+            statistics.BayesForSize = CalculateBayes
+                (statistics.BayesForAge,
+                 statistics.ProbLVIPosSize,
+                 statistics.ProbLVINegSize,
+                 1 - statistics.BayesForAge);
+        }
+
+        public void CalculatePreTestProbability(ReportStatistics statistics, Grade grade)
+        {
+            statistics.ProbLVIPosGrade = (int)grade == 1 ? DataConstants.GradeOneLVIPos
+                : (int)grade == 2 ? DataConstants.GradeTwoLVIPos
+                : DataConstants.GradeThreeLVIPos;
+            statistics.ProbLVINegGrade = (int)grade == 1 ? DataConstants.GradeOneLVINeg
+                : (int)grade == 2 ? DataConstants.GradeTwoLVINeg
+                : DataConstants.GradeThreeLVINeg;
+            statistics.BayesForGrade = CalculateBayes
+                (statistics.BayesForSize,
+                 statistics.ProbLVIPosGrade,
+                 statistics.ProbLVINegGrade,
+                 1 - statistics.BayesForSize);
+        }
+
+        public void CalculatePostTestProbability(ReportStatistics statistics, int numLVISeen)
+        {
+            statistics.LVIPresent = numLVISeen > 0;
+
+            statistics.ProbLVIPosNumberOfLVI = numLVISeen == 0 ? DataConstants.ZeroLVIImagesLVIPos
+                : numLVISeen < 3 ? DataConstants.OneToTwoLVIImagesLVIPos
+                : numLVISeen < 4 ? DataConstants.TwoToThreeLVIImagesLVIPos
+                : DataConstants.FivePlusLVIImagesLVIPos;
+            statistics.ProbLVINegNumberOfLVI = numLVISeen == 0 ? DataConstants.ZeroLVIImagesLVINeg
+                : numLVISeen < 3 ? DataConstants.OneToTwoLVIImagesLVINeg
+                : numLVISeen < 4 ? DataConstants.TwoToThreeLVIImagesLVINeg
+                : DataConstants.FivePlusLVIImagesLVINeg;
+            statistics.BayesForNumberOfLVI = CalculateBayes
+                (statistics.BayesForGrade,
+                 statistics.ProbLVIPosNumberOfLVI,
+                 statistics.ProbLVINegNumberOfLVI,
+                 1 - statistics.BayesForGrade);
         }
 
         private decimal CalculateBayes(decimal baseProb, decimal positivePredictiveProb, decimal negativePredictiveProb, decimal baseNegativePredictiveProb)
