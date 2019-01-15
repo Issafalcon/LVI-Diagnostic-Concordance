@@ -81,6 +81,23 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
             return _reportRepository.GetSubmittedReportIdsForUser(userId);
         }
 
+        public async Task GetPreTestProbabilityData(CaseReportViewModel caseReportViewModel, ReportStatistics statistics)
+        {
+            if (statistics.BayesForSize > 0)
+            {
+                await Task.Run(() =>_reportService.CalculatePreTestProbability(statistics, caseReportViewModel.TumourGrade));
+            }
+            else
+            {
+                // Assume we haven't yet calculated the first two bayes theorum values (probabilities based on age and tumour size)
+                await Task.Run(() => _reportService.CalculateAgeBasedStatistics(statistics, caseReportViewModel.PatientAge));
+                await Task.Run(() => _reportService.CalculateSizeBasedStatistics(statistics, caseReportViewModel.TumourSize));
+                await Task.Run(() => _reportService.CalculatePreTestProbability(statistics, caseReportViewModel.TumourGrade));
+            }
+
+            return;            
+        }
+
         public async Task<InterventionData> GetInterventionDataForCaseReport(CaseReportViewModel caseReportViewModel, int caseId, string userId)
         {
             int[] chartXAxis;
@@ -113,7 +130,14 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
                 chartXAxis[i] = i;
             }
 
-            return new InterventionData(theoreticalYValues, chartXAxis, observedYValues, currentStatistics.BayesForGrade, currentStatistics.BayesForNumberOfLVI);
+            return new InterventionData()
+            {
+                TheoreticalYValues = theoreticalYValues,
+                ObservedYValues = observedYValues,
+                ChartXAxis = chartXAxis,
+                PreTestProbability = currentStatistics.BayesForGrade,
+                PostTestProbability = currentStatistics.BayesForNumberOfLVI
+            };
         }
     }
 }

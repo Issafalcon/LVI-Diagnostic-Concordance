@@ -1,10 +1,37 @@
 ﻿'use strict';
 
+//import { populateProbabilityChart } from "./probabilityChart.js";
+
+
+
 $(document).ready(function () {
 
     /*
         Alternative submit button handler for intervention group
     */
+
+    $("#CaseReportViewModel_TumourGrade").change(function (e) {
+        var caseReportData = getViewModelValues();
+
+        if (!caseReportData.TumourGrade) {
+            // If we don't have a value, remove the existing pre-test probability and return
+            $("#preTestProbabilityPlaceholder").empty();
+            return;
+        }
+
+        if (caseReportData.NumberofLVI) {
+            // Run the full set of probability calculations again as we have complete set of report data
+        } else {
+            $.ajax({
+                type: "GET",
+                url: window.location.pathname + "?handler=PreTestProbabilityData&" + jQuery.param(caseReportData),
+                contentType: "application/json",
+                dataType: "json"
+            }).done(function (res) {
+                getPreTestProbabilityViewComponent(res);
+            });
+        }
+    });
 
     $("#probabilityInfo").click(function (e) {
 
@@ -18,12 +45,7 @@ $(document).ready(function () {
             // If we have no jQuery validation errors on the form, then display additional probability data
             // to intervention group.
             var caseUrl = window.location.pathname;
-            var caseReportData = {
-                PatientAge: $("#CaseReportViewModel_PatientAge")[0].value,
-                TumourSize: $("#CaseReportViewModel_TumourSize")[0].value,
-                TumourGrade: $("#CaseReportViewModel_TumourGrade")[0].value,
-                NumberofLVI: $("#CaseReportViewModel_NumberofLVI")[0].value
-            };
+            var caseReportData = getViewModelValues();
 
             $.ajax({
                 type: "GET",
@@ -46,6 +68,15 @@ $(document).ready(function () {
             $caseReportForm.validate().showErrors();
         }
     });
+
+    function getViewModelValues() {
+        return {
+            PatientAge: $("#CaseReportViewModel_PatientAge")[0].value,
+            TumourSize: $("#CaseReportViewModel_TumourSize")[0].value,
+            TumourGrade: $("#CaseReportViewModel_TumourGrade")[0].value,
+            NumberofLVI: $("#CaseReportViewModel_NumberofLVI")[0].value
+        };
+    }
 
     function checkNumberOfLVI() {
         // Check here if the number of LVI is actually an int
@@ -74,6 +105,20 @@ $(document).ready(function () {
     $.validator.addMethod("forcibleerror", function (value, element) {
         return $(element)[0].dataset.isForced !== "true";
     });
+
+    function getPreTestProbabilityViewComponent(data) {
+
+        $.ajax({
+            type: "GET",
+            url: window.location.pathname + "?handler=PreTestProbabilityViewComponent&" + jQuery.param({ preTestProb: data })
+        }).done(function (res) {
+            $("#preTestProbabilityPlaceholder").fadeToggle("300", function () {
+                $("#preTestProbabilityPlaceholder").html(res);
+                $("#preTestProbabilityPlaceholder").fadeToggle("300");
+            });
+            
+        });
+    }
 
     function getInterventionViewComponent(data) {
         var observedValue;
@@ -132,58 +177,6 @@ $(document).ready(function () {
             }
         }).done(function (res) {
             window.location.href = res.redirectUrl;
-        });
-    }
-
-    function populateProbabilityChart(data) {
-        var ctx = document.getElementById("probabilityChartPlaceholder").getContext("2d");
-
-        var probabilityChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data.chartXAxis,
-                datasets: [{
-                    label: 'Theoretical Probability of LVI',
-                    data: data.theoreticalYValues,
-                    backgroundColor: 'rgba(34, 167, 240, 0.5)',
-                    borderColor: 'rgba(34, 167, 240, 0.5)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Observed Probability of LVI',
-                    data: data.observedYValues,
-                    backgroundColor: 'rgba(165, 55, 253, 0.5)',
-                    borderColor: 'rgba(165, 55, 253, 0.5)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: "Probability Based On Cumulative LVI"
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: "Probability of Having LVI"
-                        }
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: "Cumulative Cases Reported As LVI Positive"
-                        }
-                    }]
-                }
-            }
         });
     }
 });

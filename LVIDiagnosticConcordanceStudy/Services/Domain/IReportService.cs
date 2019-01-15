@@ -13,5 +13,9 @@ namespace LVIDiagnosticConcordanceStudy.Services.Domain
         Report GetPreviousUserReport(string userId);
         Task CreateOrUpdateReportFromCase(Case currentCase, Report report, Grade grade, int numberOfLVI, string userId, bool isSubmitted = false);
         ReportStatistics CalculateStatistics(int ptAge, decimal tumourSize, Grade grade, int numLVISeen, Report previousReport);
+        void CalculateAgeBasedStatistics(ReportStatistics statistics, int ptAge);
+        void CalculateSizeBasedStatistics(ReportStatistics statistics, decimal tumourSize);
+        void CalculatePreTestProbability(ReportStatistics statistics, Grade grade);
+        void CalculatePostTestProbability(ReportStatistics statistics, int numLVISeen);
     }
 }

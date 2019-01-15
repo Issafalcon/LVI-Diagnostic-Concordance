@@ -37,6 +37,8 @@ namespace LVIDiagnosticConcordanceStudy.Pages
         public int CaseId { get; set; }
         public int[] SubmittedReports { get; private set; }
         public bool SubmitOnPost { get; set; } = false;
+        public InterventionData InterventionData { get; set; }
+        private ReportStatistics _statistics = new ReportStatistics();
 
         // TODO:
         //     1. Add initial call to a cached service to get all cases
@@ -70,21 +72,29 @@ namespace LVIDiagnosticConcordanceStudy.Pages
 
         public async Task<IActionResult> OnGetInterventionDataAsync(int? id, [FromQuery]CaseReportViewModel caseReportData)
         {
-            InterventionData interventionData = await _caseReportService.GetInterventionDataForCaseReport(caseReportData, id.Value, _userManager.GetUserId(User));
+            InterventionData = await _caseReportService.GetInterventionDataForCaseReport(caseReportData, id.Value, _userManager.GetUserId(User));
 
-            ContentResult result = new ContentResult()
-            {
-                ContentType = "application/json",
-                Content = JsonConvert.SerializeObject(interventionData),
-                StatusCode = interventionData != null ? (int)HttpStatusCode.OK : (int)HttpStatusCode.BadRequest
-            };
+            //ContentResult result = new ContentResult()
+            //{
+            //    ContentType = "application/json",
+            //    Content = JsonConvert.SerializeObject(interventionData),
+            //    StatusCode = interventionData != null ? (int)HttpStatusCode.OK : (int)HttpStatusCode.BadRequest
+            //};
 
-            return new JsonResult(interventionData);
+            return new JsonResult(InterventionData);
         }
 
         public IActionResult OnGetInterventionViewComponentAsync(decimal preTestProb, decimal postTestProb, decimal observedValue)
         {
             return ViewComponent("Intervention", new { preTestProbability = preTestProb, postTestProbability = postTestProb, observed = observedValue });
+        }
+
+        public async Task<IActionResult> OnGetPreTestProbabilityDataAsync(int? id, [FromQuery]CaseReportViewModel caseReportData)
+        {
+            
+            await _caseReportService.GetPreTestProbabilityData(caseReportData, _statistics);
+
+            return new JsonResult(_statistics.BayesForGrade);
         }
 
         public IActionResult OnGetPreTestProbabilityViewComponentAsync(decimal preTestProb)
