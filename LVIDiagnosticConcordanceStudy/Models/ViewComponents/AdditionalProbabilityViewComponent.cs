@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LVIDiagnosticConcordanceStudy.Models.ViewComponents
 {
-    public class InterventionViewComponent : ViewComponent
+    public class AdditionalProbabilityViewComponent : ViewComponent
     {
         public class Probabilities
         {

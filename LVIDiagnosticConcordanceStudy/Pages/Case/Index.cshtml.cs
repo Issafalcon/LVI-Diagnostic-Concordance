@@ -70,23 +70,16 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnGetInterventionDataAsync(int? id, [FromQuery]CaseReportViewModel caseReportData)
+        public async Task<IActionResult> OnGetAdditionalProbabilityDataAsync(int? id, [FromQuery]CaseReportViewModel caseReportData)
         {
             InterventionData = await _caseReportService.GetInterventionDataForCaseReport(caseReportData, id.Value, _userManager.GetUserId(User));
-
-            //ContentResult result = new ContentResult()
-            //{
-            //    ContentType = "application/json",
-            //    Content = JsonConvert.SerializeObject(interventionData),
-            //    StatusCode = interventionData != null ? (int)HttpStatusCode.OK : (int)HttpStatusCode.BadRequest
-            //};
 
             return new JsonResult(InterventionData);
         }
 
-        public IActionResult OnGetInterventionViewComponentAsync(decimal preTestProb, decimal postTestProb, decimal observedValue)
+        public IActionResult OnGetAdditionalProbabilityViewComponentAsync(decimal preTestProb, decimal postTestProb, decimal observedValue)
         {
-            return ViewComponent("Intervention", new { preTestProbability = preTestProb, postTestProbability = postTestProb, observed = observedValue });
+            return ViewComponent("AdditionalProbability", new { preTestProbability = preTestProb, postTestProbability = postTestProb, observed = observedValue });
         }
 
         public async Task<IActionResult> OnGetPreTestProbabilityDataAsync(int? id, [FromQuery]CaseReportViewModel caseReportData)

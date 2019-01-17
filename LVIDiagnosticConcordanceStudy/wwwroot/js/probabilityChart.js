@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-export function populateProbabilityChart(data) {
+function populateProbabilityChart(data) {
     var ctx = document.getElementById("probabilityChartPlaceholder").getContext("2d");
 
     var probabilityChart = new Chart(ctx, {
