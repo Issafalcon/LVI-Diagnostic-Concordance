@@ -10,6 +10,6 @@
     string preTestBadgeClass = Model.PreTest < DataConstants.SecondInterval ? "badge-danger" : "badge-success";
 }
 
-<button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content=@Localizer["Probability of having LVI given the supplied Grade of the tumour."]>
+<button type="button" class="btn btn-secondary" title="@Localizer["LVI Probability"]" data-container="body" data-toggle="popover" data-placement="left" data-content="@Localizer["Probability of having LVI given the supplied Grade only."]">
     @Localizer["Pre-Test Probability"] <span class="badge @(preTestBadgeClass)">@(preTestPercentage.ToString())%</span>
 </button>
