@@ -8,12 +8,17 @@ namespace LVIDiagnosticConcordanceStudy.Infrastructure.Specifications
 {
     public class CaseFilterSpecification : BaseSpecification<Case>
     {
-        public CaseFilterSpecification(int? caseId, bool includeReports = false)
+        public CaseFilterSpecification(int? caseId, bool includeReports = false, bool orderByCaseNumber = false)
             : base(c => (!caseId.HasValue || c.Id == caseId))
         {
             if (includeReports)
             {
                 AddInclude(c => c.Reports);
+            }
+
+            if (orderByCaseNumber)
+            {
+                ApplyOrderBy(c => c.Id);
             }
         }
     }

@@ -8,6 +8,6 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Services
 {
     public interface IUserService
     {
-        Task<IReadOnlyList<LVIStudyUser>> GetUserList();
+        Task<IReadOnlyList<LVIStudyUser>> GetUserListAsync();
     }
 }

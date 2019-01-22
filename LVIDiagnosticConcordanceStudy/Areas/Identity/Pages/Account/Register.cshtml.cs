@@ -129,7 +129,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             Random random = new Random();
 
             int controlFlag = random.Next(0, 2);
-            var participants = await _userService.GetUserList();
+            var participants = await _userService.GetUserListAsync();
 
             switch (controlFlag)
             {

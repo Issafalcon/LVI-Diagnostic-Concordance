@@ -45,9 +45,6 @@ namespace LVIDiagnosticConcordanceStudy.Data
         private void ConfigureCase(EntityTypeBuilder<Case> builder)
         {
             builder.ToTable("Cases");
-
-            builder.Property(c => c.Id)
-                .ValueGeneratedNever();
         }
 
         private void ConfigureReport(EntityTypeBuilder<Report> builder)

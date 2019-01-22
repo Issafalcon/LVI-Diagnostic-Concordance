@@ -18,7 +18,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Services
             _dbContext = dbContext;
         }
 
-        public async Task<IReadOnlyList<LVIStudyUser>> GetUserList()
+        public async Task<IReadOnlyList<LVIStudyUser>> GetUserListAsync()
         {
             return await _dbContext.Users.ToListAsync();
         }

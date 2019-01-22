@@ -9,5 +9,6 @@ namespace LVIDiagnosticConcordanceStudy.Services
     public interface ICaseService
     {
         Task<Case> GetCaseByIdAsync(int id);
+        Task<IReadOnlyList<Case>> GetOrderedCasesAsync();
     }
 }

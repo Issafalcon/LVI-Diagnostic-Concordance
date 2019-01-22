@@ -66,12 +66,12 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
                     return Page();
                 }
             }
+            var result = await AnonymiseUserAsync(user);
 
-            var result = await _userManager.DeleteAsync(user);
             var userId = await _userManager.GetUserIdAsync(user);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException($"Unexpected error occurred deleteing user with ID '{userId}'.");
+                throw new InvalidOperationException($"Unexpected error occurred anonymising user with ID '{userId}'.");
             }
 
             await _signInManager.SignOutAsync();
@@ -79,6 +79,22 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             _logger.LogInformation("User with ID '{UserId}' deleted themselves.", userId);
 
             return Redirect("~/");
+        }
+
+        private async Task<IdentityResult> AnonymiseUserAsync(LVIStudyUser user)
+        {
+            user.UserName = Guid.NewGuid().ToString();
+            user.NormalizedUserName = "";
+            user.Email = null;
+            user.EmailConfirmed = false;
+            user.Culture = null;
+            user.FirstName = "Withdrawn";
+            user.Gender = GenderEnum.NotSpecified;
+            user.LastName = "Withdrawn";
+            user.Nationality = "Withdrawn";
+            user.PlaceOfWork = "Withdrawn";
+
+            return await _userManager.UpdateAsync(user);
         }
     }
 }
