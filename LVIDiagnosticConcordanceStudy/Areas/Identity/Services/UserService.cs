@@ -22,5 +22,6 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Services
         {
             return await _dbContext.Users.ToListAsync();
         }
+
     }
 }

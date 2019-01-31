@@ -1,0 +1,32 @@
+﻿@page
+@model LVIDiagnosticConcordanceStudy.Pages.Admin.Cases.CreateModel
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["Create Case"];
+}
+
+<div class="row pb-3 justify-content-center">
+    <div class="card col-lg-6">
+        <h2 class="card-header">@ViewData["Title"]</h2>
+        <form class="card-body" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Case.PatientAge" class="control-label"></label>
+                <input asp-for="Case.PatientAge" class="form-control" />
+                <span asp-validation-for="Case.PatientAge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Case.TumourSize" class="control-label"></label>
+                <input asp-for="Case.TumourSize" class="form-control" />
+                <span asp-validation-for="Case.TumourSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+

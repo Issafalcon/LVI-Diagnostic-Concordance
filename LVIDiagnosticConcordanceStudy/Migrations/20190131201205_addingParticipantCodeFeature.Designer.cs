@@ -4,14 +4,16 @@ using LVIDiagnosticConcordanceStudy.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LVIDiagnosticConcordanceStudy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190131201205_addingParticipantCodeFeature")]
+    partial class addingParticipantCodeFeature
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,8 +94,7 @@ namespace LVIDiagnosticConcordanceStudy.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("ParticipantCodeId")
-                        .IsUnique();
+                    b.HasIndex("ParticipantCodeId");
 
                     b.ToTable("LVIStudyUser");
                 });
@@ -273,8 +274,8 @@ namespace LVIDiagnosticConcordanceStudy.Migrations
             modelBuilder.Entity("LVIDiagnosticConcordanceStudy.Areas.Identity.Data.LVIStudyUser", b =>
                 {
                     b.HasOne("LVIDiagnosticConcordanceStudy.Areas.Identity.Data.ParticipantCode", "ParticipantCode")
-                        .WithOne("LVIStudyUser")
-                        .HasForeignKey("LVIDiagnosticConcordanceStudy.Areas.Identity.Data.LVIStudyUser", "ParticipantCodeId")
+                        .WithMany()
+                        .HasForeignKey("ParticipantCodeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

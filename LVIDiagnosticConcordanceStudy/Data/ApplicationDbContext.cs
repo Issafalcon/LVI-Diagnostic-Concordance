@@ -17,6 +17,7 @@ namespace LVIDiagnosticConcordanceStudy.Data
 
         public DbSet<Case> Case { get; set; }
         public DbSet<Report> Report { get; set; }
+        public DbSet<ParticipantCode> ParticipantCode { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -55,6 +56,11 @@ namespace LVIDiagnosticConcordanceStudy.Data
             {
                 rs.ToTable("ReportStatistics");
             });
+        }
+
+        private void ConfigureCase(EntityTypeBuilder<ParticipantCode> builder)
+        {
+            builder.ToTable("ParticipantCodes");
         }
     }
 }

@@ -39,6 +39,10 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Data
         [PersonalData]
         public bool IsBreastSpecialist { get; set; }
 
+        //TODO: Adjust participant code - Relationship should be Code string and entered as null for seed data
+        public int ParticipantCodeId { get; set; }
+        public ParticipantCode ParticipantCode { get; set; }
+
         public List<Report> Reports { get; set; }
     }
 

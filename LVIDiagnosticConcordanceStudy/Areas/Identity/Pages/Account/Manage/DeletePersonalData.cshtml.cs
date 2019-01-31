@@ -85,7 +85,8 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
         {
             user.UserName = Guid.NewGuid().ToString();
             user.NormalizedUserName = "";
-            user.Email = null;
+            user.Email = "withdrawn";
+            user.NormalizedEmail = "WITHDRAWN";
             user.EmailConfirmed = false;
             user.Culture = null;
             user.FirstName = "Withdrawn";

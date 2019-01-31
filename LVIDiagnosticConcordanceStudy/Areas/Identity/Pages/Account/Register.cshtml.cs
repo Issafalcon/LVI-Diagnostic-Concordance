@@ -19,6 +19,8 @@ using System.Linq;
 using System.Security.Claims;
 using LVIDiagnosticConcordanceStudy.Infrastructure.Security;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Services;
+using LVIDiagnosticConcordanceStudy.Data.Repository;
+using LVIDiagnosticConcordanceStudy.Infrastructure.Specifications;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 {
@@ -31,6 +33,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IStringLocalizer<RegisterModel> _localizer;
+        private readonly IAsyncRepository<ParticipantCode> _codeRepository;
         private readonly RequestLocalizationOptions _locOptions;
 
         public RegisterModel(
@@ -72,6 +75,9 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
+
+            [Display(Name = "Participant Code", Description = "The 10 character code provided to you by the study administrator.")]
+            public string ParticipantCode { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -166,6 +172,13 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             }
         }
 
+        private async Task<bool> CheckValidParticipantCode(string code)
+        {
+            var validCodes = await _codeRepository.ListAsync(new ParticipantCodeSpecification(isUsed: false));
+
+            return validCodes.Any(pc => pc.Code == code);
+        }
+
         public void OnGet(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
@@ -174,11 +187,18 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
+
             if (ModelState.IsValid)
             {
                 var user = new LVIStudyUser();
 
                 await TryUpdateModelAsync<LVIStudyUser>(user, "input");
+
+                if (!await CheckValidParticipantCode(user.ParticipantCode.Code))
+                {
+                    ModelState.AddModelError("ParticipantCode", "The Participant Code you have provided is not valid");
+                    return Page();
+                }
 
                 await RandomizeIntoGroup(user);
 
@@ -200,7 +220,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    // await _signInManager.SignInAsync(user, isPersistent: false);
+                    //TODO: Redirect to the Registration Confirmation Page - Asking user to check email and confirm address before logging in
                     return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)
