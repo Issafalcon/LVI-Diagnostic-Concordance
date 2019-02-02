@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="Pages\Admin\Participants\" />
     <Folder Include="Resources\Areas\Identity\Pages\Account\" />
   </ItemGroup>
 

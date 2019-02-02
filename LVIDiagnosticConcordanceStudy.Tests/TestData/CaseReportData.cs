@@ -236,11 +236,11 @@ namespace LVIDiagnosticConcordanceStudy.Tests.TestData
                 BayesForNumberOfLVI = 0.01372754m,
 
                 LVIPresent = false,
-                CumulativeBayesForGrade = 1.771216147m,
-                CumulativeAverageBayesForGrade = 0.442804037m,
+                CumulativeBayesForGrade = 1.627496506m,
+                CumulativeAverageBayesForGrade = 0.406874127m,
                 CumulativeCasesWithLVIPos = 2,
 
-                BinomialDist = 0.365250077m
+                BinomialDist = 0.349433981m
             },
             new ReportStatistics
             {
@@ -258,11 +258,11 @@ namespace LVIDiagnosticConcordanceStudy.Tests.TestData
                 BayesForNumberOfLVI = 0.01709943m,
 
                 LVIPresent = false,
-                CumulativeBayesForGrade = 2.009369826m,
-                CumulativeAverageBayesForGrade = 0.401873965m,
+                CumulativeBayesForGrade = 1.865650185m,
+                CumulativeAverageBayesForGrade = 0.373130037m,
                 CumulativeCasesWithLVIPos = 2,
 
-                BinomialDist = 0.345587371m
+                BinomialDist = 0.342967371m
             },
             new ReportStatistics
             {
@@ -280,11 +280,11 @@ namespace LVIDiagnosticConcordanceStudy.Tests.TestData
                 BayesForNumberOfLVI = 0.010369541m,
 
                 LVIPresent = false,
-                CumulativeBayesForGrade = 2.167817376m,
-                CumulativeAverageBayesForGrade = 0.361302896m,
+                CumulativeBayesForGrade = 2.024097735m,
+                CumulativeAverageBayesForGrade = 0.337349622m,
                 CumulativeCasesWithLVIPos = 2,
 
-                BinomialDist = 0.325847154m
+                BinomialDist = 0.329146707m
             },
             new ReportStatistics
             {
@@ -302,11 +302,11 @@ namespace LVIDiagnosticConcordanceStudy.Tests.TestData
                 BayesForNumberOfLVI = 0.004977314m,
 
                 LVIPresent = false,
-                CumulativeBayesForGrade = 2.326264926m,
-                CumulativeAverageBayesForGrade = 0.332323561m,
+                CumulativeBayesForGrade = 2.10656846m,
+                CumulativeAverageBayesForGrade = 0.300938351m,
                 CumulativeCasesWithLVIPos = 2,
 
-                BinomialDist = 0.307731402m
+                BinomialDist = 0.317505866m
             },
             new ReportStatistics
             {
@@ -324,11 +324,11 @@ namespace LVIDiagnosticConcordanceStudy.Tests.TestData
                 BayesForNumberOfLVI = 0.632125747m,
 
                 LVIPresent = true,
-                CumulativeBayesForGrade = 2.820273552m,
-                CumulativeAverageBayesForGrade = 0.352534194m,
+                CumulativeBayesForGrade = 2.600577087m,
+                CumulativeAverageBayesForGrade = 0.325072136m,
                 CumulativeCasesWithLVIPos = 3,
 
-                BinomialDist = 0.279174635m
+                BinomialDist = 0.269410211m
             },
             new ReportStatistics
             {
@@ -346,11 +346,11 @@ namespace LVIDiagnosticConcordanceStudy.Tests.TestData
                 BayesForNumberOfLVI = 0.632125747m,
 
                 LVIPresent = true,
-                CumulativeBayesForGrade = 3.314282179m,
-                CumulativeAverageBayesForGrade = 0.368253575m,
+                CumulativeBayesForGrade = 3.094585713m,
+                CumulativeAverageBayesForGrade = 0.343842857m,
                 CumulativeCasesWithLVIPos = 4,
 
-                BinomialDist = 0.233169852m
+                BinomialDist = 0.214214999m
             },
             new ReportStatistics
             {
@@ -368,11 +368,11 @@ namespace LVIDiagnosticConcordanceStudy.Tests.TestData
                 BayesForNumberOfLVI = 0.005343128m,
 
                 LVIPresent = false,
-                CumulativeBayesForGrade = 3.402310334m,
-                CumulativeAverageBayesForGrade = 0.340231033m,
+                CumulativeBayesForGrade = 3.182613868m,
+                CumulativeAverageBayesForGrade = 0.318261387m,
                 CumulativeCasesWithLVIPos = 4,
 
-                BinomialDist = 0.232095273m
+                BinomialDist = 0.216302956m
             }
         };
     }

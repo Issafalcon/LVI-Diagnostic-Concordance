@@ -83,7 +83,7 @@ namespace LVIDiagnosticConcordanceStudy.Services
 
             if (previousReport != null)
             {
-                statistics.CumulativeBayesForGrade = previousReport.Statistics.BayesForGrade + statistics.BayesForGrade;
+                statistics.CumulativeBayesForGrade = previousReport.Statistics.CumulativeBayesForGrade + statistics.BayesForGrade;
                 statistics.CumulativeAverageBayesForGrade = statistics.CumulativeBayesForGrade / numberOfUserReports;
                 statistics.CumulativeCasesWithLVIPos = previousReport.Statistics.CumulativeCasesWithLVIPos + (statistics.LVIPresent ? 1 : 0);             
             }

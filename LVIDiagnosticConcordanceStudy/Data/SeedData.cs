@@ -17,14 +17,14 @@ namespace LVIDiagnosticConcordanceStudy.Data
             using (var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
-                var user1 = EnsureAdminUser(serviceProvider, initialUserPw, "atfiggins@gmail.com");
+                await EnsureAdminUser(serviceProvider, initialUserPw, "atfiggins@gmail.com");
                 await EnsureAdminUser(serviceProvider, initialUserPw, "pablo.pinto1@icloud.com");
 
-                //await SeedCasesAsync(serviceProvider);
+                await SeedCasesAsync(serviceProvider);
             }
         }
 
-        private static async Task<IdentityResult> EnsureAdminUser(IServiceProvider serviceProvider,
+        private static async Task EnsureAdminUser(IServiceProvider serviceProvider,
                                             string testUserPw, string UserName)
         {
             var userManager = serviceProvider.GetService<UserManager<LVIStudyUser>>();
@@ -34,11 +34,8 @@ namespace LVIDiagnosticConcordanceStudy.Data
             if (user == null)
             {
                 user = new LVIStudyUser { UserName = UserName, IsAdmin = true, Email = UserName, EmailConfirmed = true };
-                result = await userManager.CreateAsync(user, testUserPw);
-                return result;
+                await userManager.CreateAsync(user, testUserPw);
             }
-
-            return result;
         }
 
         private static async Task SeedCasesAsync(IServiceProvider serviceProvider)

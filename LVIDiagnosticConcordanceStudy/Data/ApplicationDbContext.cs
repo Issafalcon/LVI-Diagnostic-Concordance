@@ -22,9 +22,6 @@ namespace LVIDiagnosticConcordanceStudy.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
 
             builder.Entity<LVIStudyUser>(ConfigureLVIStudyUser);
             builder.Entity<Case>(ConfigureCase);
@@ -41,6 +38,11 @@ namespace LVIDiagnosticConcordanceStudy.Data
             builder.HasMany(u => u.Reports)
                 .WithOne(r => r.LVIStudyUser)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(u => u.ParticipantCode)
+                .WithOne(pc => pc.LVIStudyUser)
+                .HasForeignKey<LVIStudyUser>(u => u.Code)
+                .HasPrincipalKey<ParticipantCode>(pc => pc.Code);
         }
 
         private void ConfigureCase(EntityTypeBuilder<Case> builder)
@@ -61,6 +63,11 @@ namespace LVIDiagnosticConcordanceStudy.Data
         private void ConfigureCase(EntityTypeBuilder<ParticipantCode> builder)
         {
             builder.ToTable("ParticipantCodes");
+
+            //builder.HasOne(pc => pc.LVIStudyUser)
+            //    .WithOne(su => su.ParticipantCode)
+            //    .HasPrincipalKey<ParticipantCode>(pc => pc.Code)
+            //    .HasForeignKey<LVIStudyUser>(su => su.Code);
         }
     }
 }

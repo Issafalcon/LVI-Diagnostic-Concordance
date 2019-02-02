@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
 using Microsoft.AspNetCore.Identity;
 
@@ -39,8 +40,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Data
         [PersonalData]
         public bool IsBreastSpecialist { get; set; }
 
-        //TODO: Adjust participant code - Relationship should be Code string and entered as null for seed data
-        public int ParticipantCodeId { get; set; }
+        public string Code { get; set; }
         public ParticipantCode ParticipantCode { get; set; }
 
         public List<Report> Reports { get; set; }

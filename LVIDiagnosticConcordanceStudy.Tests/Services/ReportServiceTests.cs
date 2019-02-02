@@ -98,5 +98,30 @@ namespace LVIDiagnosticConcordanceStudy.Tests
             Assert.Equal(latestTestreport.Statistics.BayesForNumberOfLVI, Decimal.Round(currentReport.Statistics.BayesForNumberOfLVI, 9));
 
         }
+
+        [Theory]
+        [ClassData(typeof(CaseReportData))]
+        public void CalculateCumulativeStatistics_CalculatesCorrectly(Report[] testReports)
+        {
+            //Arrange
+            var reportService = new ReportService(null, null);
+            Report latestTestreport = testReports[testReports.Length - 1];
+            Report previousTestReport = null;
+
+            if (testReports.Length > 1)
+            {
+                previousTestReport = testReports[testReports.Length - 2];
+            }            
+
+            //Act
+            ReportStatistics actualStats = reportService.CalculateStatistics(latestTestreport.Case.PatientAge, latestTestreport.Case.TumourSize, latestTestreport.TumourGrade, latestTestreport.NumberofLVI, previousTestReport);
+
+            //Assert
+            Assert.Equal(Decimal.Round(latestTestreport.Statistics.CumulativeBayesForGrade, 5), Decimal.Round(actualStats.CumulativeBayesForGrade, 5));
+            Assert.Equal(Decimal.Round(latestTestreport.Statistics.CumulativeAverageBayesForGrade, 5), Decimal.Round(actualStats.CumulativeAverageBayesForGrade, 5));
+            Assert.Equal(Decimal.Round(latestTestreport.Statistics.CumulativeCasesWithLVIPos, 5), Decimal.Round(actualStats.CumulativeCasesWithLVIPos, 5));
+            Assert.Equal(Decimal.Round(latestTestreport.Statistics.BinomialDist, 5), Decimal.Round(actualStats.BinomialDist, 5));
+
+        }
     }
 }
