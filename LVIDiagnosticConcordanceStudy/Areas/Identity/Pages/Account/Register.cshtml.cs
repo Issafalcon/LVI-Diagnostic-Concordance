@@ -21,6 +21,7 @@ using LVIDiagnosticConcordanceStudy.Infrastructure.Security;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Services;
 using LVIDiagnosticConcordanceStudy.Data.Repository;
 using LVIDiagnosticConcordanceStudy.Infrastructure.Specifications;
+using LVIDiagnosticConcordanceStudy.Infrastructure;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 {
@@ -35,6 +36,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
         private readonly IStringLocalizer<RegisterModel> _localizer;
         private readonly IAsyncRepository<ParticipantCode> _codeRepository;
         private readonly RequestLocalizationOptions _locOptions;
+        private readonly StudyOptions _studyOptions;
 
         public RegisterModel(
             UserManager<LVIStudyUser> userManager,
@@ -43,7 +45,8 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             IStringLocalizer<RegisterModel> localizer,
-            IOptions<RequestLocalizationOptions> locOptions)
+            IOptions<RequestLocalizationOptions> locOptions,
+            IOptions<StudyOptions> studyOptions)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -52,6 +55,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _localizer = localizer;
             _locOptions = locOptions.Value;
+            _studyOptions = studyOptions.Value;
         }
 
         [BindProperty]
@@ -76,8 +80,9 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+            [Required]
             [Display(Name = "Participant Code", Description = "The 10 character code provided to you by the study administrator.")]
-            public string ParticipantCode { get; set; }
+            public string Code { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -137,13 +142,15 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             int controlFlag = random.Next(0, 2);
             var participants = await _userService.GetUserListAsync();
 
+            int participantGroupMax = _studyOptions.MaximumParticipants / 2;
             switch (controlFlag)
             {
                 case 0:
                     int controlGroupCount = (from participant in participants
                                              where participant.InControlGroup == true
+                                                && participant.IsAdmin == false
                                              select participant).Count();
-                    if (controlGroupCount >= 10)
+                    if (controlGroupCount >= participantGroupMax)
                     {
                         newParticipant.InControlGroup = false;
                     }
@@ -156,8 +163,9 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
                 case 1:
                     int interventionGroupCount = (from participant in participants
                                                  where participant.InControlGroup == false
+                                                    && participant.IsAdmin == false
                                                  select participant).Count();
-                    if (interventionGroupCount >= 10)
+                    if (interventionGroupCount >= participantGroupMax)
                     {
                         newParticipant.InControlGroup = true;
                     }

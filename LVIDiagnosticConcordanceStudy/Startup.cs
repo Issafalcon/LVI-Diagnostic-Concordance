@@ -22,6 +22,7 @@ using LVIDiagnosticConcordanceStudy.Data.Repository;
 using LVIDiagnosticConcordanceStudy.Services.ViewModel;
 using LVIDiagnosticConcordanceStudy.Services.Domain;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Services;
+using LVIDiagnosticConcordanceStudy.Infrastructure;
 
 namespace LVIDiagnosticConcordanceStudy
 {
@@ -105,6 +106,7 @@ namespace LVIDiagnosticConcordanceStudy
             services.AddScoped<ICaseReportViewModelService, CaseReportViewModelService>();
             services.AddSingleton<IEmailSender, EmailSender>();
             services.Configure<SendGridOptions>(Configuration);
+            services.Configure<StudyOptions>(Configuration.GetSection("Study"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

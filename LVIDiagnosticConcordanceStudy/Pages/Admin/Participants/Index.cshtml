@@ -1,0 +1,74 @@
+﻿@page
+@model LVIDiagnosticConcordanceStudy.Pages.Admin.Participants.IndexModel
+
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["Participant List"];
+}
+
+<div class="row pb-3 justify-content-center">
+    <div class="card col-lg-6">
+        <h2 class="card-header">@ViewData["Title"]</h2>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cases[0].Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cases[0].PatientAge)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cases[0].TumourSize)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Cases)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PatientAge)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TumourSize)
+                            </td>
+                            <td>
+                                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card col-lg-3">
+        <h2 class="card-header">Participant Codes</h2>
+        <div class="card-body">
+            <p>
+                <a asp-action="GenerateParticipantCode">Generate New Code</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
