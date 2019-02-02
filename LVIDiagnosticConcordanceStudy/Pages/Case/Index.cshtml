@@ -59,20 +59,38 @@
                 <input asp-for="CaseReportViewModel.TumourSize" class="form-control" readonly />
                 <span asp-validation-for="CaseReportViewModel.TumourSize" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CaseReportViewModel.TumourGrade" class="control-label"></label>
-                <select asp-for="CaseReportViewModel.TumourGrade" class="form-control" asp-items="@Html.GetEnumSelectList<Grade>()"
-                        disabled="@(Model.SubmittedReports.Contains(Model.CaseId))">
-                    <option value=""></option>
-                </select>
-                <span asp-validation-for="CaseReportViewModel.TumourGrade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CaseReportViewModel.NumberofLVI" class="control-label"></label>
-                <input asp-for="CaseReportViewModel.NumberofLVI" class="form-control"
-                       readonly="@(Model.SubmittedReports.Contains(Model.CaseId))" value="" />
-                <span asp-validation-for="CaseReportViewModel.NumberofLVI" class="text-danger"></span>
-            </div>
+
+            @if (Model.SubmittedReports.Contains(Model.CaseId))
+            {
+                <div class="form-group">
+                    <label asp-for="CaseReportViewModel.TumourGrade" class="control-label"></label>
+                    <select asp-for="CaseReportViewModel.TumourGrade" class="form-control" asp-items="@Html.GetEnumSelectList<Grade>()" disabled>
+                        <option value=""></option>
+                    </select>
+                    <span asp-validation-for="CaseReportViewModel.TumourGrade" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CaseReportViewModel.NumberofLVI" class="control-label"></label>
+                    <input asp-for="CaseReportViewModel.NumberofLVI" class="form-control" readonly" />
+                    <span asp-validation-for="CaseReportViewModel.NumberofLVI" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="CaseReportViewModel.TumourGrade" class="control-label"></label>
+                    <select asp-for="CaseReportViewModel.TumourGrade" class="form-control" asp-items="@Html.GetEnumSelectList<Grade>()">
+                        <option value=""></option>
+                    </select>
+                    <span asp-validation-for="CaseReportViewModel.TumourGrade" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CaseReportViewModel.NumberofLVI" class="control-label"></label>
+                    <input asp-for="CaseReportViewModel.NumberofLVI" class="form-control" value="" />
+                    <span asp-validation-for="CaseReportViewModel.NumberofLVI" class="text-danger"></span>
+                </div>
+            }
+
             @if (Model.CurrentUser.InControlGroup)
             {
                 <div class="form-group">

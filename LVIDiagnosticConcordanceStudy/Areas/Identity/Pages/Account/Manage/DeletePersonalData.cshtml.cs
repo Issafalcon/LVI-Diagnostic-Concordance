@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
+using LVIDiagnosticConcordanceStudy.Data.Repository;
+using LVIDiagnosticConcordanceStudy.Infrastructure.Specifications;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,15 +16,18 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<LVIStudyUser> _userManager;
         private readonly SignInManager<LVIStudyUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
+        private readonly IRepository<ParticipantCode> _participantCodeRepository;
 
         public DeletePersonalDataModel(
             UserManager<LVIStudyUser> userManager,
             SignInManager<LVIStudyUser> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger<DeletePersonalDataModel> logger,
+            IRepository<ParticipantCode> participantCodeRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _participantCodeRepository = participantCodeRepository;
         }
 
         [BindProperty]
@@ -83,6 +88,8 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
 
         private async Task<IdentityResult> AnonymiseUserAsync(LVIStudyUser user)
         {
+            FreeUpParticipantCode(user.Code);
+
             user.UserName = Guid.NewGuid().ToString();
             user.NormalizedUserName = "";
             user.Email = "withdrawn";
@@ -91,11 +98,22 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             user.Culture = null;
             user.FirstName = "Withdrawn";
             user.Gender = GenderEnum.NotSpecified;
+            user.ParticipantCode = null;
             user.LastName = "Withdrawn";
             user.Nationality = "Withdrawn";
             user.PlaceOfWork = "Withdrawn";
 
             return await _userManager.UpdateAsync(user);
+        }
+
+        private void FreeUpParticipantCode(string code)
+        {
+            var participantCode = _participantCodeRepository.GetSingleBySpec(new ParticipantCodeSpecification(code, null));
+
+            participantCode.IsUsed = false;
+
+            _participantCodeRepository.Update(participantCode);
+
         }
     }
 }

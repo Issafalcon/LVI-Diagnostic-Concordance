@@ -45,6 +45,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             IStringLocalizer<RegisterModel> localizer,
+            IAsyncRepository<ParticipantCode> codeRepository,
             IOptions<RequestLocalizationOptions> locOptions,
             IOptions<StudyOptions> studyOptions)
         {
@@ -54,6 +55,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _localizer = localizer;
+            _codeRepository = codeRepository;
             _locOptions = locOptions.Value;
             _studyOptions = studyOptions.Value;
         }
@@ -180,11 +182,11 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             }
         }
 
-        private async Task<bool> CheckValidParticipantCode(string code)
+        private async Task<ParticipantCode> GetMatchingCode(string code)
         {
-            var validCodes = await _codeRepository.ListAsync(new ParticipantCodeSpecification(isUsed: false));
+            var validCodes = await _codeRepository.ListAsync(new ParticipantCodeSpecification(null, false));
 
-            return validCodes.Any(pc => pc.Code == code);
+            return validCodes.FirstOrDefault(pc => pc.Code == code);
         }
 
         public void OnGet(string returnUrl = null)
@@ -202,7 +204,9 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 
                 await TryUpdateModelAsync<LVIStudyUser>(user, "input");
 
-                if (!await CheckValidParticipantCode(user.ParticipantCode.Code))
+                var matchingCode = await GetMatchingCode(user.Code);
+
+                if (matchingCode == null)
                 {
                     ModelState.AddModelError("ParticipantCode", "The Participant Code you have provided is not valid");
                     return Page();
@@ -227,6 +231,10 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    // Set the existing code status to 'Used' and update the DB
+                    matchingCode.IsUsed = true;
+                    await _codeRepository.UpdateAsync(matchingCode);
 
                     //TODO: Redirect to the Registration Confirmation Page - Asking user to check email and confirm address before logging in
                     return LocalRedirect(returnUrl);

@@ -1,5 +1,52 @@
-﻿@using LVIDiagnosticConcordanceStudy.Models.ViewComponents
-@using Models
+﻿@using LVIDiagnosticConcordanceStudy.Areas.Identity.Data
+@using LVIDiagnosticConcordanceStudy.Infrastructure
 @using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
 
 @inject IViewLocalizer Localizer
+@inject IOptions<StudyOptions> StudyOptions
+@model IReadOnlyList<ParticipantCode>
+
+<div class="card col-lg-3">
+    <h2 class="card-header">Participant Codes</h2>
+    <div class="card-body">
+        @if (StudyOptions.Value.MaximumParticipants <= Model.Count)
+        {
+            <p>(Maximum Number of Codes Generated)</p>
+        }
+        else
+        {
+            <form class="pb-2" asp-page="Index" asp-page-handler="GenerateParticipantCode" method="post">
+                <button type="submit" class="btn btn-outline-secondary btn intro-btn">
+                    Generate New Code
+                </button>
+            </form>
+        }
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].IsUsed)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var code in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => code.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => code.IsUsed)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

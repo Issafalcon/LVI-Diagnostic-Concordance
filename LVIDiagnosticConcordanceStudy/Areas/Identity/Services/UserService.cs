@@ -20,7 +20,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Services
 
         public async Task<IReadOnlyList<LVIStudyUser>> GetUserListAsync()
         {
-            return await _dbContext.Users.ToListAsync();
+            return await _dbContext.Users.Where(u => u.IsAdmin == false).ToListAsync();
         }
 
     }
