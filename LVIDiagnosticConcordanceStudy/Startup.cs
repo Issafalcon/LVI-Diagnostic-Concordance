@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using LVIDiagnosticConcordanceStudy.Infrastructure.Security;
 using Microsoft.AspNetCore.Mvc.Razor;
-using LVIDiagnosticConcordanceStudy.Infrastructure.Localization;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using LVIDiagnosticConcordanceStudy.Services;
@@ -23,6 +22,7 @@ using LVIDiagnosticConcordanceStudy.Services.ViewModel;
 using LVIDiagnosticConcordanceStudy.Services.Domain;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Services;
 using LVIDiagnosticConcordanceStudy.Infrastructure;
+using LVIDiagnosticConcordanceStudy.Resources;
 
 namespace LVIDiagnosticConcordanceStudy
 {

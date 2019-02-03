@@ -118,42 +118,42 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Breast Subspecialty ?" xml:space="preserve">
-    <value>Subespecialista Mama ?</value>
+    <value>Breast Subspecialty ?</value>
   </data>
   <data name="Confirm Password" xml:space="preserve">
-    <value>Repita Clave</value>
+    <value>Confirm Password</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="First Name" xml:space="preserve">
-    <value>Nombres</value>
+    <value>First Name</value>
   </data>
   <data name="Gender" xml:space="preserve">
-    <value>Genero</value>
+    <value>Gender</value>
   </data>
   <data name="Last Name" xml:space="preserve">
-    <value>Apellidos</value>
+    <value>Last Name</value>
   </data>
   <data name="Nationality" xml:space="preserve">
-    <value>Nacionalidadd</value>
+    <value>Nationality</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Clave</value>
+    <value>Password</value>
   </data>
   <data name="Place of Work (Hospital)" xml:space="preserve">
-    <value>Lugar de trabajo</value>
+    <value>Place of Work (Hospital)</value>
   </data>
   <data name="Years in Histopathology" xml:space="preserve">
-    <value>Años de patologo</value>
+    <value>Years in Histopathology</value>
   </data>
   <data name="Years Qualified" xml:space="preserve">
-    <value>Años de entrenamiento</value>
+    <value>Years Qualified</value>
   </data>
   <data name="Personal Data" xml:space="preserve">
-    <value>Información Personal</value>
+    <value>Personal Data</value>
   </data>
   <data name="Profile" xml:space="preserve">
-    <value>Perfil</value>
+    <value>Profile</value>
   </data>
 </root>

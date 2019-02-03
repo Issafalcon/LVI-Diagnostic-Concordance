@@ -117,16 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Breast Pathology Quality Assessment" xml:space="preserve">
-    <value>Breast Pathology Quality Assessment</value>
-  </data>
-  <data name="Login" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <data name="Register" xml:space="preserve">
-    <value>Register</value>
-  </data>
-  <data name="Welcome to Breast pathology Quality Assessment" xml:space="preserve">
-    <value>Welcome to Breast pathology Quality Assessment</value>
+  <data name="Cases" xml:space="preserve">
+    <value>Spanish Cases</value>
   </data>
 </root>

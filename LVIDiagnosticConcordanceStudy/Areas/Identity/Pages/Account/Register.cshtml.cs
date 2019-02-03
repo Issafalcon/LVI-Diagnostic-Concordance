@@ -11,13 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Localization;
-using LVIDiagnosticConcordanceStudy.Infrastructure.Localization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Builder;
 using System.Linq;
-using System.Security.Claims;
-using LVIDiagnosticConcordanceStudy.Infrastructure.Security;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Services;
 using LVIDiagnosticConcordanceStudy.Data.Repository;
 using LVIDiagnosticConcordanceStudy.Infrastructure.Specifications;
@@ -237,7 +234,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
                     await _codeRepository.UpdateAsync(matchingCode);
 
                     //TODO: Redirect to the Registration Confirmation Page - Asking user to check email and confirm address before logging in
-                    return LocalRedirect(returnUrl);
+                    return RedirectToPage("./RegisterConfirmation");
                 }
                 foreach (var error in result.Errors)
                 {

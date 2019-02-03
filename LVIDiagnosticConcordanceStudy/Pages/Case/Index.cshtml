@@ -1,10 +1,14 @@
 ﻿@page "{id:int?}"
 
 @using Models.Entities.ReportAggregate
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
 @model LVIDiagnosticConcordanceStudy.Pages.CaseModel
 
 @{
-    ViewData["Title"] = "Cases";
+    ViewData["Title"] = Localizer["Cases"];
     ViewData["SubTitle"] = "Case" + RouteData.Values["id"];
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }

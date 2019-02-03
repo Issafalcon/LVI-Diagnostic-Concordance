@@ -1,8 +1,5 @@
 ﻿@page
 @model IndexModel
-@{
-    ViewData["Title"] = "Home page";
-}
 
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Areas.Identity.Data
@@ -21,7 +18,7 @@
     <div class="intro">
 
         <h1>@Localizer["Breast Pathology Quality Assessment"]</h1>
-        <p class="intro-para">@Localizer["Welcome to Breast pathology Quality Assessment"]</p>
+        <p class="intro-para">@Localizer["Welcome_Text"]</p>
         @if (!SignInManager.IsSignedIn(User))
         {
             <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Login"]</a>

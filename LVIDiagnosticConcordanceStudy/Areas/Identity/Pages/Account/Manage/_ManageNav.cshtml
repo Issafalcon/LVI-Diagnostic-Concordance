@@ -1,9 +1,11 @@
 ﻿@inject SignInManager<LVIStudyUser> SignInManager
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 
 <div class="btn-group-lg btn-group-vertical py-2">
-    <a asp-page="./Index" class="btn btn-outline-secondary intro-btn @ManageNavPages.IndexNavClass(ViewContext)">Profile</a>
-    <a id="change-password" asp-page="./ChangePassword" class="btn btn-outline-secondary intro-btn @ManageNavPages.ChangePasswordNavClass(ViewContext)">Password</a>
-    <a asp-page="./PersonalData" class="btn btn-outline-secondary intro-btn @ManageNavPages.PersonalDataNavClass(ViewContext)">Personal data</a>
+    <a asp-page="./Index" class="btn btn-outline-secondary intro-btn @ManageNavPages.IndexNavClass(ViewContext)">@Localizer["Profile"]</a>
+    <a id="change-password" asp-page="./ChangePassword" class="btn btn-outline-secondary intro-btn @ManageNavPages.ChangePasswordNavClass(ViewContext)">@Localizer["Password"]</a>
+    <a asp-page="./PersonalData" class="btn btn-outline-secondary intro-btn @ManageNavPages.PersonalDataNavClass(ViewContext)">@Localizer["Personal Data"]</a>
 </div>
 

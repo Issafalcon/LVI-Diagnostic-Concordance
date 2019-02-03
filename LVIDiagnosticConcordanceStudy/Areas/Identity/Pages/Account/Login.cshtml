@@ -1,11 +1,16 @@
 ﻿@page
 @model LoginModel
 
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject SignInManager<LVIStudyUser> SignInManager
+
+@inject IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = Localizer["Log In"];
 }
 
-@inject SignInManager<LVIStudyUser> SignInManager
+
 
 @if (!SignInManager.IsSignedIn(User))
 {

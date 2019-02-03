@@ -3,7 +3,27 @@
 @{
     ViewData["Title"] = "About";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@Model.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Areas.Identity.Data
+
+@inject IViewLocalizer Localizer
+@inject SignInManager<LVIStudyUser> SignInManager
+
+@if (!SignInManager.IsSignedIn(User))
+{
+    <div class="row justify-content-md-end">
+        @await Html.PartialAsync("_SelectLanguagePartial")
+    </div>
+}
+
+<div class="intro">
+
+    <h1>@Localizer["About"]</h1>
+    <hr />
+    <h3>@Localizer["Study Author"]</h3>
+    <p class="intro-para">@Localizer["Dr. Pablo Pinto"]</p>
+    <hr />
+    <h3>@Localizer["Application Developer"]</h3>
+    <p class="intro-para">@Localizer["Dr. Adam Figgins"]</p>
+</div>

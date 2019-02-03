@@ -117,37 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Breast Subspecialty ?" xml:space="preserve">
-    <value>Breast Subspecialty ?</value>
-  </data>
-  <data name="Confirm Password" xml:space="preserve">
-    <value>Confirm Password</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="First Name" xml:space="preserve">
-    <value>First Name</value>
-  </data>
-  <data name="Gender" xml:space="preserve">
-    <value>Gender</value>
-  </data>
-  <data name="Last Name" xml:space="preserve">
-    <value>Last Name</value>
-  </data>
-  <data name="Nationality" xml:space="preserve">
-    <value>Nationality</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="Place of Work (Hospital)" xml:space="preserve">
-    <value>Place of Work (Hospital)</value>
-  </data>
-  <data name="Years in Histopathology" xml:space="preserve">
-    <value>Years in Histopathology</value>
-  </data>
-  <data name="Years Qualified" xml:space="preserve">
-    <value>Years Qualified</value>
+  <data name="About" xml:space="preserve">
+    <value>Bienvenido a evaluación de calidad en Patología Mamaria</value>
   </data>
 </root>
