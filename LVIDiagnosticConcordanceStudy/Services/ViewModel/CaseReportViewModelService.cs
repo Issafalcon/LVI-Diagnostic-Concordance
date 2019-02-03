@@ -70,6 +70,11 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
             await _reportService.CreateOrUpdateReportFromCase(currentCase, existingReport, caseReport.TumourGrade, caseReport.NumberofLVI, userId, isSubmitted);
         }
 
+        public async Task<IReadOnlyList<Case>> GetOrderedCasesAsync()
+        {
+            return await _caseRepository.ListAsync(new CaseFilterSpecification(null, false, true));
+        }
+
         public async Task<int> GetCaseCount()
         {
             var allCasesSpecification = new CaseFilterSpecification(null);

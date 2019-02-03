@@ -5,7 +5,7 @@ namespace LVIDiagnosticConcordanceStudy.Infrastructure.Specifications
 {
     public class ReportFilterSpecification : BaseSpecification<Report>
     {
-        public ReportFilterSpecification(string userId, int? caseId, bool orderByReportNumberDesc = false, bool includeCase = false)
+        public ReportFilterSpecification(string userId, int? caseId, bool orderByCaseNumber = false, bool includeCase = false)
             : base(r => (string.IsNullOrEmpty(userId) || r.LVIStudyUserID == userId) && 
             (!caseId.HasValue || r.CaseId == caseId))
         {
@@ -14,9 +14,9 @@ namespace LVIDiagnosticConcordanceStudy.Infrastructure.Specifications
                 AddInclude(r => r.Case);
             }
 
-            if (orderByReportNumberDesc)
+            if (orderByCaseNumber)
             {
-                ApplyOrderByDescending(r => r.UserReportNumber);
+                ApplyOrderBy(r => r.CaseId);
             }
         }
     }

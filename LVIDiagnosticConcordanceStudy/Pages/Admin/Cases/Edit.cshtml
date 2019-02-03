@@ -1,11 +1,11 @@
-﻿@page
-@model LVIDiagnosticConcordanceStudy.Pages.Admin.Cases.CreateModel
+﻿@page "{id:int?}"
+@model LVIDiagnosticConcordanceStudy.Pages.Admin.Cases.EditModel
 @using Microsoft.AspNetCore.Mvc.Localization
 
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = Localizer["Create Case"];
+    ViewData["Title"] = Localizer["Edit Case"];
 }
 
 <div class="row p-4 justify-content-center">
@@ -24,8 +24,8 @@
                 <span asp-validation-for="Case.TumourSize" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-outline-secondary btn intro-btn" /> |
-                <a class="btn btn-secondary" asp-page="./Index">Cancel</a>
+                <input type="submit" value="Save" class="btn btn-outline-secondary btn intro-btn" /> |
+                <a class="btn btn-secondary" asp-page="./Index">Back to List</a>
             </div>
         </form>
     </div>
@@ -34,4 +34,3 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-

@@ -30,7 +30,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages.Case
 
         [BindProperty]
         public IReadOnlyList<Report> Reports { get; private set; }
-        public int CaseCount { get; set; }
+        public IReadOnlyList<Models.Case> Cases { get; private set; }
         public List<int> SubmittedReports { get; private set; }
 
         public async Task<IActionResult> OnGetAsync()
@@ -41,9 +41,9 @@ namespace LVIDiagnosticConcordanceStudy.Pages.Case
             {
                 return NotFound();
             }
-            CaseCount = await _caseReportService.GetCaseCount();
+            Cases = await _caseReportService.GetOrderedCasesAsync();
 
-            Reports = await _reportService.GetUserReports(userId);
+            Reports = await _reportService.GetUserReportsOrderedByCase(userId);
             SubmittedReports = new List<int>();
             foreach (var report in Reports)
             {

@@ -1,0 +1,49 @@
+﻿@page "{id:int?}"
+@model LVIDiagnosticConcordanceStudy.Pages.Admin.Cases.DeleteModel
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["Delete Case"];
+}
+
+<div class="row p-4 justify-content-center">
+    <div class="card col-lg-6">
+        <h2 class="card-header">@ViewData["Title"]</h2>
+        <div class="card-body">
+            <h4>Are you sure you want to delete this?</h4>
+            <div>
+                <h4>Case</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Case.Id)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Case.Id)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Case.PatientAge)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Case.PatientAge)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Case.TumourSize)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Case.TumourSize)
+                    </dd>
+                </dl>
+
+                <form method="post">
+                    <input type="hidden" asp-for="Case.Id" />
+                    <input type="submit" value="Delete" class="btn btn-outline-secondary btn intro-btn" /> |
+                    <a class="btn btn-secondary" asp-page="./Index">Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+        

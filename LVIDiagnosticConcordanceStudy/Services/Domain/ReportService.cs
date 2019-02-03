@@ -31,6 +31,13 @@ namespace LVIDiagnosticConcordanceStudy.Services
             return await _reportRepository.ListAsync(reportFilter);
         }
 
+        public async Task<IReadOnlyList<Report>> GetUserReportsOrderedByCase(string userId, bool includeCase = false)
+        {
+            var reportFilter = new ReportFilterSpecification(userId, null, includeCase: includeCase, orderByCaseNumber: true);
+
+            return await _reportRepository.ListAsync(reportFilter);
+        }
+
         public int[] GetSubmittedUserReportIds(string userId)
         {
             return _reportRepository.GetSubmittedReportIdsForUser(userId);

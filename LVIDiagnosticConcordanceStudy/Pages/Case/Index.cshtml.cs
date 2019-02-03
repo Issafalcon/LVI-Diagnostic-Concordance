@@ -10,6 +10,7 @@ using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
 using LVIDiagnosticConcordanceStudy.Models;
 using System.Net;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace LVIDiagnosticConcordanceStudy.Pages
 {
@@ -33,16 +34,14 @@ namespace LVIDiagnosticConcordanceStudy.Pages
 
         [BindProperty]
         public CaseReportViewModel CaseReportViewModel { get; set; }
-        public int CaseCount { get; private set; }
+
+        public IReadOnlyList<Models.Case> Cases { get; private set; }
         public int CaseId { get; set; }
         public int[] SubmittedReports { get; private set; }
         public bool SubmitOnPost { get; set; } = false;
         public InterventionData InterventionData { get; set; }
         private ReportStatistics _statistics = new ReportStatistics();
 
-        // TODO:
-        //     1. Add initial call to a cached service to get all cases
-        //     2. On get async, retrieve a list of all submitted cases for the user to help populate a select dropdown for the cases
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -59,12 +58,13 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             }
 
             CaseReportViewModel = await _caseReportService.GetCaseReportForUser(CurrentUser.Id, id.Value);
-            CaseCount = await _caseReportService.GetCaseCount();
+            Cases = await _caseReportService.GetOrderedCasesAsync();
+
             SubmittedReports = _caseReportService.GetSubmittedCaseReportIds(CurrentUser.Id);
 
             if (CaseReportViewModel == null)
             {
-                return NotFound();
+                return RedirectToPage("./Summary");
             }
 
             return Page();

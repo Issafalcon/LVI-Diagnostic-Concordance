@@ -18,12 +18,12 @@
         <button class="btn btn-outline-secondary intro-btn" data-dropdown="#dropdown-with-icons">Select Case...</button>
         <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-with-icons">
             <ul>
-                @for (var i = 1; i <= Model.CaseCount; i++)
+                @foreach(var item in Model.Cases)
                 {
                     <li>
-                        <a asp-route-id="@i">
-                            Case @i
-                            @if (Model.SubmittedReports.Contains(i))
+                        <a asp-route-id="@(item.Id)">
+                            Case @item.Id
+                            @if (Model.SubmittedReports.Contains(item.Id))
                             {
                                 <span class="text-right text-success">Complete</span>
                             }
