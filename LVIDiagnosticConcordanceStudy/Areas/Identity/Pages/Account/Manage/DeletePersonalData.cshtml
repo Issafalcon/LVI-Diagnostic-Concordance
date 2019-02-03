@@ -1,7 +1,11 @@
 ﻿@page
 @model DeletePersonalDataModel
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Delete Personal Data";
+    ViewData["Title"] = Localizer["Delete Personal Data"];
     ViewData["ActivePage"] = ManageNavPages.DeletePersonalData;
 }
 
@@ -10,7 +14,7 @@
 <div class="alert alert-warning" role="alert">
     <p>
         <span class="glyphicon glyphicon-warning-sign"></span>
-        <strong>Deleting this data will permanently remove your account and withdraw you from the study. This action cannot be reversed.</strong>
+        <strong>@Localizer["Personal_Delete_Warning_Text"]</strong>
     </p>
 </div>
 
@@ -19,16 +23,16 @@
         <div asp-validation-summary="All" class="text-danger"></div>
         @if (Model.RequirePassword)
         {
-        <div class="form-group">
-            <label asp-for="Input.Password"></label>
-            <input asp-for="Input.Password" class="form-control" />
-            <span asp-validation-for="Input.Password" class="text-danger"></span>
-        </div>
+            <div class="form-group">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
         }
-        <button class="btn btn-danger" type="submit">Delete data and close my account</button>
+        <button class="btn btn-danger" type="submit">@Localizer["Delete data and close my account"]</button>
     </form>
 </div>
 
 @section Scripts {
-<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }

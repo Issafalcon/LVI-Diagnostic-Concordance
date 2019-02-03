@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Localization;
-using LVIDiagnosticConcordanceStudy.Resources;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 {

@@ -1,4 +1,4 @@
-﻿namespace LVIDiagnosticConcordanceStudy.Resources
+﻿namespace LVIDiagnosticConcordanceStudy
 {
     public class SharedResource
     {

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
@@ -23,17 +24,20 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<LVIStudyUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly RequestLocalizationOptions _locOptions;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
         public IndexModel(
             UserManager<LVIStudyUser> userManager,
             SignInManager<LVIStudyUser> signInManager,
             IEmailSender emailSender,
-            IOptions<RequestLocalizationOptions> locOptions)
+            IOptions<RequestLocalizationOptions> locOptions,
+            IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _locOptions = locOptions.Value;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [TempData]
@@ -65,21 +69,23 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "FirstNameRequired_Error")]
+            [Required(ErrorMessage = "Required_Field_Error")]
             [Display(Name = "First Name")]
             [DataType(DataType.Text, ErrorMessage = "Error")]
             public string FirstName { get; set; }
 
-            [Required(ErrorMessage = "LastNameRequired_Error")]
+            [Required(ErrorMessage = "Required_Field_Error")]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage = "GenderRequired_Error")]
+            [Required(ErrorMessage = "Required_Field_Error")]
+            [Display(Name = "Gender")]
             public GenderEnum Gender { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage = "NationalityRequired_Error")]
+            [Display(Name = "Nationality")]
+            [Required(ErrorMessage = "Required_Field_Error")]
             public string Nationality { get; set; }
 
             [PersonalData]
@@ -88,21 +94,22 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             public string Culture { get; set; }
 
             [PersonalData]
-            [Display(Name = "Work Place (Hospital)")]
+            [Display(Name = "Place of Work (Hospital)")]
             public string PlaceOfWork { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage = "Please enter the number of years you have been qualified")]
+            [Required(ErrorMessage = "Required_Field_Error")]
             [Display(Name = "Years Qualified", Description = "The number of years you have been qualified as a doctor")]
             public int YearsQualified { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage = "Please enter the number of years you have worked in histopathology")]
+            [Required(ErrorMessage = "Required_Field_Error")]
             [Display(Name = "Years In Histopathology", Description = "The number of years you have been working in the specialty of histopathology")]
             public int YearsInPath { get; set; }
 
             [PersonalData]
-            [Display(Name = "Subspecialty In Breast Pathology", Description = "Check the box if you subspecialise in breast pathology")]
+            [Required(ErrorMessage = "Required_Field_Error")]
+            [Display(Name = "Breast Subspecialty ?")]
             public bool IsBreastSpecialist { get; set; }
         }
 
@@ -182,7 +189,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
 
                 Response.Cookies.Append(
                             CookieRequestCultureProvider.DefaultCookieName,
-                            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(Input.Culture)),
+                            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(user.Culture)),
                             new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
                         );
             }
@@ -221,7 +228,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = _sharedLocalizer["Your profile has been updated"];
             return RedirectToPage();
         }
 
@@ -249,10 +256,11 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
                 protocol: Request.Scheme);
             await _emailSender.SendEmailAsync(
                 email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                _sharedLocalizer["Confirm your email"],
+                string.Format(_sharedLocalizer["Email_Confirmation_Message_Text"], HtmlEncoder.Default.Encode(callbackUrl)));
+                //$"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = _sharedLocalizer["Verification email sent. Please check your email."];
             return RedirectToPage();
         }
     }

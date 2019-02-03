@@ -19,6 +19,9 @@ using LVIDiagnosticConcordanceStudy.Areas.Identity.Services;
 using LVIDiagnosticConcordanceStudy.Data.Repository;
 using LVIDiagnosticConcordanceStudy.Infrastructure.Specifications;
 using LVIDiagnosticConcordanceStudy.Infrastructure;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
+using System.Globalization;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 {
@@ -30,7 +33,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
         private readonly IUserService _userService;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly IStringLocalizer<RegisterModel> _localizer;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
         private readonly IAsyncRepository<ParticipantCode> _codeRepository;
         private readonly RequestLocalizationOptions _locOptions;
         private readonly StudyOptions _studyOptions;
@@ -41,7 +44,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             IUserService userService,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IStringLocalizer<RegisterModel> localizer,
+            IStringLocalizer<SharedResource> sharedLocalizer,
             IAsyncRepository<ParticipantCode> codeRepository,
             IOptions<RequestLocalizationOptions> locOptions,
             IOptions<StudyOptions> studyOptions)
@@ -51,7 +54,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             _userService = userService;
             _logger = logger;
             _emailSender = emailSender;
-            _localizer = localizer;
+            _sharedLocalizer = sharedLocalizer;
             _codeRepository = codeRepository;
             _locOptions = locOptions.Value;
             _studyOptions = studyOptions.Value;
@@ -74,63 +77,66 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Required_Field_Error")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Required_Field_Error")]
             [Display(Name = "Participant Code", Description = "The 10 character code provided to you by the study administrator.")]
             public string Code { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Required_Field_Error")]
+            [StringLength(100, ErrorMessage = "New_Password_Error", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "New_Password_Match_Error")]
             public string ConfirmPassword { get; set; }
 
-            [Required(ErrorMessage = "FirstNameRequired_Error")]
+            [Required(ErrorMessage = "Required_Field_Error")]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
-            [Required(ErrorMessage = "LastNameRequired_Error")]
+            [Required(ErrorMessage = "Required_Field_Error")]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage = "GenderRequired_Error")]
+            [Display(Name = "Gender")]
+            [Required(ErrorMessage = "Required_Field_Error")]
             public GenderEnum Gender { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage = "NationalityRequired_Error")]
+            [Required(ErrorMessage = "Required_Field_Error")]
+            [Display(Name = "Nationality")]
             public string Nationality { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage = "Please select your preferred language")]
+            [Required(ErrorMessage = "Required_Field_Error")]
             [Display(Name = "Preferred Language")]
             public string Culture { get; set; }
 
             [PersonalData]
-            [Display(Name = "Work Place (Hospital)")]
+            [Display(Name = "Place of Work (Hospital)")]
             public string PlaceOfWork { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage = "Please enter the number of years you have been qualified")]
+            [Required(ErrorMessage = "Required_Field_Error")]
             [Display(Name = "Years Qualified", Description = "The number of years you have been qualified as a doctor")]
             public int YearsQualified { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage = "Please enter the number of years you have worked in histopathology")]
-            [Display(Name = "Years In Histopathology", Description = "The number of years you have been working in the specialty of histopathology")]
+            [Required(ErrorMessage = "Required_Field_Error")]
+            [Display(Name = "Years in Histopathology", Description = "The number of years you have been working in the specialty of histopathology")]
             public int YearsInPath { get; set; }
 
             [PersonalData]
-            [Display(Name = "Subspecialty In Breast Pathology", Description = "Check the box if you subspecialise in breast pathology")]
+            [Required(ErrorMessage = "Required_Field_Error")]
+            [Display(Name = "Breast Subspecialty ?", Description = "Check the box if you subspecialise in breast pathology")]
             public bool IsBreastSpecialist { get; set; }
         }
 
@@ -219,6 +225,15 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    // Set the culture in the cookie here, so when the user is redirected, the preferred language is stored
+                    string selectedCulture = user.Culture ?? "en-GB";
+
+                    Response.Cookies.Append(
+                                CookieRequestCultureProvider.DefaultCookieName,
+                                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(selectedCulture)),
+                                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+                            );
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
@@ -226,8 +241,11 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
                         values: new { userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    var emailBody = _sharedLocalizer
+                        .WithCulture(new CultureInfo(selectedCulture))["Email_Confirmation_Message_Text", HtmlEncoder.Default.Encode(callbackUrl)];
+
+                    await _emailSender.SendEmailAsync(Input.Email, _sharedLocalizer
+                        .WithCulture(new CultureInfo(selectedCulture))["Confirm your email"], emailBody);
 
                     // Set the existing code status to 'Used' and update the DB
                     matchingCode.IsUsed = true;

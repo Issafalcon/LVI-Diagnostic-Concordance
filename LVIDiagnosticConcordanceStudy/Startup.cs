@@ -22,7 +22,6 @@ using LVIDiagnosticConcordanceStudy.Services.ViewModel;
 using LVIDiagnosticConcordanceStudy.Services.Domain;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Services;
 using LVIDiagnosticConcordanceStudy.Infrastructure;
-using LVIDiagnosticConcordanceStudy.Resources;
 
 namespace LVIDiagnosticConcordanceStudy
 {

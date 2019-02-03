@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
+
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
 {
     public class ChangePasswordModel : PageModel
@@ -16,18 +14,18 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<LVIStudyUser> _userManager;
         private readonly SignInManager<LVIStudyUser> _signInManager;
         private readonly ILogger<ChangePasswordModel> _logger;
-        private readonly IStringLocalizer<ChangePasswordModel> _localizer;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
         public ChangePasswordModel(
             UserManager<LVIStudyUser> userManager,
             SignInManager<LVIStudyUser> signInManager,
             ILogger<ChangePasswordModel> logger,
-            IStringLocalizer<ChangePasswordModel> localizer)
+            IStringLocalizer<SharedResource> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _localizer = localizer;
+            _sharedLocalizer = localizer;
         }
 
         [BindProperty]
@@ -44,14 +42,14 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             public string OldPassword { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "New_Password_Error", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "New password")]
             public string NewPassword { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm new password")]
-            [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+            [Compare("NewPassword", ErrorMessage = "New_Password_Match_Error")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -60,7 +58,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound(_sharedLocalizer[$"Unable to load user with ID '{_userManager.GetUserId(User)}'."]);
             }
 
             var hasPassword = await _userManager.HasPasswordAsync(user);
@@ -82,7 +80,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound(_sharedLocalizer[$"Unable to load user with ID '{_userManager.GetUserId(User)}'."]);
             }
 
             var changePasswordResult = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
@@ -97,7 +95,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Your password has been changed.";
+            StatusMessage = _sharedLocalizer["Your password has been changed."];
 
             return RedirectToPage();
         }

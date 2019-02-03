@@ -7,6 +7,7 @@ using LVIDiagnosticConcordanceStudy.Infrastructure.Specifications;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
@@ -17,17 +18,20 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<LVIStudyUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
         private readonly IRepository<ParticipantCode> _participantCodeRepository;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
         public DeletePersonalDataModel(
             UserManager<LVIStudyUser> userManager,
             SignInManager<LVIStudyUser> signInManager,
             ILogger<DeletePersonalDataModel> logger,
-            IRepository<ParticipantCode> participantCodeRepository)
+            IRepository<ParticipantCode> participantCodeRepository,
+            IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _participantCodeRepository = participantCodeRepository;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [BindProperty]
@@ -37,6 +41,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
         {
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name = "Password")]
             public string Password { get; set; }
         }
 
@@ -47,7 +52,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound(_sharedLocalizer[$"Unable to load user with ID '{_userManager.GetUserId(User)}'."]);
             }
 
             RequirePassword = await _userManager.HasPasswordAsync(user);
@@ -59,7 +64,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound(_sharedLocalizer[$"Unable to load user with ID '{_userManager.GetUserId(User)}'."]);
             }
 
             RequirePassword = await _userManager.HasPasswordAsync(user);
@@ -67,7 +72,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             {
                 if (!await _userManager.CheckPasswordAsync(user, Input.Password))
                 {
-                    ModelState.AddModelError(string.Empty, "Password not correct.");
+                    ModelState.AddModelError(string.Empty, _sharedLocalizer["Password not correct."]);
                     return Page();
                 }
             }

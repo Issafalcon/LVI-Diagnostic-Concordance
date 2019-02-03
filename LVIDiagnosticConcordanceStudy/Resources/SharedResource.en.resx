@@ -156,4 +156,52 @@
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
   </data>
+  <data name="Confirm new password" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
+  <data name="Confirm your email" xml:space="preserve">
+    <value>Confirm your email</value>
+  </data>
+  <data name="Current password" xml:space="preserve">
+    <value>Current Password</value>
+  </data>
+  <data name="Email_Confirmation_Message_Text" xml:space="preserve">
+    <value>Please confirm your account by &lt;a href='{0}'&gt;clicking here&lt;/a&gt;.</value>
+  </data>
+  <data name="New password" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="New_Password_Error" xml:space="preserve">
+    <value>The {0} must be at least {2} and at max {1} characters long.</value>
+  </data>
+  <data name="New_Password_Match_Error" xml:space="preserve">
+    <value>The new password and confirmation password do not match.</value>
+  </data>
+  <data name="Participant Code" xml:space="preserve">
+    <value>Participant Code</value>
+  </data>
+  <data name="Password not correct." xml:space="preserve">
+    <value>Password not correct.</value>
+  </data>
+  <data name="Please select your preferred language" xml:space="preserve">
+    <value>Please select your preferred language</value>
+  </data>
+  <data name="Preferred Language" xml:space="preserve">
+    <value>Preferred Language</value>
+  </data>
+  <data name="Required_Field_Error" xml:space="preserve">
+    <value>{0} is required</value>
+  </data>
+  <data name="Unable to load user with ID '{0}'" xml:space="preserve">
+    <value>Unable to load user with ID {0}</value>
+  </data>
+  <data name="Verification email sent. Please check your email." xml:space="preserve">
+    <value>Verification email sent. Please check your email.</value>
+  </data>
+  <data name="Your password has been changed." xml:space="preserve">
+    <value>Your password has been changed.</value>
+  </data>
+  <data name="Your profile has been updated" xml:space="preserve">
+    <value>Your profile has been updated</value>
+  </data>
 </root>
