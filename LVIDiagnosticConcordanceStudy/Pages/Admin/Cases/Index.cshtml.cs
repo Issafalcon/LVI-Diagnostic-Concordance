@@ -19,7 +19,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages.Admin.Cases
 
         public async Task OnGetAsync()
         {
-            Cases = await _caseService.GetOrderedCasesAsync();
+            Cases = await _caseService.GetOrderedCasesAsync(includeReports: true);
         }
     }
 }

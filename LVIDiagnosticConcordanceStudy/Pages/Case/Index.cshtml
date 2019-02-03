@@ -18,7 +18,7 @@
         <button class="btn btn-outline-secondary intro-btn" data-dropdown="#dropdown-with-icons">Select Case...</button>
         <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-with-icons">
             <ul>
-                @foreach(var item in Model.Cases)
+                @foreach (var item in Model.Cases)
                 {
                     <li>
                         <a asp-route-id="@(item.Id)">
@@ -113,6 +113,9 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/lib/jquery-sweet-dropdown/js/jquery.sweet-dropdown.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
-    <script src="~/js/probabilityChart.js"></script>
-    <script src="~/js/caseReport.js"></script>
+    @if (!Model.CurrentUser.InControlGroup)
+    {
+        <script src="~/js/probabilityChart.js"></script>
+        <script src="~/js/caseReport.js"></script>
+    }
 }

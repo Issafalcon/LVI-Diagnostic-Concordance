@@ -1,4 +1,5 @@
 ﻿using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace LVIDiagnosticConcordanceStudy.Models.ViewModels
@@ -18,6 +19,7 @@ namespace LVIDiagnosticConcordanceStudy.Models.ViewModels
 
         [Required]
         [Display(Name = "Number Of LVI")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "The Number Of LVI must be an integer of 0 or greater")]
         public int NumberofLVI { get; set; }
 
         public bool IsSubmitted { get; set; }

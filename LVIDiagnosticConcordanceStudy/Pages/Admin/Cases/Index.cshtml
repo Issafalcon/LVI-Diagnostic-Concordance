@@ -16,6 +16,9 @@
             <p>
                 <a class="btn btn-outline-secondary btn intro-btn" asp-page="Create">Create New</a>
             </p>
+            <div class="text-center text-danger">
+                NOTE: You can not edit cases that have already been reported by one or more users
+            </div>
             <table class="table">
                 <thead>
                     <tr>
@@ -45,8 +48,11 @@
                                 @Html.DisplayFor(modelItem => item.TumourSize)
                             </td>
                             <td>
-                                <a class="btn btn-secondary" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                                <a class="btn btn-secondary" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                                @if (!item.Reports.Any())
+                                {
+                                    <a class="btn btn-secondary" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                                }
+                                | <a class="btn btn-secondary" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                             </td>
                         </tr>
                     }

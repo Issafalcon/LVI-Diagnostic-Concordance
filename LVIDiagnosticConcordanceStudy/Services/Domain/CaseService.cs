@@ -17,9 +17,9 @@ namespace LVIDiagnosticConcordanceStudy.Services
             _caseRepository = caseRepository;
         }
 
-        public async Task<IReadOnlyList<Case>> GetOrderedCasesAsync()
+        public async Task<IReadOnlyList<Case>> GetOrderedCasesAsync(bool includeReports = false)
         {
-            return await _caseRepository.ListAsync(new CaseFilterSpecification(null, orderByCaseNumber: true));
+            return await _caseRepository.ListAsync(new CaseFilterSpecification(null, includeReports: includeReports, orderByCaseNumber: true));
         }
 
         public async Task<Case> GetCaseByIdAsync(int id)

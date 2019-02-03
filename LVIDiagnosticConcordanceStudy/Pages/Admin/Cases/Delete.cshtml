@@ -12,10 +12,12 @@
     <div class="card col-lg-6">
         <h2 class="card-header">@ViewData["Title"]</h2>
         <div class="card-body">
-            <h4>Are you sure you want to delete this?</h4>
+            <h5 class="text-center">Are you sure you want to delete this?</h5>
+            <div class="text-danger w-75 p-3">
+                <span class="font-weight-bold">WARNING:</span> Deleting the case will also remove all existing reports that
+                have been submitted by users for this case
+            </div>
             <div>
-                <h4>Case</h4>
-                <hr />
                 <dl class="dl-horizontal">
                     <dt>
                         @Html.DisplayNameFor(model => model.Case.Id)
