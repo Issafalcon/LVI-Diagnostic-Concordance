@@ -55,7 +55,10 @@ namespace LVIDiagnosticConcordanceStudy
                 services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            }           
+            }
+
+            // Automatically perform database migration
+            services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
 
             services.AddDefaultIdentity<LVIStudyUser>(options =>
             {
