@@ -22,6 +22,7 @@ using LVIDiagnosticConcordanceStudy.Services.ViewModel;
 using LVIDiagnosticConcordanceStudy.Services.Domain;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Services;
 using LVIDiagnosticConcordanceStudy.Infrastructure;
+using System;
 
 namespace LVIDiagnosticConcordanceStudy
 {
@@ -44,9 +45,17 @@ namespace LVIDiagnosticConcordanceStudy
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("MyDBConnection")));
+            }
+            else
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            }           
 
             services.AddDefaultIdentity<LVIStudyUser>(options =>
             {
