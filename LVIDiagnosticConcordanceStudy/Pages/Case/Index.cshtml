@@ -18,8 +18,14 @@
 }
 
 <div class="row p-3 justify-content-center">
-    <div class="col-8 justify-content-center">
-        <button class="btn btn-outline-secondary intro-btn" data-dropdown="#dropdown-with-icons">Select Case...</button>
+    <div class="col-10">
+
+        <div class="d-inline-flex">
+            <a asp-page="./Summary" id="caseSummary" class="btn btn-outline-secondary intro-btn">Summary</a>
+        </div>
+        <div class="d-inline-flex">
+            <button class="btn btn-outline-secondary intro-btn" data-dropdown="#dropdown-with-icons">Select Case...</button>
+        </div>        
         <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-with-icons">
             <ul>
                 @foreach (var item in Model.Cases)
@@ -35,9 +41,6 @@
                     </li>
                 }
             </ul>
-        </div>
-        <div class="d-inline-block">
-            <a asp-page="./Summary" id="caseSummary" class="btn btn-outline-secondary intro-btn">Summary</a>
         </div>
     </div>
 </div>

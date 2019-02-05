@@ -9,72 +9,70 @@
     ViewData["Title"] = Localizer["Participant List"];
 }
 
-<div class="row p-4 card-columns justify-content-center">
-    <div class="card col-7">
+<div class="row pt-4 justify-content-center">
+    <div class="card col-sm-auto col-md-10">
         <h2 class="card-header">@ViewData["Title"]</h2>
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Participants[0].FullName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Participants[0].InControlGroup)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Participants[0].Nationality)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Participants[0].PlaceOfWork)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Participants[0].YearsQualified)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Participants[0].YearsInPath)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Participants[0].IsBreastSpecialist)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Participants[0].Code)
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Participants)
-                    {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FullName)
-                        </td>
-                        <td>
-                            @(item.InControlGroup ? "Control" : "Intervention")
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nationality)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PlaceOfWork)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.YearsQualified)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.YearsInPath)
-                        </td>
-                        <td>
-                            @(item.IsBreastSpecialist ? "Yes" : "No")
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Code)
-                        </td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+        <table class="card-body table table-responsive">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Participants[0].FullName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Participants[0].InControlGroup)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Participants[0].Nationality)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Participants[0].PlaceOfWork)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Participants[0].YearsQualified)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Participants[0].YearsInPath)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Participants[0].IsBreastSpecialist)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Participants[0].Code)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Participants)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @(item.InControlGroup ? "Control" : "Intervention")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nationality)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlaceOfWork)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.YearsQualified)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.YearsInPath)
+                    </td>
+                    <td>
+                        @(item.IsBreastSpecialist ? "Yes" : "No")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
     </div>
 
     @await Component.InvokeAsync("ParticipantCodes")

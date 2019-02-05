@@ -7,7 +7,7 @@
 @inject IOptions<StudyOptions> StudyOptions
 @model IReadOnlyList<ParticipantCode>
 
-<div class="card col-lg-3">
+<div class="card col-sm-auto col-md-10">
     <h2 class="card-header">Participant Codes</h2>
     <div class="card-body">
         @if (StudyOptions.Value.MaximumParticipants <= Model.Count)
