@@ -14,7 +14,7 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
         Task<IReadOnlyList<Case>> GetOrderedCasesAsync();
         Task<int> GetCaseCount();
         int[] GetSubmittedCaseReportIds(string userId);
-        Task<InterventionData> GetInterventionDataForCaseReport(CaseReportViewModel caseReportViewModel, int caseId, string userId);
+        Task<InterventionData> GetInterventionDataForCaseReport(CaseReportViewModel caseReportViewModel, string userId);
         Task GetPreTestProbabilityData(CaseReportViewModel caseReportViewModel, ReportStatistics statistics);
     }
 }

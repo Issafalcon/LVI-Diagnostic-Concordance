@@ -72,7 +72,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages
 
         public async Task<IActionResult> OnGetAdditionalProbabilityDataAsync(int? id, [FromQuery]CaseReportViewModel caseReportData)
         {
-            InterventionData = await _caseReportService.GetInterventionDataForCaseReport(caseReportData, id.Value, _userManager.GetUserId(User));
+            InterventionData = await _caseReportService.GetInterventionDataForCaseReport(caseReportData, _userManager.GetUserId(User));
 
             return new JsonResult(InterventionData);
         }

@@ -103,7 +103,7 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
             return;            
         }
 
-        public async Task<InterventionData> GetInterventionDataForCaseReport(CaseReportViewModel caseReportViewModel, int caseId, string userId)
+        public async Task<InterventionData> GetInterventionDataForCaseReport(CaseReportViewModel caseReportViewModel, string userId)
         {
             int[] chartXAxis;
             decimal[] theoreticalYValues;
@@ -111,7 +111,7 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
 
             Report previousReport = _reportService.GetPreviousUserReport(userId);
 
-            int currentReportNumber = previousReport != null ? previousReport.UserReportNumber + 1 : 1; ;
+            int currentReportNumber = previousReport != null ? previousReport.UserReportNumber + 1 : 1;
 
             // Calculate statistics for the current case report on the fly
             ReportStatistics currentStatistics = await Task.Run(() => _reportService.CalculateStatistics(
