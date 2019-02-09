@@ -57,6 +57,14 @@
         <form id="caseReport" asp-page-handler="Submitted" class="card-body" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="CaseReportViewModel.SlideUrl" class="control-label"></label>
+                <input asp-for="CaseReportViewModel.SlideUrl" class="form-control" readonly />
+                @if (!String.IsNullOrEmpty(Model.CaseReportViewModel.SlideUrl))
+                {
+                    <a href=@(Html.Raw(Model.CaseReportViewModel.SlideUrl)) target="_blank">Click here to view slides</a>
+                }
+            </div>
+            <div class="form-group">
                 <label asp-for="CaseReportViewModel.PatientAge" class="control-label"></label>
                 <input asp-for="CaseReportViewModel.PatientAge" class="form-control" readonly />
                 <span asp-validation-for="CaseReportViewModel.PatientAge" class="text-danger"></span>

@@ -77,9 +77,9 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             return new JsonResult(InterventionData);
         }
 
-        public IActionResult OnGetAdditionalProbabilityViewComponentAsync(decimal preTestProb, decimal postTestProb, decimal observedValue)
+        public IActionResult OnGetAdditionalProbabilityViewComponentAsync(decimal preTestProb, decimal postTestProb, decimal observedValue, bool lviReported)
         {
-            return ViewComponent("AdditionalProbability", new { preTestProbability = preTestProb, postTestProbability = postTestProb, observed = observedValue });
+            return ViewComponent("AdditionalProbability", new { preTestProbability = preTestProb, postTestProbability = postTestProb, observed = observedValue, lviReported });
         }
 
         public async Task<IActionResult> OnGetPreTestProbabilityDataAsync(int? id, [FromQuery]CaseReportViewModel caseReportData)
@@ -110,7 +110,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             {
                 // Calling in from ajax, we need to return a redirect url so we can redirect from the client
                 // as redirects do not get handled in ajax callback functions
-                return new JsonResult(new { redirectUrl = "/Case/" + (id.Value + 1).ToString() });
+                return new JsonResult(new { redirectUrl = "/Case/Index/" + (id.Value + 1).ToString() });
             }
 
             return RedirectToPage("/Case/Index", new { id = id.Value + 1 });

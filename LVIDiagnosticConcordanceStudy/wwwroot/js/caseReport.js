@@ -58,7 +58,7 @@ $(document).ready(function () {
 
         clearTimeout(timeout);
 
-        timeout = setTimeout(getPostTestProbabilityData, 1000);
+        timeout = setTimeout(getPostTestProbabilityData, 500);
     });
 
     // Data Retrieval
@@ -124,7 +124,8 @@ $(document).ready(function () {
         var probabilityData = {
             preTestProb: data.preTestProbability,
             postTestProb: data.postTestProbability,
-            observedValue: observedValue
+            observedValue: observedValue,
+            lviReported: data.lviReported
         };
 
         $.ajax({
@@ -151,6 +152,8 @@ $(document).ready(function () {
 
 
                 $("#interventionSubmit").click(confirmSubmission);
+                // Need to re-add the initial submit button (before the modal) as we have moved it to the new chart card
+                $("#interventionReportSubmit").click(initialSubmit);
             });
         });
     }
@@ -159,8 +162,10 @@ $(document).ready(function () {
     /*              Submission Handlers                            */
     /***************************************************************/
 
-    $("#interventionReportSubmit").click(function (e) {
+    // Attach the click event to the button on page load
+    $("#interventionReportSubmit").click(initialSubmit);
 
+    function initialSubmit() {
         var $caseReportForm = $("#caseReport");
 
         checkNumberOfLVI();
@@ -171,7 +176,7 @@ $(document).ready(function () {
             // Errors with the form - send to OnPostAsync method, which will reload page with errors
             $caseReportForm.validate().showErrors();
         }
-    });
+    };
 
     function confirmSubmission() {
         if ($("#confirmationCode").length) {

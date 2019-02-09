@@ -12,5 +12,6 @@ namespace LVIDiagnosticConcordanceStudy.Models
         public decimal[] ObservedYValues { get; set; }
         public decimal PreTestProbability { get; set; }
         public decimal PostTestProbability { get; set; }
+        public bool LVIReported { get; set; } = false;
     }
 }

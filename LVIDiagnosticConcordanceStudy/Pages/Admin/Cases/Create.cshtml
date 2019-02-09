@@ -24,6 +24,11 @@
                 <span asp-validation-for="Case.TumourSize" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Case.SlideURL" class="control-label"></label>
+                <input asp-for="Case.SlideURL" class="form-control" />
+                <span asp-validation-for="Case.SlideURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-outline-secondary btn intro-btn" /> |
                 <a class="btn btn-secondary" asp-page="./Index">Cancel</a>
             </div>

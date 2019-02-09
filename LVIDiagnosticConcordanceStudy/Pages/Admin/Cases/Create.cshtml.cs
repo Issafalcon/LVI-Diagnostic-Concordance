@@ -37,7 +37,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages.Admin.Cases
             if (await TryUpdateModelAsync<Models.Case>(
                 newCase,
                 "case",
-                c => c.PatientAge, c => c.TumourSize))
+                c => c.PatientAge, c => c.TumourSize, c => c.SlideURL))
             {
                 await _caseRepository.AddAsync(newCase);
                 return RedirectToPage("./Index");

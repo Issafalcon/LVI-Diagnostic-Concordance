@@ -49,7 +49,7 @@ namespace LVIDiagnosticConcordanceStudy.Pages.Admin.Cases
             if (await TryUpdateModelAsync<Models.Case>(
                 caseToUpdate,
                 "case",
-                c => c.PatientAge, c => c.TumourSize))
+                c => c.PatientAge, c => c.TumourSize, c => c.SlideURL))
             {
                 await _caseRepository.UpdateAsync(caseToUpdate);
                 return RedirectToPage("./Index");

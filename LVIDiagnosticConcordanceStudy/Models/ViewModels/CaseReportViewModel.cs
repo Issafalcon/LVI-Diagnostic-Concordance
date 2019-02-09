@@ -22,6 +22,10 @@ namespace LVIDiagnosticConcordanceStudy.Models.ViewModels
         [RegularExpression(@"^\d+$", ErrorMessage = "The Number Of LVI must be an integer of 0 or greater")]
         public int NumberofLVI { get; set; }
 
+        [Display(Name = "Case Link")]
+        [DataType(DataType.Url)]
+        public string SlideUrl { get; set; }
+
         public bool IsSubmitted { get; set; }
     }
 }

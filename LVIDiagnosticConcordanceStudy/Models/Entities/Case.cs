@@ -14,6 +14,10 @@ namespace LVIDiagnosticConcordanceStudy.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:F2}")]
         public decimal TumourSize { get; set; }
 
+        [Display(Name = "Case Link")]
+        [DataType(DataType.Url)]
+        public string SlideURL { get; set; }
+
         public ICollection<Report> Reports { get; set; }
     }
 }

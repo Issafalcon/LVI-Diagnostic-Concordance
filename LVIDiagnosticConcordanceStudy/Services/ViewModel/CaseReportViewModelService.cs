@@ -45,6 +45,7 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
             {
                 PatientAge = currentCase.PatientAge,
                 TumourSize = currentCase.TumourSize,
+                SlideUrl = currentCase.SlideURL,
                 IsSubmitted = false
             };
 
@@ -141,7 +142,8 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
                 ObservedYValues = observedYValues,
                 ChartXAxis = chartXAxis,
                 PreTestProbability = currentStatistics.BayesForGrade,
-                PostTestProbability = currentStatistics.BayesForNumberOfLVI
+                PostTestProbability = currentStatistics.BayesForNumberOfLVI,
+                LVIReported = caseReportViewModel.NumberofLVI > 0 ? true : false
             };
         }
     }
