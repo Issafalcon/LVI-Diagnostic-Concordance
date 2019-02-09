@@ -20,7 +20,7 @@ namespace LVIDiagnosticConcordanceStudy.Data
                 await EnsureAdminUser(serviceProvider, initialUserPw, "atfiggins@gmail.com");
                 await EnsureAdminUser(serviceProvider, initialUserPw, "pablo.pinto1@icloud.com");
 
-                await SeedCasesAsync(serviceProvider);
+                //await SeedCasesAsync(serviceProvider);
             }
         }
 
