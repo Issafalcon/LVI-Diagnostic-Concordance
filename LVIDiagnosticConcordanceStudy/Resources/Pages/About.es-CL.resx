@@ -118,6 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About" xml:space="preserve">
-    <value>Bienvenido a evaluación de calidad en Patología Mamaria</value>
+    <value>About</value>
+  </data>
+  <data name="Application Developer" xml:space="preserve">
+    <value>Application Developer</value>
+  </data>
+  <data name="Study Author" xml:space="preserve">
+    <value>Study Author</value>
   </data>
 </root>

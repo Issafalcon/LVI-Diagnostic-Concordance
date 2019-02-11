@@ -120,6 +120,9 @@
   <data name="Breast Pathology Quality Assessment" xml:space="preserve">
     <value>Breast Pathology Quality Assessment</value>
   </data>
+  <data name="Cases" xml:space="preserve">
+    <value>Cases</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>

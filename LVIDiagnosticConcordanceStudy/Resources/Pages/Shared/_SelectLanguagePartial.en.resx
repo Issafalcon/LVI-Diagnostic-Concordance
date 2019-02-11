@@ -117,19 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Breast Pathology Quality Assessment" xml:space="preserve">
-    <value>Estudio en calidad en patología mamaria</value>
-  </data>
-  <data name="Cases" xml:space="preserve">
-    <value>Casos</value>
-  </data>
-  <data name="Login" xml:space="preserve">
-    <value>Mi cuenta</value>
-  </data>
-  <data name="Register" xml:space="preserve">
-    <value>Crear una cuenta</value>
-  </data>
-  <data name="Welcome_Text" xml:space="preserve">
-    <value>Bienvenido al estudio en calidad en patología mamaria.</value>
+  <data name="Language:" xml:space="preserve">
+    <value>Language:</value>
   </data>
 </root>
