@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Case" xml:space="preserve">
-    <value>Caso</value>
+    <value>Case</value>
   </data>
-  <data name="Cases" xml:space="preserve">
-    <value>Casos</value>
+  <data name="Incomplete" xml:space="preserve">
+    <value>Incomplete</value>
   </data>
-  <data name="Click here to view slides" xml:space="preserve">
-    <value>Click here to view slides</value>
+  <data name="Number of LVI" xml:space="preserve">
+    <value>Number of LVI</value>
   </data>
-  <data name="Complete" xml:space="preserve">
-    <value>Completar</value>
+  <data name="Status" xml:space="preserve">
+    <value>Estado</value>
   </data>
-  <data name="Select Case" xml:space="preserve">
-    <value>Seleccione el caso</value>
+  <data name="Submitted" xml:space="preserve">
+    <value>Submitted</value>
   </data>
-  <data name="Summary" xml:space="preserve">
-    <value>Resumen</value>
+  <data name="Tumour Grade" xml:space="preserve">
+    <value>Tumour Grade</value>
   </data>
 </root>

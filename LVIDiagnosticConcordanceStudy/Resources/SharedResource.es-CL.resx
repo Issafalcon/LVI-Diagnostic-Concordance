@@ -166,25 +166,25 @@
     <value>Contraseña actual</value>
   </data>
   <data name="Email_Confirmation_Message_Text" xml:space="preserve">
-    <value>Please confirm your account by &lt;a href='{0}'&gt;clicking here&lt;/a&gt;. Spanish version</value>
+    <value>Por favor confirme su cuenta haciendo &lt;a href='{0}'&gt;clic aquí&lt;/a&gt;.</value>
   </data>
   <data name="New password" xml:space="preserve">
     <value>Nueva contraseña</value>
   </data>
   <data name="New_Password_Error" xml:space="preserve">
-    <value>Spanish {0} error for {2} and {1}</value>
+    <value>The {0} must be at least {2} and at max {1} characters long.</value>
   </data>
   <data name="New_Password_Match_Error" xml:space="preserve">
-    <value>The new password and confirmation password do not match.</value>
+    <value>Su nueva clave y la confirmación no coinciden</value>
   </data>
   <data name="Participant Code" xml:space="preserve">
     <value>Código de participante</value>
   </data>
   <data name="Password not correct." xml:space="preserve">
-    <value>Password not correct.</value>
+    <value>Clave incorrecta.</value>
   </data>
   <data name="Please select your preferred language" xml:space="preserve">
-    <value>Please select your preferred language</value>
+    <value>Por favor elija su idioma favorito</value>
   </data>
   <data name="Preferred Language" xml:space="preserve">
     <value>Idioma Preferido</value>
@@ -196,12 +196,30 @@
     <value>Unable to load user with ID {0}</value>
   </data>
   <data name="Verification email sent. Please check your email." xml:space="preserve">
-    <value>Verification email sent. Please check your email.</value>
+    <value>un correo de verificación ha sido enviado. Por favor revise su correo.</value>
   </data>
   <data name="Your password has been changed." xml:space="preserve">
-    <value>Your password has been changed.</value>
+    <value>Su clave ha sido cambiada.</value>
   </data>
   <data name="Your profile has been updated" xml:space="preserve">
-    <value>Your profile has been updated</value>
+    <value>Su perfil ha sido actualizado</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Años</value>
+  </data>
+  <data name="Case Link" xml:space="preserve">
+    <value>Case Link</value>
+  </data>
+  <data name="Grade" xml:space="preserve">
+    <value>Grado</value>
+  </data>
+  <data name="Number Of LVI" xml:space="preserve">
+    <value>Number Of LVI</value>
+  </data>
+  <data name="Num_LVI_Error" xml:space="preserve">
+    <value>The Number Of LVI must be an integer of 0 or greater</value>
+  </data>
+  <data name="Tumour Size in cm" xml:space="preserve">
+    <value>Tumour Size in cm</value>
   </data>
 </root>

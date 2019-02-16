@@ -1,6 +1,7 @@
 ﻿using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Localization;
 
 namespace LVIDiagnosticConcordanceStudy.Models.ViewModels
 {
@@ -10,16 +11,16 @@ namespace LVIDiagnosticConcordanceStudy.Models.ViewModels
         public int PatientAge { get; set; }
 
         [Display(Name = "Tumour Size in cm")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:F2}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:F2}")]
         public decimal TumourSize { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Required_Field_Error")]
         [Display(Name = "Grade")]
         public Grade TumourGrade { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Required_Field_Error")]
         [Display(Name = "Number Of LVI")]
-        [RegularExpression(@"^\d+$", ErrorMessage = "The Number Of LVI must be an integer of 0 or greater")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "Num_LVI_Error")]
         public int NumberofLVI { get; set; }
 
         [Display(Name = "Case Link")]

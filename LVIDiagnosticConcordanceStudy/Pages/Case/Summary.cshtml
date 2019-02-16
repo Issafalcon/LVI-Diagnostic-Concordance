@@ -1,4 +1,8 @@
 ﻿@page
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 @model LVIDiagnosticConcordanceStudy.Pages.Case.SummaryModel
 @{
 }
@@ -8,10 +12,10 @@
         <table class="card-body table-striped table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Case #</th>
-                    <th scope="col">Tumour Grade</th>
-                    <th scope="col">Number of LVI</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">@Localizer["Case"] #</th>
+                    <th scope="col">@Localizer["Tumour Grade"]</th>
+                    <th scope="col">@Localizer["Number of LVI"]</th>
+                    <th scope="col">@Localizer["Status"]</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +23,7 @@
                     int reportCount = 0;
                 }
 
-                @foreach(var item in Model.Cases)
+                @foreach (var item in Model.Cases)
                 {
                     <tr>
                         <th scope="row"><a class="btn btn-secondary" asp-page="./Index" asp-route-id="@(item.Id)">@(item.Id)</a></th>
@@ -29,11 +33,11 @@
                             <td>@Model.Reports[reportCount].NumberofLVI</td>
                             @if (Model.Reports[reportCount].IsSubmitted)
                             {
-                                <th scope="row" class="text-success">Submitted</th>
+                                <th scope="row" class="text-success">@Localizer["Submitted"]</th>
                             }
                             else
                             {
-                                <th scope="row" class="text-primary">Incomplete</th>
+                                <th scope="row" class="text-primary">@Localizer["Incomplete"]</th>
                             }
                             reportCount++;
                         }
@@ -41,7 +45,7 @@
                         {
                             <td></td>
                             <td></td>
-                            <th scope="row" class="text-primary">Incomplete</th>
+                            <th scope="row" class="text-primary">@Localizer["Incomplete"]</th>
                         }
                     </tr>
                 }

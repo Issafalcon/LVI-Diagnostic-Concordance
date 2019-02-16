@@ -11,6 +11,7 @@ using LVIDiagnosticConcordanceStudy.Models;
 using System.Net;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Microsoft.Extensions.Localization;
 
 namespace LVIDiagnosticConcordanceStudy.Pages
 {
@@ -19,15 +20,18 @@ namespace LVIDiagnosticConcordanceStudy.Pages
         private readonly ApplicationDbContext _context;
         private readonly UserManager<LVIStudyUser> _userManager;
         private readonly ICaseReportViewModelService _caseReportService;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
         public CaseModel(
             ApplicationDbContext context,
             UserManager<LVIStudyUser> userManager,
-            ICaseReportViewModelService caseReportService)
+            ICaseReportViewModelService caseReportService,
+            IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _context = context;
             _userManager = userManager;
             _caseReportService = caseReportService;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         public LVIStudyUser CurrentUser { get; set; }

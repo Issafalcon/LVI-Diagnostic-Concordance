@@ -204,4 +204,22 @@
   <data name="Your profile has been updated" xml:space="preserve">
     <value>Your profile has been updated</value>
   </data>
+  <data name="Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="Case Link" xml:space="preserve">
+    <value>Case Link</value>
+  </data>
+  <data name="Grade" xml:space="preserve">
+    <value>Grade</value>
+  </data>
+  <data name="Number Of LVI" xml:space="preserve">
+    <value>Number Of LVI</value>
+  </data>
+  <data name="Num_LVI_Error" xml:space="preserve">
+    <value>The Number Of LVI must be an integer of 0 or greater</value>
+  </data>
+  <data name="Tumour Size in cm" xml:space="preserve">
+    <value>Tumour Size in cm</value>
+  </data>
 </root>

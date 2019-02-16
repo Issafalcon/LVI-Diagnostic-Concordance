@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Areas.Identity.Data
 @using Infrastructure.Security
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @inject SignInManager<LVIStudyUser> SignInManager
 
 <!DOCTYPE html>
@@ -33,35 +35,32 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a asp-page="/Index" class="navbar-brand">Breast Pathology QA</a>
+        <a asp-page="/Index" class="navbar-brand">@Localizer["Breast Pathology QA"]</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a asp-page="/Index" class="nav-link text-left">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a asp-page="/About" class="nav-link text-left">About</a>
+                    <a asp-page="/About" class="nav-link text-left">@Localizer["About"]</a>
                 </li>
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item">
-                        <a asp-page="/Case/Index" asp-route-id="1" class="nav-link text-left">Cases</a>
+                        <a asp-page="/Case/Index" asp-route-id="1" class="nav-link text-left">@Localizer["Cases"]</a>
                     </li>
                 }
                 @if (SignInManager.IsSignedIn(User) &&
-                 User.Claims.FirstOrDefault(claim => claim.Type == CustomClaimTypes.IsAdmin).Value == "true")
+                User.Claims.FirstOrDefault(claim => claim.Type == CustomClaimTypes.IsAdmin).Value == "true")
                 {
                     <li class="nav-item lvi-nav-dropdown">
                         <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                            Admin
+                            @Localizer["Admin"]
                             <i class="fa fa-caret-down"></i>
                         </a>
                         <div class="lvi-nav-dropdown-content">
-                            <a class="nav-link p-3" asp-page="/Admin/Cases/Index">Cases</a>
-                            <a class="nav-link p-3" asp-page="/Admin/Participants/Index">Participants</a>
+                            <a class="nav-link p-3" asp-page="/Admin/Cases/Index">@Localizer["Cases"]</a>
+                            <a class="nav-link p-3" asp-page="/Admin/Participants/Index">@Localizer["Participants"]</a>
                         </div>
                     </li>
                 }

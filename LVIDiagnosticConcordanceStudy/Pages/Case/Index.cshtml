@@ -9,7 +9,7 @@
 
 @{
     ViewData["Title"] = Localizer["Cases"];
-    ViewData["SubTitle"] = "Case" + RouteData.Values["id"];
+    ViewData["SubTitle"] = Localizer["Case"];
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
@@ -21,10 +21,10 @@
     <div class="col-10">
 
         <div class="d-inline-flex">
-            <a asp-page="./Summary" id="caseSummary" class="btn btn-outline-secondary intro-btn">Summary</a>
+            <a asp-page="./Summary" id="caseSummary" class="btn btn-outline-secondary intro-btn">@Localizer["Summary"]</a>
         </div>
         <div class="d-inline-flex">
-            <button class="btn btn-outline-secondary intro-btn" data-dropdown="#dropdown-with-icons">Select Case...</button>
+            <button class="btn btn-outline-secondary intro-btn" data-dropdown="#dropdown-with-icons">@Localizer["Select Case"]...</button>
         </div>        
         <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-with-icons">
             <ul>
@@ -35,7 +35,7 @@
                             Case @item.Id
                             @if (Model.SubmittedReports.Contains(item.Id))
                             {
-                                <span class="text-right text-success">Complete</span>
+                                <span class="text-right text-success">@Localizer["Complete"]</span>
                             }
                         </a>
                     </li>
@@ -50,7 +50,7 @@
     <div class="card col-lg-4">
         <div class="card-header position-relative">
             <h1>@ViewData["Title"]</h1>
-            <h4 class="card-subtitle mb-2 text-muted">@ViewData["SubTitle"]</h4>
+            <h4 class="card-subtitle mb-2 text-muted">@ViewData["SubTitle"] @RouteData.Values["id"]</h4>
             <div class="text-right card-img-top" id="preTestProbabilityPlaceholder"></div>
         </div>
 
@@ -61,7 +61,7 @@
                 <input asp-for="CaseReportViewModel.SlideUrl" class="form-control" readonly />
                 @if (!String.IsNullOrEmpty(Model.CaseReportViewModel.SlideUrl))
                 {
-                    <a href=@(Html.Raw(Model.CaseReportViewModel.SlideUrl)) target="_blank">Click here to view slides</a>
+                    <a href=@(Html.Raw(Model.CaseReportViewModel.SlideUrl)) target="_blank">@Localizer["Click here to view slides"]</a>
                 }
             </div>
             <div class="form-group">

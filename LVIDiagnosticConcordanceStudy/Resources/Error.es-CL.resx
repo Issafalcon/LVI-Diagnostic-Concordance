@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Error" xml:space="preserve">
-    <value>Errore</value>
+    <value>Error</value>
   </data>
   <data name="Error_Instructions" xml:space="preserve">
-    <value>Please contact the administrator if this problem persists</value>
+    <value>Por favor contacte el administrador si el problema persiste</value>
   </data>
   <data name="Request ID" xml:space="preserve">
     <value>Request ID</value>

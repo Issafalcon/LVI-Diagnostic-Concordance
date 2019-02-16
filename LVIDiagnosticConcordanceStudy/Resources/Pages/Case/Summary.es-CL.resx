@@ -120,19 +120,19 @@
   <data name="Case" xml:space="preserve">
     <value>Caso</value>
   </data>
-  <data name="Cases" xml:space="preserve">
-    <value>Casos</value>
+  <data name="Incomplete" xml:space="preserve">
+    <value>Incomplete</value>
   </data>
-  <data name="Click here to view slides" xml:space="preserve">
-    <value>Click here to view slides</value>
+  <data name="Number of LVI" xml:space="preserve">
+    <value>Number of LVI</value>
   </data>
-  <data name="Complete" xml:space="preserve">
-    <value>Completar</value>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
   </data>
-  <data name="Select Case" xml:space="preserve">
-    <value>Seleccione el caso</value>
+  <data name="Submitted" xml:space="preserve">
+    <value>Submitted</value>
   </data>
-  <data name="Summary" xml:space="preserve">
-    <value>Resumen</value>
+  <data name="Tumour Grade" xml:space="preserve">
+    <value>Grado</value>
   </data>
 </root>
