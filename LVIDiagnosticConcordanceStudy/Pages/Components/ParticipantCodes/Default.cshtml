@@ -12,13 +12,13 @@
     <div class="card-body">
         @if (StudyOptions.Value.MaximumParticipants <= Model.Count)
         {
-            <p>(Maximum Number of Codes Generated)</p>
+            <p>@Localizer["(Maximum Number of Codes Generated)"]</p>
         }
         else
         {
             <form class="pb-2" asp-page="Index" asp-page-handler="GenerateParticipantCode" method="post">
                 <button type="submit" class="btn btn-outline-secondary btn intro-btn">
-                    Generate New Code
+                    @Localizer["Generate New Code"]
                 </button>
             </form>
         }

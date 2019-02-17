@@ -117,37 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Back" xml:space="preserve">
-    <value>Back</value>
+  <data name="LVI Probability" xml:space="preserve">
+    <value>LVI Probability</value>
   </data>
-  <data name="Case" xml:space="preserve">
-    <value>Case</value>
+  <data name="Pre-Test Probability" xml:space="preserve">
+    <value>Pre-Test Probability</value>
   </data>
-  <data name="Cases" xml:space="preserve">
-    <value>Cases</value>
-  </data>
-  <data name="Click here to view slides" xml:space="preserve">
-    <value>Click here to view slides</value>
-  </data>
-  <data name="Complete" xml:space="preserve">
-    <value>Complete</value>
-  </data>
-  <data name="Confirm" xml:space="preserve">
-    <value>Confirm</value>
-  </data>
-  <data name="Confirm Report Submission" xml:space="preserve">
-    <value>Confirm Report Submission</value>
-  </data>
-  <data name="Report_Submission_Confirm_Text" xml:space="preserve">
-    <value>Once you submit your answer you will be unable to change it. Are you sure you wish to proceed?</value>
-  </data>
-  <data name="Select Case" xml:space="preserve">
-    <value>Select Case</value>
-  </data>
-  <data name="Submit" xml:space="preserve">
-    <value>Submit</value>
-  </data>
-  <data name="Summary" xml:space="preserve">
-    <value>Summary</value>
+  <data name="Pre-test_Probability_Tooltip" xml:space="preserve">
+    <value>The chance of there being LVI in the sample for the grade you have specified</value>
   </data>
 </root>

@@ -17,6 +17,34 @@
     <link href="~/lib/jquery-sweet-dropdown/css/jquery.sweet-dropdown.min.css" rel="stylesheet" />
 }
 
+<div class="modal fade" id="controlGroupModal" tabindex="-1" role="dialog" aria-labelledby="controlGroupModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="controlGroupModalTitle">@Localizer["Confirm Report Submission"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <hr />
+                <div class="row p-3 text-center">
+                    <div>
+                        <p class="p-2">
+                            @Localizer["Report_Submission_Confirm_Text"]
+                        </p>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["Back"]</button>
+                            <input id="controlSubmit" type="submit" value=@Localizer["Confirm"] class="btn btn-outline-secondary intro-btn" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row p-3 justify-content-center">
     <div class="col-10">
 
@@ -25,7 +53,7 @@
         </div>
         <div class="d-inline-flex">
             <button class="btn btn-outline-secondary intro-btn" data-dropdown="#dropdown-with-icons">@Localizer["Select Case"]...</button>
-        </div>        
+        </div>
         <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-with-icons">
             <ul>
                 @foreach (var item in Model.Cases)
@@ -108,14 +136,14 @@
 
             @if (Model.CurrentUser.InControlGroup)
             {
-                <div class="form-group">
-                    <input type="submit" value="Submit" class="btn btn-outline-secondary intro-btn" disabled="@(Model.SubmittedReports.Contains(Model.CaseId))" />
+                <div id="controlSubmitDiv" class="form-group">
+                    <input id="controlReportSubmit" type="button" value=@Localizer["Submit"] class="btn btn-outline-secondary intro-btn" disabled="@(Model.SubmittedReports.Contains(Model.CaseId))" />
                 </div>
             }
             else
             {
                 <div id="interventionSubmitDiv" class="form-group">
-                    <input id="interventionReportSubmit" type="button" value="Submit" class="btn btn-outline-secondary intro-btn" disabled="@(Model.SubmittedReports.Contains(Model.CaseId))" />
+                    <input id="interventionReportSubmit" type="button" value=@Localizer["Submit"] class="btn btn-outline-secondary intro-btn" disabled="@(Model.SubmittedReports.Contains(Model.CaseId))" />
                 </div>
             }
         </form>
@@ -135,6 +163,15 @@
         </environment>
         <environment exclude="Development">
             <script src="~/js/caseReport.min.js"></script>
+        </environment>
+    }
+    else
+    {
+        <environment include="Development">
+            <script src="~/js/controlCaseReport.js"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="~/js/controlCaseReport.min.js"></script>
         </environment>
     }
 }

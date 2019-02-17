@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Back" xml:space="preserve">
+    <value>Atrás</value>
+  </data>
   <data name="Case" xml:space="preserve">
     <value>Caso</value>
   </data>
@@ -129,8 +132,20 @@
   <data name="Complete" xml:space="preserve">
     <value>Completar</value>
   </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="Confirm Report Submission" xml:space="preserve">
+    <value>Confirm Report Submission</value>
+  </data>
+  <data name="Report_Submission_Confirm_Text" xml:space="preserve">
+    <value>Once you submit your answer you will be unable to change it. Are you sure you wish to proceed?</value>
+  </data>
   <data name="Select Case" xml:space="preserve">
     <value>Seleccione el caso</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Enviar</value>
   </data>
   <data name="Summary" xml:space="preserve">
     <value>Resumen</value>

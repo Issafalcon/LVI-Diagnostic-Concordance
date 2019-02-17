@@ -120,17 +120,8 @@
   <data name="Back" xml:space="preserve">
     <value>Back</value>
   </data>
-  <data name="Case" xml:space="preserve">
-    <value>Case</value>
-  </data>
-  <data name="Cases" xml:space="preserve">
-    <value>Cases</value>
-  </data>
-  <data name="Click here to view slides" xml:space="preserve">
-    <value>Click here to view slides</value>
-  </data>
-  <data name="Complete" xml:space="preserve">
-    <value>Complete</value>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
   </data>
   <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
@@ -138,16 +129,22 @@
   <data name="Confirm Report Submission" xml:space="preserve">
     <value>Confirm Report Submission</value>
   </data>
+  <data name="LVI Probability" xml:space="preserve">
+    <value>LVI Probability</value>
+  </data>
+  <data name="No_Concordance_Message" xml:space="preserve">
+    <value>According to our calculations, the tumour grade and LVI number you have provided are VERY unlikely. We recommend you change your answer. Otherwise, re-enter the following code and confirm submission.</value>
+  </data>
+  <data name="Partial_Concordance_Message" xml:space="preserve">
+    <value>According to our calculations, the tumour grade and LVI number you have provided are unlikely. We recommend you change your answer. Otherwise, please confirm.</value>
+  </data>
+  <data name="Post-Test Probability" xml:space="preserve">
+    <value>Post-Test Probability</value>
+  </data>
+  <data name="Post-test_Probability_Tooltip" xml:space="preserve">
+    <value>The probability that LVI is actually present in the sample given your report</value>
+  </data>
   <data name="Report_Submission_Confirm_Text" xml:space="preserve">
     <value>Once you submit your answer you will be unable to change it. Are you sure you wish to proceed?</value>
-  </data>
-  <data name="Select Case" xml:space="preserve">
-    <value>Select Case</value>
-  </data>
-  <data name="Submit" xml:space="preserve">
-    <value>Submit</value>
-  </data>
-  <data name="Summary" xml:space="preserve">
-    <value>Summary</value>
   </data>
 </root>
