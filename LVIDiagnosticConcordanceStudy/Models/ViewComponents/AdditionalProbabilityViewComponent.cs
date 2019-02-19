@@ -23,8 +23,8 @@ namespace LVIDiagnosticConcordanceStudy.Models.ViewComponents
             public void CalculateConcordance()
             {
                 int criteriaMet = 0;
-                criteriaMet += this.PreTest < DataConstants.SecondInterval && LVIReported ? 0 : 1;
-                criteriaMet += this.PostTest < DataConstants.SecondInterval && LVIReported ? 0 : 1;
+                criteriaMet += this.PreTest < DataConstants.FiftyPercent && LVIReported ? 0 : 1;
+                criteriaMet += this.PostTest < DataConstants.FiftyPercent && LVIReported ? 0 : 1;
                 criteriaMet += this.Observed < 0.2m && LVIReported ? 0 : 1;
 
                 ConcordanceCriteriaMet = criteriaMet;

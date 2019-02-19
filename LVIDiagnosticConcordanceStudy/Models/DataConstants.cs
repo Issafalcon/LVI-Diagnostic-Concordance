@@ -13,6 +13,7 @@ namespace LVIDiagnosticConcordanceStudy.Models
         public const decimal LVIRiskPreTestMax = 1;
         public const decimal Interval = 0.1996146273717783m;
         public const decimal SecondInterval = 0.3992292547435566m;
+        public const decimal FiftyPercent = 0.50m;
         public const decimal ThirdInterval = 0.598843882115335m;
         public const decimal FourthInterval = 0.7984585094871133m;
 
