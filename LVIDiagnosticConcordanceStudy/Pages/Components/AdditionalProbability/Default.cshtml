@@ -36,13 +36,13 @@
                         </p>
                         }
 
-                        @if (Model.ConcordanceCriteriaMet == 2)
+                        @if (Model.ConcordanceCriteriaMet <= 2 && Model.ConcordanceCriteriaMet > 0)
                         {
                         <p class="p-2">
                             @Localizer["Partial_Concordance_Message"]
                         </p>
                         }
-                        @if (Model.ConcordanceCriteriaMet < 2)
+                        @if (Model.ConcordanceCriteriaMet < 1)
                         {
                             string code = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 10);
 
