@@ -127,10 +127,10 @@
     <value>Confirmar</value>
   </data>
   <data name="Confirm Report Submission" xml:space="preserve">
-    <value>Confirm Report Submission</value>
+    <value>Confirmar envío</value>
   </data>
   <data name="LVI Probability" xml:space="preserve">
-    <value>LVI Probability</value>
+    <value>Probabilidad de permeaciones vasculares (PV)</value>
   </data>
   <data name="No_Concordance_Message" xml:space="preserve">
     <value>According to our calculations, the tumour grade and LVI number you have provided are VERY unlikely. We recommend you change your answer. Otherwise, re-enter the following code and confirm submission.</value>
@@ -142,9 +142,9 @@
     <value>Probabilidad post-test</value>
   </data>
   <data name="Post-test_Probability_Tooltip" xml:space="preserve">
-    <value>The probability that LVI is actually present in the sample given your report</value>
+    <value>La probabilidad  de que haya Permeaciones Vasculares (PV)  en la muestra estudiada dependiendo del numero de PV  de lo que encontró  el usuario.</value>
   </data>
   <data name="Report_Submission_Confirm_Text" xml:space="preserve">
-    <value>Once you submit your answer you will be unable to change it. Are you sure you wish to proceed?</value>
+    <value>Una vez que envíe su respuesta, no podrá cambiarla. ¿Seguro que desea continuar?</value>
   </data>
 </root>

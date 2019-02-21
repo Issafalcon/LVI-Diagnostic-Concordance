@@ -44,14 +44,14 @@
                     </div>
                 </div>
                 <div class="form-group align-content-center">
-                    <button type="submit" class="btn btn-outline-secondary btn-lg intro-btn">Log in</button>
+                    <button type="submit" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Log In"]</button>
                 </div>
                 <div class="flex-row">
                     <p>
-                        <a asp-page="./ForgotPassword" class="card-link d-inline-block">Forgot your password?</a>
+                        <a asp-page="./ForgotPassword" class="card-link d-inline-block">@Localizer["Forgot your password?"]</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="card-link d-inline-block">Register as a new user</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="card-link d-inline-block">@Localizer["Register as a new user"]</a>
                     </p>
                 </div>
             </form>

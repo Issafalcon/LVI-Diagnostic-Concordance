@@ -127,7 +127,7 @@
     <value>Casos</value>
   </data>
   <data name="Click here to view slides" xml:space="preserve">
-    <value>Click here to view slides</value>
+    <value>Haga clic aquí para ver los corte histológicos.</value>
   </data>
   <data name="Complete" xml:space="preserve">
     <value>Completar</value>
@@ -136,10 +136,10 @@
     <value>Confirmar</value>
   </data>
   <data name="Confirm Report Submission" xml:space="preserve">
-    <value>Confirm Report Submission</value>
+    <value>Confirmar envío</value>
   </data>
   <data name="Report_Submission_Confirm_Text" xml:space="preserve">
-    <value>Once you submit your answer you will be unable to change it. Are you sure you wish to proceed?</value>
+    <value>Una vez que envíe su respuesta, no podrá cambiarla. ¿Seguro que desea continuar?</value>
   </data>
   <data name="Select Case" xml:space="preserve">
     <value>Seleccione el caso</value>

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Breast Subspecialty ?" xml:space="preserve">
-    <value>Subespecialista Mama ?</value>
+    <value>¿Subespecialista en patologia mamaria?</value>
   </data>
   <data name="Confirm Password" xml:space="preserve">
     <value>Repita Clave</value>
@@ -130,7 +130,7 @@
     <value>Nombres</value>
   </data>
   <data name="Gender" xml:space="preserve">
-    <value>Genero</value>
+    <value>Sexo</value>
   </data>
   <data name="Last Name" xml:space="preserve">
     <value>Apellidos</value>
@@ -145,7 +145,7 @@
     <value>Lugar de trabajo</value>
   </data>
   <data name="Years in Histopathology" xml:space="preserve">
-    <value>Años de patologo</value>
+    <value>Años de patólogo</value>
   </data>
   <data name="Years Qualified" xml:space="preserve">
     <value>Años de entrenamiento</value>
@@ -172,7 +172,7 @@
     <value>Nueva contraseña</value>
   </data>
   <data name="New_Password_Error" xml:space="preserve">
-    <value>The {0} must be at least {2} and at max {1} characters long.</value>
+    <value>{0} debe tener al menos {2} y con un máximo de {1} caracteres.</value>
   </data>
   <data name="New_Password_Match_Error" xml:space="preserve">
     <value>Su nueva clave y la confirmación no coinciden</value>
@@ -214,12 +214,27 @@
     <value>Grado</value>
   </data>
   <data name="Number Of LVI" xml:space="preserve">
-    <value>Number Of LVI</value>
+    <value>Número de permeaciones vasculares (PV)</value>
   </data>
   <data name="Num_LVI_Error" xml:space="preserve">
-    <value>The Number Of LVI must be an integer of 0 or greater</value>
+    <value>El Número de permeaciones vasculares (PV) debe ser un número entero de 0 o mayor</value>
   </data>
   <data name="Tumour Size in cm" xml:space="preserve">
-    <value>Tumour Size in cm</value>
+    <value>Tamaño del tumor en cm</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Hembra</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Masculino</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Otro</value>
+  </data>
+  <data name="Please confirm your e-mail before logging in." xml:space="preserve">
+    <value>Please confirm your e-mail before logging in.</value>
+  </data>
+  <data name="Remember me?" xml:space="preserve">
+    <value>¿Recordarme?</value>
   </data>
 </root>

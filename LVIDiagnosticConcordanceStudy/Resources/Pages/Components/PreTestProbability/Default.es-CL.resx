@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LVI Probability" xml:space="preserve">
-    <value>LVI Probability</value>
+    <value>Probabilidad de permeaciones vasculares (PV)</value>
   </data>
   <data name="Pre-Test Probability" xml:space="preserve">
     <value>Probabilidad pre-test</value>
   </data>
   <data name="Pre-test_Probability_Tooltip" xml:space="preserve">
-    <value>The chance of there being LVI in the sample for the grade you have specified</value>
+    <value>La probabilidad  de que haya Permeaciones Vasculares (PV)  en la muestra estudiada independiente de lo que puédese  encontrar el usuario (observador).</value>
   </data>
 </root>

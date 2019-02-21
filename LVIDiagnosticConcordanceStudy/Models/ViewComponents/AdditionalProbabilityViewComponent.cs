@@ -23,9 +23,37 @@ namespace LVIDiagnosticConcordanceStudy.Models.ViewComponents
             public void CalculateConcordance()
             {
                 int criteriaMet = 0;
-                criteriaMet += this.PreTest < DataConstants.FiftyPercent && LVIReported ? 0 : 1;
-                criteriaMet += this.PostTest < DataConstants.FiftyPercent && LVIReported ? 0 : 1;
-                criteriaMet += this.Observed < 0.2m && LVIReported ? 0 : 1;
+
+                if (LVIReported)
+                {
+                    if (Observed > 0.2m)
+                    {
+                        criteriaMet = PreTest >= DataConstants.FiftyPercent && PostTest >= DataConstants.FiftyPercent
+                             ? 3
+                             : 1;
+                    }
+                    else
+                    {
+                        criteriaMet = PreTest < DataConstants.FiftyPercent && PostTest < DataConstants.FiftyPercent
+                             ? 0
+                             : 1;
+                    }
+                }
+                else if (!LVIReported)
+                {
+                    if (Observed > 0.2m)
+                    {
+                        criteriaMet = PreTest < DataConstants.FiftyPercent && PostTest < DataConstants.FiftyPercent
+                             ? 3
+                             : 1;
+                    }
+                    else
+                    {
+                        criteriaMet = PreTest >= DataConstants.FiftyPercent && PostTest >= DataConstants.FiftyPercent
+                             ? 0
+                             : 1;
+                    }
+                }
 
                 ConcordanceCriteriaMet = criteriaMet;
             }

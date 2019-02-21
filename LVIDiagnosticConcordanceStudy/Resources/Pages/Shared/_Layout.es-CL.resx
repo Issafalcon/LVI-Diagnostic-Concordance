@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About" xml:space="preserve">
-    <value>Acerca de</value>
+    <value>Nosotros</value>
   </data>
   <data name="Admin" xml:space="preserve">
-    <value>Admin</value>
+    <value>Administrador</value>
   </data>
   <data name="Breast Pathology QA" xml:space="preserve">
     <value>Breast Pathology QA</value>
@@ -130,6 +130,6 @@
     <value>Casos</value>
   </data>
   <data name="Participants" xml:space="preserve">
-    <value>Participants</value>
+    <value>Participantes</value>
   </data>
 </root>

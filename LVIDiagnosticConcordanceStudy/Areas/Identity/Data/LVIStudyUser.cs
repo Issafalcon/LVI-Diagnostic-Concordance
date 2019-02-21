@@ -48,10 +48,11 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Data
 
     public enum GenderEnum
     {
+        [Display(Name = "Female")]
         Female,
+        [Display(Name = "Male")]
         Male,
-        Other,
-        [Display(Name = "Prefer Not To Specify")]
-        NotSpecified
+        [Display(Name = "Other")]
+        Other
     }
 }

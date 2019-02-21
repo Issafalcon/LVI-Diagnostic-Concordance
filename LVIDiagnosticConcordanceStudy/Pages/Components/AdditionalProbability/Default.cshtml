@@ -7,7 +7,7 @@
 
 @{
     int postTestPercentage = Convert.ToInt32(Model.PostTest * 100);
-    string postTestBadgeClass = Model.PostTest < DataConstants.SecondInterval ? "badge-danger" : "badge-success";
+    string postTestBadgeClass = Model.PostTest < DataConstants.FiftyPercent ? "badge-danger" : "badge-success";
 }
 
 <!-- Intervention Group Additional Information Modal -->

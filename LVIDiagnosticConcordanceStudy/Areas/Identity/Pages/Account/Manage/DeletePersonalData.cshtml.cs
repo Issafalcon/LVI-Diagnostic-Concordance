@@ -102,7 +102,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             user.EmailConfirmed = false;
             user.Culture = null;
             user.FirstName = "Withdrawn";
-            user.Gender = GenderEnum.NotSpecified;
+            user.Gender = GenderEnum.Other;
             user.ParticipantCode = null;
             user.LastName = "Withdrawn";
             user.Nationality = "Withdrawn";

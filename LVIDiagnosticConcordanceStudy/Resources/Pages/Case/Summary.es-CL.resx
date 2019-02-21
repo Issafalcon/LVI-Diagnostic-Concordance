@@ -121,16 +121,16 @@
     <value>Caso</value>
   </data>
   <data name="Incomplete" xml:space="preserve">
-    <value>Incomplete</value>
+    <value>Incompleto</value>
   </data>
   <data name="Number of LVI" xml:space="preserve">
-    <value>Number of LVI</value>
+    <value>Número de permeaciones vasculares (PV)</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>Status</value>
+    <value>la situación</value>
   </data>
   <data name="Submitted" xml:space="preserve">
-    <value>Submitted</value>
+    <value>Enviado</value>
   </data>
   <data name="Tumour Grade" xml:space="preserve">
     <value>Grado</value>

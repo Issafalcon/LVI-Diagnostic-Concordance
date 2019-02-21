@@ -142,7 +142,7 @@
     <value>Post-Test Probability</value>
   </data>
   <data name="Post-test_Probability_Tooltip" xml:space="preserve">
-    <value>The probability that LVI is actually present in the sample given your report</value>
+    <value>The chance of there being LVI in the sample considering how many LVI the user observed</value>
   </data>
   <data name="Report_Submission_Confirm_Text" xml:space="preserve">
     <value>Once you submit your answer you will be unable to change it. Are you sure you wish to proceed?</value>

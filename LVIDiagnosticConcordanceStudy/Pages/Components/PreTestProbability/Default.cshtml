@@ -7,7 +7,7 @@
 
 @{
     int preTestPercentage = Convert.ToInt32(Model.PreTest * 100);
-    string preTestBadgeClass = Model.PreTest < DataConstants.SecondInterval ? "badge-danger" : "badge-success";
+    string preTestBadgeClass = Model.PreTest < DataConstants.FiftyPercent ? "badge-danger" : "badge-success";
 }
 
 <button type="button" class="btn btn-secondary" title="@Localizer["LVI Probability"]" data-trigger="focus" data-container="body" data-toggle="popover" data-content="@Localizer["Pre-test_Probability_Tooltip"]">

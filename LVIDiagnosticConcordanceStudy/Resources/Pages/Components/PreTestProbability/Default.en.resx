@@ -124,6 +124,6 @@
     <value>Pre-Test Probability</value>
   </data>
   <data name="Pre-test_Probability_Tooltip" xml:space="preserve">
-    <value>The chance of there being LVI in the sample for the grade you have specified</value>
+    <value>The chance of there being LVI in the sample  without considering what the user would have observed</value>
   </data>
 </root>
