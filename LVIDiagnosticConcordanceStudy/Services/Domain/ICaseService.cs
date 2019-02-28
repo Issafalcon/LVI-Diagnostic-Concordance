@@ -10,5 +10,6 @@ namespace LVIDiagnosticConcordanceStudy.Services
     {
         Task<Case> GetCaseByIdAsync(int id);
         Task<IReadOnlyList<Case>> GetOrderedCasesAsync(bool includeReports = false);
+        Task ResetCasesAsync();
     }
 }

@@ -30,5 +30,8 @@ namespace LVIDiagnosticConcordanceStudy.Models.ViewModels
 
         [Display(Name = "Participant Code")]
         public string Code { get; set; }
+
+        [Display(Name = "Completed Study")]
+        public bool CompleteStudy { get; set; } = false;
     }
 }

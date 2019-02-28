@@ -9,13 +9,45 @@
     ViewData["Title"] = Localizer["Case List"];
 }
 
+<div class="modal fade" id="resetWarningModal" tabindex="-1" role="dialog" aria-labelledby="resetWarningModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resetWarningModalTitle">@Localizer["Reset All Cases"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <hr />
+                <div class="row p-3 text-center">
+                    <div>
+                        <p class="p-2 text-danger">
+                            @Localizer["Reset_All_Cases_Warning_Message"]
+                        </p>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["Cancel"]</button>
+                            <form asp-page="./Index" asp-page-handler="ResetCases">
+                                <input type="submit" value="@Localizer["Reset Cases"]" class="btn btn-outline-secondary btn intro-btn" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row p-4 justify-content-center">
     <div class="card col-lg-6">
         <h2 class="card-header">@ViewData["Title"]</h2>
         <div class="card-body">
             <p>
                 <a class="btn btn-outline-secondary btn intro-btn" asp-page="Create">Create New</a>
+                <input id="resetCasesSubmit" type="submit" value="@Localizer["Reset Cases"]" class="btn btn-outline-secondary intro-btn" />
             </p>
+
             <div class="text-center text-danger">
                 NOTE: You can not edit cases that have already been reported by one or more users
             </div>
@@ -23,7 +55,7 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Cases[0].Id)
+                            @Html.DisplayNameFor(model => model.Cases[0].CaseNumber)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Cases[0].PatientAge)
@@ -39,7 +71,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Id)
+                                @Html.DisplayFor(modelItem => item.CaseNumber)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.PatientAge)
@@ -61,5 +93,15 @@
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <environment include="Development">
+        <script src="~/js/caseAdmin.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/caseAdmin.min.js"></script>
+    </environment>
+}
 
 

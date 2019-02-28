@@ -7,6 +7,9 @@ namespace LVIDiagnosticConcordanceStudy.Models.ViewModels
 {
     public class CaseReportViewModel
     {
+        [Display(Name = "Case Number")]
+        public int CaseNumber { get; set; }
+
         [Display(Name = "Age")]
         public int PatientAge { get; set; }
 

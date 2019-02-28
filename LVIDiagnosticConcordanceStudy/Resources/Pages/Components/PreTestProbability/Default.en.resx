@@ -121,9 +121,9 @@
     <value>LVI Probability</value>
   </data>
   <data name="Pre-Test Probability" xml:space="preserve">
-    <value>Pre-Test Probability</value>
+    <value>LVI Pre-Seen Slide Probability</value>
   </data>
   <data name="Pre-test_Probability_Tooltip" xml:space="preserve">
-    <value>The chance of there being LVI in the sample  without considering what the user would have observed</value>
+    <value>The chance of finding an LVI before examining the histological slide</value>
   </data>
 </root>

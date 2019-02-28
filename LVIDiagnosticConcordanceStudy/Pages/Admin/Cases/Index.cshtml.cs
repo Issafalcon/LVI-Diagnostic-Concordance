@@ -1,5 +1,6 @@
 using LVIDiagnosticConcordanceStudy.Data.Repository;
 using LVIDiagnosticConcordanceStudy.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,6 +21,12 @@ namespace LVIDiagnosticConcordanceStudy.Pages.Admin.Cases
         public async Task OnGetAsync()
         {
             Cases = await _caseService.GetOrderedCasesAsync(includeReports: true);
+        }
+
+        public async Task<IActionResult> OnPostResetCasesAsync()
+        {
+            await _caseService.ResetCasesAsync();
+            return RedirectToPage("./Index");
         }
     }
 }

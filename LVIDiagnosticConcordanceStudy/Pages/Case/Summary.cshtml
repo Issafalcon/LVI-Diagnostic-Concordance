@@ -1,15 +1,94 @@
 ﻿@page
 
 @using Microsoft.AspNetCore.Mvc.Localization
+@using LVIDiagnosticConcordanceStudy.Areas.Identity.Data
 @inject IViewLocalizer Localizer
+@inject UserManager<LVIStudyUser> UserManager
 
 @model LVIDiagnosticConcordanceStudy.Pages.Case.SummaryModel
 @{
+    bool casesComplete = Model.Cases.Count == Model.SubmittedReports.Count;
+}
+
+<div class="modal fade" id="resetWarningModal" tabindex="-1" role="dialog" aria-labelledby="resetWarningModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resetWarningModalTitle">@Localizer["Reset All Reports"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <hr />
+                <div class="row p-3 text-center">
+                    <div>
+                        <p class="p-2 text-danger">
+                            @Localizer["Reset_All_Reports_Warning_Message"]
+                        </p>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["Cancel"]</button>
+                            <form asp-page="./Summary" asp-page-handler="ResetReports">
+                                <input type="submit" value="@Localizer["Reset_Reports"]" class="btn btn-outline-secondary btn intro-btn" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (casesComplete)
+{
+    <div class="modal fade" id="completeStudyWarningModal" tabindex="-1" role="dialog" aria-labelledby="completeStudyWarningModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resetWarningModalTitle">@Localizer["Complete Study"]</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <hr />
+                    <div class="row p-3 text-center">
+                        <div>
+                            <p class="p-2 text-danger font-weight-bold">
+                                @Localizer["Complete_Study_Warning_Message"]
+                            </p>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["Cancel"]</button>
+                                <form asp-page="./Summary" asp-page-handler="CompleteStudy">
+                                    <input type="submit" value="@Localizer["Confirm"]" class="btn btn-outline-secondary intro-btn" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
 <div class="row pt-3 justify-content-center">
     <div class="card col-sm-auto col-md-10">
-        <table class="card-body table-striped table-hover">
+
+        <div class="row justify-content-center pt-3">
+            <div class="p-1">
+                <input id="resetReportsSubmit" type="submit" value="@Localizer["Reset_All_Reports"]" class="btn btn-outline-secondary intro-btn" />
+            </div>
+            @if (casesComplete)
+            {
+                <div class="p-1">
+                    <input id="completeStudySubmit" type="submit" value="@Localizer["Complete Study"]" class="btn btn-outline-secondary intro-btn" />
+                </div>
+            }
+        </div>
+
+        <table class="card-body table-striped table-hover m-4">
             <thead>
                 <tr>
                     <th scope="col">@Localizer["Case"] #</th>
@@ -26,7 +105,7 @@
                 @foreach (var item in Model.Cases)
                 {
                     <tr>
-                        <th scope="row"><a class="btn btn-secondary" asp-page="./Index" asp-route-id="@(item.Id)">@(item.Id)</a></th>
+                        <th scope="row"><a class="btn btn-secondary" asp-page="./Index" asp-route-id="@(item.Id)">@(item.CaseNumber)</a></th>
                         @if (Model.SubmittedReports.Contains(item.Id))
                         {
                             <td>@Model.Reports[reportCount].TumourGrade</td>
@@ -53,3 +132,13 @@
         </table>
     </div>
 </div>
+
+@section Scripts
+    {
+    <environment include="Development">
+        <script src="~/js/caseSummary.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/caseSummary.min.js"></script>
+    </environment>
+}

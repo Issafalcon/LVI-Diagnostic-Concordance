@@ -14,6 +14,11 @@
         <form class="card-body" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Case.CaseNumber" class="control-label"></label>
+                <input asp-for="Case.CaseNumber" class="form-control" />
+                <span asp-validation-for="Case.CaseNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Case.PatientAge" class="control-label"></label>
                 <input asp-for="Case.PatientAge" class="form-control" />
                 <span asp-validation-for="Case.PatientAge" class="text-danger"></span>

@@ -48,6 +48,8 @@ namespace LVIDiagnosticConcordanceStudy.Data
         private void ConfigureCase(EntityTypeBuilder<Case> builder)
         {
             builder.ToTable("Cases");
+            builder.HasIndex(c => c.CaseNumber)
+                .IsUnique();
         }
 
         private void ConfigureReport(EntityTypeBuilder<Report> builder)

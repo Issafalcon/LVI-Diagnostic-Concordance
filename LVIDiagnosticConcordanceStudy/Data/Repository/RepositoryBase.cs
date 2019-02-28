@@ -102,6 +102,12 @@ namespace LVIDiagnosticConcordanceStudy.Data.Repository
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task DeleteRangeAsync(IEnumerable<T> entities)
+        {
+            _dbContext.Set<T>().RemoveRange(entities);
+            await _dbContext.SaveChangesAsync();
+        }
+
         private IQueryable<T> ApplySpecification(ISpecification<T> spec)
         {
             return SpecificationEvaluator<T>.GetQuery(_dbContext.Set<T>().AsQueryable(), spec);

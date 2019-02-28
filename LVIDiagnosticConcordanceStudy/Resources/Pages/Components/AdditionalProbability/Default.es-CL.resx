@@ -133,10 +133,10 @@
     <value>Probabilidad de permeaciones vasculares (PV)</value>
   </data>
   <data name="No_Concordance_Message" xml:space="preserve">
-    <value>According to our calculations, the tumour grade and LVI number you have provided are VERY unlikely. We recommend you change your answer. Otherwise, re-enter the following code and confirm submission.</value>
+    <value>According to our calculations, the LVI number you have provided is VERY unlikely. We recommend you change your answer. Otherwise, re-enter the following code and confirm submission.</value>
   </data>
   <data name="Partial_Concordance_Message" xml:space="preserve">
-    <value>According to our calculations, the tumour grade and LVI number you have provided are unlikely. We recommend you change your answer. Otherwise, please confirm.</value>
+    <value>According to our calculations, the LVI number you have provided is unlikely. We recommend you change your answer. Otherwise, please confirm.</value>
   </data>
   <data name="Post-Test Probability" xml:space="preserve">
     <value>Probabilidad post-test</value>

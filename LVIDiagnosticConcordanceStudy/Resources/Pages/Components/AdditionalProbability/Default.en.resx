@@ -133,16 +133,16 @@
     <value>LVI Probability</value>
   </data>
   <data name="No_Concordance_Message" xml:space="preserve">
-    <value>According to our calculations, the tumour grade and LVI number you have provided are VERY unlikely. We recommend you change your answer. Otherwise, re-enter the following code and confirm submission.</value>
+    <value>According to our calculations, the LVI number you have provided is VERY unlikely. We recommend you change your answer. Otherwise, re-enter the following code and confirm submission.</value>
   </data>
   <data name="Partial_Concordance_Message" xml:space="preserve">
-    <value>According to our calculations, the tumour grade and LVI number you have provided are unlikely. We recommend you change your answer. Otherwise, please confirm.</value>
+    <value>According to our calculations, the LVI number you have provided is unlikely. We recommend you change your answer. Otherwise, please confirm.</value>
   </data>
   <data name="Post-Test Probability" xml:space="preserve">
-    <value>Post-Test Probability</value>
+    <value>LVI Pre-Seen Slide Probability</value>
   </data>
   <data name="Post-test_Probability_Tooltip" xml:space="preserve">
-    <value>The chance of there being LVI in the sample considering how many LVI the user observed</value>
+    <value>The chance of finding an LVI after you examined the histological slide and gave your first impression to the computer</value>
   </data>
   <data name="Report_Submission_Confirm_Text" xml:space="preserve">
     <value>Once you submit your answer you will be unable to change it. Are you sure you wish to proceed?</value>

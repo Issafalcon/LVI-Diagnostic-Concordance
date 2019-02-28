@@ -43,6 +43,14 @@ namespace LVIDiagnosticConcordanceStudy.Services
             return _reportRepository.GetSubmittedReportIdsForUser(userId);
         }
 
+        public async Task DeleteUserReports(string userId)
+        {
+            var reportFilter = new ReportFilterSpecification(userId, null);
+            var userReports = _reportRepository.List(reportFilter);
+
+            await _reportRepository.DeleteRangeAsync(userReports);
+        }
+
         public async Task CreateOrUpdateReportFromCase(Case currentCase, Report report, Grade grade, int numberOfLVI, string userId, bool isSubmitted = false)
         {
             Report previousReport = GetPreviousUserReport(userId);

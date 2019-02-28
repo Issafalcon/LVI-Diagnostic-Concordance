@@ -37,5 +37,27 @@
       "renameLocals": true
     },
     "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/caseAdmin.min.js",
+    "inputFiles": [
+      "wwwroot/js/caseAdmin.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/caseSummary.min.js",
+    "inputFiles": [
+      "wwwroot/js/caseSummary.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
   }
 ]

@@ -7,6 +7,9 @@ namespace LVIDiagnosticConcordanceStudy.Models
 {
     public class Case : BaseEntity
     {
+        [Display(Name = "Case Number")]
+        public int CaseNumber { get; set; }
+
         [Display(Name = "Age")]
         public int PatientAge { get; set; }
 

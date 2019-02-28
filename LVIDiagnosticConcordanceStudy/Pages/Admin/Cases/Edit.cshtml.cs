@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using LVIDiagnosticConcordanceStudy.Data.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace LVIDiagnosticConcordanceStudy.Pages.Admin.Cases
 {
@@ -49,9 +50,18 @@ namespace LVIDiagnosticConcordanceStudy.Pages.Admin.Cases
             if (await TryUpdateModelAsync<Models.Case>(
                 caseToUpdate,
                 "case",
-                c => c.PatientAge, c => c.TumourSize, c => c.SlideURL))
+                c => c.CaseNumber, c => c.PatientAge, c => c.TumourSize, c => c.SlideURL))
             {
-                await _caseRepository.UpdateAsync(caseToUpdate);
+                try
+                {
+                    await _caseRepository.UpdateAsync(caseToUpdate);
+                }
+                catch (DbUpdateException e)
+                {
+                    ModelState.AddModelError("", e.InnerException.Message);
+                    return Page();
+                }
+                
                 return RedirectToPage("./Index");
             }
 

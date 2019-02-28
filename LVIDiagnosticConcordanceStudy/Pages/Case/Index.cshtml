@@ -60,7 +60,7 @@
                 {
                     <li>
                         <a asp-route-id="@(item.Id)">
-                            Case @item.Id
+                            Case @item.CaseNumber
                             @if (Model.SubmittedReports.Contains(item.Id))
                             {
                                 <span class="text-right text-success">@Localizer["Complete"]</span>
@@ -78,7 +78,7 @@
     <div class="card col-lg-4">
         <div class="card-header position-relative">
             <h1>@ViewData["Title"]</h1>
-            <h4 class="card-subtitle mb-2 text-muted">@ViewData["SubTitle"] @RouteData.Values["id"]</h4>
+            <h4 class="card-subtitle mb-2 text-muted">@ViewData["SubTitle"] @Model.CaseReportViewModel.CaseNumber.ToString()</h4>
             <div class="text-right card-img-top" id="preTestProbabilityPlaceholder"></div>
         </div>
 

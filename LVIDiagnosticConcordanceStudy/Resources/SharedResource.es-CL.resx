@@ -237,4 +237,7 @@
   <data name="Remember me?" xml:space="preserve">
     <value>¿Recordarme?</value>
   </data>
+  <data name="Case Number" xml:space="preserve">
+    <value>Número de caso</value>
+  </data>
 </root>

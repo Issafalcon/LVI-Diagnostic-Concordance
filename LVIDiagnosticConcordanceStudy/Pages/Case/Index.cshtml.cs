@@ -54,6 +54,12 @@ namespace LVIDiagnosticConcordanceStudy.Pages
             }
 
             CurrentUser = await _userManager.GetUserAsync(User);
+
+            if (CurrentUser.CompleteStudy)
+            {
+                return NotFound();
+            }
+
             CaseId = id.HasValue ? id.Value : 0;
 
             if (CurrentUser == null)

@@ -15,6 +15,7 @@ namespace LVIDiagnosticConcordanceStudy.Data.Repository
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
+        Task DeleteRangeAsync(IEnumerable<T> entities);
         Task<int> CountAsync(ISpecification<T> spec);
     }
 }

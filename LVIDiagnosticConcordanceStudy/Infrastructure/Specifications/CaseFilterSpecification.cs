@@ -18,7 +18,7 @@ namespace LVIDiagnosticConcordanceStudy.Infrastructure.Specifications
 
             if (orderByCaseNumber)
             {
-                ApplyOrderBy(c => c.Id);
+                ApplyOrderBy(c => c.CaseNumber);
             }
         }
     }

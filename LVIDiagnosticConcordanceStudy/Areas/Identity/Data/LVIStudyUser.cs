@@ -44,6 +44,8 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Data
         public ParticipantCode ParticipantCode { get; set; }
 
         public List<Report> Reports { get; set; }
+
+        public bool CompleteStudy { get; set; } = false;
     }
 
     public enum GenderEnum

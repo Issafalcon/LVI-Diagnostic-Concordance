@@ -26,6 +26,9 @@
         }
         else
         {
-            <a asp-page="/Case/Index" asp-route-id="1" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Cases"]</a>
+            @if (!SignInManager.UserManager.GetUserAsync(User).Result.CompleteStudy)
+            {
+                <a asp-page="/Case/Index" asp-route-id="1" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Cases"]</a>
+            }
         }
     </div>

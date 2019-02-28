@@ -117,40 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="Reset Cases" xml:space="preserve">
+    <value>Reset Cases</value>
   </data>
-  <data name="Case" xml:space="preserve">
-    <value>Case</value>
-  </data>
-  <data name="Complete_Study_Warning_Message" xml:space="preserve">
-    <value>Are you sure you wish to complete the study? You will no longer be able to modify your reports or access the case data.</value>
-  </data>
-  <data name="Confirm" xml:space="preserve">
-    <value>Confirm</value>
-  </data>
-  <data name="Incomplete" xml:space="preserve">
-    <value>Incomplete</value>
-  </data>
-  <data name="Number of LVI" xml:space="preserve">
-    <value>Number of LVI</value>
-  </data>
-  <data name="Reset_All_Reports" xml:space="preserve">
-    <value>Reset All Reports</value>
-  </data>
-  <data name="Reset_All_Reports_Warning_Message" xml:space="preserve">
-    <value>WARNING: This will reset all of the reports you have submitted so far. You will need to submit all your answers again. Only perform this action if you are sure you have made any mistakes in your report submissions.</value>
-  </data>
-  <data name="Reset_Reports" xml:space="preserve">
-    <value>Reset Reports</value>
-  </data>
-  <data name="Status" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="Submitted" xml:space="preserve">
-    <value>Submitted</value>
-  </data>
-  <data name="Tumour Grade" xml:space="preserve">
-    <value>Tumour Grade</value>
+  <data name="Reset_All_Cases_Warning_Message" xml:space="preserve">
+    <value>WARNING: This is a full case load reset. This will delete all report records and case records in the database. Use this only for testing purposes when a full case reset is required.</value>
   </data>
 </root>

@@ -43,6 +43,7 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
 
             CaseReportViewModel caseReport = new CaseReportViewModel
             {
+                CaseNumber = currentCase.CaseNumber,
                 PatientAge = currentCase.PatientAge,
                 TumourSize = currentCase.TumourSize,
                 SlideUrl = currentCase.SlideURL,

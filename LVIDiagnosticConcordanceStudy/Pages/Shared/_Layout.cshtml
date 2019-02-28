@@ -44,7 +44,7 @@
                 <li class="nav-item">
                     <a asp-page="/About" class="nav-link text-left">@Localizer["About"]</a>
                 </li>
-                @if (SignInManager.IsSignedIn(User))
+                @if (SignInManager.IsSignedIn(User) && !SignInManager.UserManager.GetUserAsync(User).Result.CompleteStudy)
                 {
                     <li class="nav-item">
                         <a asp-page="/Case/Index" asp-route-id="1" class="nav-link text-left">@Localizer["Cases"]</a>
