@@ -117,7 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="English (United Kingdom)" xml:space="preserve">
+    <value>Inglés (Reino Unido)</value>
+  </data>
   <data name="Language:" xml:space="preserve">
-    <value>Lengua:</value>
+    <value>Idioma:</value>
+  </data>
+  <data name="Spanish (Chile)" xml:space="preserve">
+    <value>Español (Chile)</value>
   </data>
 </root>

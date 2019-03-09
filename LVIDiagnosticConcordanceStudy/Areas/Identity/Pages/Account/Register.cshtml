@@ -1,17 +1,21 @@
 ﻿@page
 @model RegisterModel
-@{
-    ViewData["Title"] = "Register";
-}
 
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
 @inject SignInManager<LVIStudyUser> SignInManager
+
+@{
+    ViewData["Title"] = Localizer["Register"];
+}
 
 @{
     List<SelectListItem> YesNoDropDown = new List<SelectListItem>
     {
-    new SelectListItem { Value = "", Text = "" },
-    new SelectListItem { Value = "true", Text = "Yes" },
-    new SelectListItem { Value = "false", Text = "No" }
+        new SelectListItem { Value = "", Text = "" },
+        new SelectListItem { Value = "true", Text = Localizer["Yes"].Value },
+        new SelectListItem { Value = "false", Text = Localizer["No"].Value }
     };
 }
 
@@ -26,7 +30,7 @@
 <div class="row justify-content-center">
     <div class="col-md-6 card">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="card-body">
-            <h1>Create a new account</h1>
+            <h1>@Localizer["Create a new account"]</h1>
             <h4 class="card-subtitle mb-2 text-muted">@ViewData["Title"]</h4>
             <hr />
 

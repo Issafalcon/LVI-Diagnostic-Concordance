@@ -2,6 +2,10 @@
 
 $(document).ready(function () {
 
+    // For use with simple phrase localization in JS
+    // Would need to add more extensive solution for additional languages /  larger app, but this will do for a few phrases
+    var culture = /c=(.+-.+)\|/.exec("c=es-CL|uic=es-CL")[1];
+
     /***************************************************************/
     /*              Pre-Test Probability Calls                     */
     /***************************************************************/
@@ -183,7 +187,9 @@ $(document).ready(function () {
             if ($("#codeInput").val() === $("#confirmationCode").text()) {
                 submitCaseReport();
             } else {
-                $("#codeInputError").text("The code does not match. Please try again.");
+                $("#codeInputError").text(culture === "en-GB"
+                    ? "The code does not match. Please try again."
+                    : "Spanish: The code does not match. Please try again");
             }
         } else {
             submitCaseReport();
@@ -234,7 +240,9 @@ $(document).ready(function () {
     function checkNumberOfLVI() {
         // Check here if the number of LVI is actually an int
         if (!Number.isInteger(Number($("#CaseReportViewModel_NumberofLVI")[0].value))) {
-            forceError($("#CaseReportViewModel_NumberofLVI"), "The Number Of LVI must be an integer of 0 or greater");
+            forceError($("#CaseReportViewModel_NumberofLVI"), culture === "en-GB" 
+                ? "The Number Of LVI must be an integer of 0 or greater"
+                : "Spanish: The Number Of LVI must be an integer of 0 or greater");
         } else {
             forceError($("#CaseReportViewModel_NumberofLVI"), "");
         }
@@ -271,14 +279,18 @@ $(document).ready(function () {
             data: {
                 labels: data.chartXAxis,
                 datasets: [{
-                    label: 'Theoretical Probability of LVI',
+                    label: culture === "en-GB"
+                        ? 'Theoretical Probability of LVI'
+                        : 'Spanish: Theoretical Probability of LVI',
                     data: data.theoreticalYValues,
                     backgroundColor: 'rgba(34, 167, 240, 0.5)',
                     borderColor: 'rgba(34, 167, 240, 0.5)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Observed Probability of LVI',
+                    label: culture === "en-GB"
+                        ? 'Observed Probability of LVI'
+                        : 'Spanish: Observed Probability of LVI',
                     data: data.observedYValues,
                     backgroundColor: 'rgba(165, 55, 253, 0.5)',
                     borderColor: 'rgba(165, 55, 253, 0.5)',
@@ -289,7 +301,9 @@ $(document).ready(function () {
                 responsive: true,
                 title: {
                     display: true,
-                    text: "Probability Based On Cumulative LVI"
+                    text: culture === "en-GB"
+                        ? "Probability Based On Cumulative LVI"
+                        : "Spanish: Probability Based On Cumulative LVI"
                 },
                 scales: {
                     yAxes: [{
@@ -298,7 +312,9 @@ $(document).ready(function () {
                         },
                         scaleLabel: {
                             display: true,
-                            labelString: "Probability of Having LVI"
+                            labelString: culture === "en-GB"
+                                ? "Probability of Having LVI"
+                                : "Spanish: Probability of Having LVI"
                         }
                     }],
                     xAxes: [{
@@ -307,7 +323,9 @@ $(document).ready(function () {
                         },
                         scaleLabel: {
                             display: true,
-                            labelString: "Cumulative Cases Reported As LVI Positive"
+                            labelString: culture === "en-GB"
+                                ? "Cumulative Cases Reported As LVI Positive"
+                                : "Spanish: Cumulative Cases Reported As LVI Positive"
                         }
                     }]
                 }

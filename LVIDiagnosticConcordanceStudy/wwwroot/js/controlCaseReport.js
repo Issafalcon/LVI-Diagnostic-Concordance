@@ -50,7 +50,9 @@ $(document).ready(function () {
     function checkNumberOfLVI() {
         // Check here if the number of LVI is actually an int
         if (!Number.isInteger(Number($("#CaseReportViewModel_NumberofLVI")[0].value))) {
-            forceError($("#CaseReportViewModel_NumberofLVI"), "The Number Of LVI must be an integer of 0 or greater");
+            forceError($("#CaseReportViewModel_NumberofLVI"), culture === "en-GB"
+                ? "The Number Of LVI must be an integer of 0 or greater"
+                : "Spanish: The Number Of LVI must be an integer of 0 or greater");
         } else {
             forceError($("#CaseReportViewModel_NumberofLVI"), "");
         }

@@ -121,7 +121,7 @@
     <value>¿Subespecialista en patologia mamaria?</value>
   </data>
   <data name="Confirm Password" xml:space="preserve">
-    <value>Repita Clave</value>
+    <value>Confirme clave</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -136,7 +136,7 @@
     <value>Apellidos</value>
   </data>
   <data name="Nationality" xml:space="preserve">
-    <value>Nacionalidadd</value>
+    <value>Nacionalidad</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Clave</value>
@@ -145,7 +145,7 @@
     <value>Lugar de trabajo</value>
   </data>
   <data name="Years in Histopathology" xml:space="preserve">
-    <value>Años de patólogo</value>
+    <value>Años de entrenamiento en patología</value>
   </data>
   <data name="Years Qualified" xml:space="preserve">
     <value>Años de entrenamiento</value>
@@ -157,7 +157,7 @@
     <value>Perfil</value>
   </data>
   <data name="Confirm new password" xml:space="preserve">
-    <value>Confirm new password</value>
+    <value>Confirme clave</value>
   </data>
   <data name="Confirm your email" xml:space="preserve">
     <value>Confirme su email</value>
@@ -172,7 +172,7 @@
     <value>Nueva contraseña</value>
   </data>
   <data name="New_Password_Error" xml:space="preserve">
-    <value>{0} debe tener al menos {2} y con un máximo de {1} caracteres.</value>
+    <value>La Clave debe tener al menos {2} y como máximo {1} caracteres.</value>
   </data>
   <data name="New_Password_Match_Error" xml:space="preserve">
     <value>Su nueva clave y la confirmación no coinciden</value>
@@ -223,7 +223,7 @@
     <value>Tamaño del tumor en cm</value>
   </data>
   <data name="Female" xml:space="preserve">
-    <value>Hembra</value>
+    <value>Feminino</value>
   </data>
   <data name="Male" xml:space="preserve">
     <value>Masculino</value>
@@ -239,5 +239,14 @@
   </data>
   <data name="Case Number" xml:space="preserve">
     <value>Número de caso</value>
+  </data>
+  <data name="English (United Kingdom)" xml:space="preserve">
+    <value>Inglés (Reino Unido)</value>
+  </data>
+  <data name="Password_Required_Field_Error" xml:space="preserve">
+    <value>Se requiere que ingrese una clave</value>
+  </data>
+  <data name="Spanish (Chile)" xml:space="preserve">
+    <value>Español (Chile)</value>
   </data>
 </root>

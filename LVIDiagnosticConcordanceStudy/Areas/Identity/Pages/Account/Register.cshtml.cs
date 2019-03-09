@@ -70,7 +70,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             get
             {
                 return _locOptions.SupportedUICultures
-                    .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+                    .Select(c => new SelectListItem { Value = c.Name, Text = _sharedLocalizer[c.DisplayName] })
                     .ToList();
             }
         }
@@ -86,7 +86,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             [Display(Name = "Participant Code", Description = "The 10 character code provided to you by the study administrator.")]
             public string Code { get; set; }
 
-            [Required(ErrorMessage = "Required_Field_Error")]
+            [Required(ErrorMessage = "Password_Required_Field_Error")]
             [StringLength(100, ErrorMessage = "New_Password_Error", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -251,7 +251,6 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
                     matchingCode.IsUsed = true;
                     await _codeRepository.UpdateAsync(matchingCode);
 
-                    //TODO: Redirect to the Registration Confirmation Page - Asking user to check email and confirm address before logging in
                     return RedirectToPage("./RegisterConfirmation");
                 }
                 foreach (var error in result.Errors)

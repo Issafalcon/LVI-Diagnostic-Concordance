@@ -1,7 +1,11 @@
 ﻿@page
 @model RegisterConfirmationModel
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Registration Confirmation";
+    ViewData["Title"] = Localizer["Registration Confirmation"];
 }
 
 <div class="row justify-content-center p-5">
@@ -9,8 +13,7 @@
         <h1>@ViewData["Title"]</h1>
         <hr />
         <p class="text-center">
-            Thank you for registering. You will need to confirm your e-mail before logging in. <br />
-            Please check your inbox (including your spam folder) for your activation link.
+            @Localizer["Confirmation_Message"]
         </p>
     </div>
 </div>
