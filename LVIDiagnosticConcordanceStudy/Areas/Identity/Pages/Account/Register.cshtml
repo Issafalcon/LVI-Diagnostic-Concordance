@@ -2,6 +2,7 @@
 @model RegisterModel
 
 @using Microsoft.AspNetCore.Mvc.Localization
+@using LVIDiagnosticConcordanceStudy.Pages
 
 @inject IViewLocalizer Localizer
 @inject SignInManager<LVIStudyUser> SignInManager
@@ -9,16 +10,6 @@
 @{
     ViewData["Title"] = Localizer["Register"];
 }
-
-@{
-    List<SelectListItem> YesNoDropDown = new List<SelectListItem>
-    {
-        new SelectListItem { Value = "", Text = "" },
-        new SelectListItem { Value = "true", Text = Localizer["Yes"].Value },
-        new SelectListItem { Value = "false", Text = Localizer["No"].Value }
-    };
-}
-
 
 @if (!SignInManager.IsSignedIn(User))
 {
@@ -53,7 +44,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.Nationality"></label>
-                <input asp-for="Input.Nationality" class="form-control" />
+                <select asp-for="Input.Nationality" class="form-control" asp-items="@Model.Nationalities">
+                    <option value=""></option>
+                </select>
                 <span asp-validation-for="Input.Nationality" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -80,7 +73,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.IsBreastSpecialist"></label>
-                <select asp-for="Input.IsBreastSpecialist" class="form-control" asp-items="YesNoDropDown"></select>
+                <select asp-for="Input.IsBreastSpecialist" class="form-control" asp-items="@Model.YesNoDropDown">
+                    <option value=""></option>
+                </select>
                 <span asp-validation-for="Input.IsBreastSpecialist" class="text-danger"></span>
             </div>
             <div class="form-group">

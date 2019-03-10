@@ -305,6 +305,13 @@ $(document).ready(function () {
                         ? "Probability Based On Cumulative LVI"
                         : "Spanish: Probability Based On Cumulative LVI"
                 },
+                tooltips: {
+                    enabled: true
+                },
+                legend: {
+                    // TODO: Add explanations for observed and theoretical probability
+                    display: true
+                },
                 scales: {
                     yAxes: [{
                         ticks: {

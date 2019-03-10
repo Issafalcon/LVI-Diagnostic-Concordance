@@ -120,13 +120,7 @@
   <data name="Create a new account" xml:space="preserve">
     <value>Crear una cuenta</value>
   </data>
-  <data name="No" xml:space="preserve">
-    <value>No</value>
-  </data>
   <data name="Register" xml:space="preserve">
     <value>Registrarse</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Si</value>
   </data>
 </root>

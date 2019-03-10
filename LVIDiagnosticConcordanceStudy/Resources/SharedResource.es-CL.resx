@@ -249,4 +249,583 @@
   <data name="Spanish (Chile)" xml:space="preserve">
     <value>Español (Chile)</value>
   </data>
+  <data name="Afghan" xml:space="preserve">
+    <value>Afgano</value>
+  </data>
+  <data name="Albanian" xml:space="preserve">
+    <value>Albanés</value>
+  </data>
+  <data name="Algerian" xml:space="preserve">
+    <value>Algerian</value>
+  </data>
+  <data name="American" xml:space="preserve">
+    <value>Americano</value>
+  </data>
+  <data name="Andorran" xml:space="preserve">
+    <value>Andorrano</value>
+  </data>
+  <data name="Angolan" xml:space="preserve">
+    <value>Angoleño</value>
+  </data>
+  <data name="Antiguans" xml:space="preserve">
+    <value>Antiguano</value>
+  </data>
+  <data name="Argentinean" xml:space="preserve">
+    <value>Argentino</value>
+  </data>
+  <data name="Armenian" xml:space="preserve">
+    <value>Armenio</value>
+  </data>
+  <data name="Australian" xml:space="preserve">
+    <value>Australiano</value>
+  </data>
+  <data name="Austrian" xml:space="preserve">
+    <value>Austriaco</value>
+  </data>
+  <data name="Azerbaijani" xml:space="preserve">
+    <value>Azerbaiyano</value>
+  </data>
+  <data name="Bahamian" xml:space="preserve">
+    <value>Bahameño</value>
+  </data>
+  <data name="Bahraini" xml:space="preserve">
+    <value>Bahreiní</value>
+  </data>
+  <data name="Bangladeshi" xml:space="preserve">
+    <value>Bangladeshi</value>
+  </data>
+  <data name="Barbadian" xml:space="preserve">
+    <value>Barbadense</value>
+  </data>
+  <data name="Barbudans" xml:space="preserve">
+    <value>Barbudense</value>
+  </data>
+  <data name="Batswana" xml:space="preserve">
+    <value>Botsuano</value>
+  </data>
+  <data name="Belarusian" xml:space="preserve">
+    <value>Bielorruso</value>
+  </data>
+  <data name="Belgian" xml:space="preserve">
+    <value>Belga</value>
+  </data>
+  <data name="Belizean" xml:space="preserve">
+    <value>Beliceño</value>
+  </data>
+  <data name="Beninese" xml:space="preserve">
+    <value>Beninés</value>
+  </data>
+  <data name="Bhutanese" xml:space="preserve">
+    <value>Butanés</value>
+  </data>
+  <data name="Bolivian" xml:space="preserve">
+    <value>Boliviano</value>
+  </data>
+  <data name="Bosnian" xml:space="preserve">
+    <value>Bosnio</value>
+  </data>
+  <data name="Brazilian" xml:space="preserve">
+    <value>Brasileño</value>
+  </data>
+  <data name="British" xml:space="preserve">
+    <value>Británico</value>
+  </data>
+  <data name="Bruneian" xml:space="preserve">
+    <value>Bruneiano</value>
+  </data>
+  <data name="Bulgarian" xml:space="preserve">
+    <value>Búlgaro</value>
+  </data>
+  <data name="Burkinabe" xml:space="preserve">
+    <value>Burkinabe</value>
+  </data>
+  <data name="Burmese" xml:space="preserve">
+    <value>Birmano</value>
+  </data>
+  <data name="Burundian" xml:space="preserve">
+    <value>Burundi</value>
+  </data>
+  <data name="Cambodian" xml:space="preserve">
+    <value>Camboyano</value>
+  </data>
+  <data name="Cameroonian" xml:space="preserve">
+    <value>Camerunés</value>
+  </data>
+  <data name="Canadian" xml:space="preserve">
+    <value>Canadiense</value>
+  </data>
+  <data name="Cape Verdean" xml:space="preserve">
+    <value>Cabo Verde</value>
+  </data>
+  <data name="Central African" xml:space="preserve">
+    <value>Centroafricano</value>
+  </data>
+  <data name="Chadian" xml:space="preserve">
+    <value>Chadiano</value>
+  </data>
+  <data name="Chilean" xml:space="preserve">
+    <value>Chileno</value>
+  </data>
+  <data name="Chinese" xml:space="preserve">
+    <value>Chino</value>
+  </data>
+  <data name="Colombian" xml:space="preserve">
+    <value>Colombiano</value>
+  </data>
+  <data name="Comoran" xml:space="preserve">
+    <value>Comorense</value>
+  </data>
+  <data name="Congolese" xml:space="preserve">
+    <value>Congoleño</value>
+  </data>
+  <data name="Costa Rican" xml:space="preserve">
+    <value>Costarricense</value>
+  </data>
+  <data name="Croatian" xml:space="preserve">
+    <value>Croata</value>
+  </data>
+  <data name="Cuban" xml:space="preserve">
+    <value>Cubano</value>
+  </data>
+  <data name="Cypriot" xml:space="preserve">
+    <value>Chipriota</value>
+  </data>
+  <data name="Czech" xml:space="preserve">
+    <value>Checo</value>
+  </data>
+  <data name="Danish" xml:space="preserve">
+    <value>Danés</value>
+  </data>
+  <data name="Djibouti" xml:space="preserve">
+    <value>Djibouti</value>
+  </data>
+  <data name="Dominican" xml:space="preserve">
+    <value>Dominicana</value>
+  </data>
+  <data name="Dutch" xml:space="preserve">
+    <value>Holandés</value>
+  </data>
+  <data name="East Timorese" xml:space="preserve">
+    <value>East Timorese</value>
+  </data>
+  <data name="Ecuadorean" xml:space="preserve">
+    <value>Ecuatoriano</value>
+  </data>
+  <data name="Egyptian" xml:space="preserve">
+    <value>Egipcio</value>
+  </data>
+  <data name="Emirian" xml:space="preserve">
+    <value>Emiriano</value>
+  </data>
+  <data name="Equatorial Guinean" xml:space="preserve">
+    <value>Equatorial Guinean</value>
+  </data>
+  <data name="Eritrean" xml:space="preserve">
+    <value>Eritreo</value>
+  </data>
+  <data name="Estonian" xml:space="preserve">
+    <value>Estonio</value>
+  </data>
+  <data name="Ethiopian" xml:space="preserve">
+    <value>Etíope</value>
+  </data>
+  <data name="Fijian" xml:space="preserve">
+    <value>Fiyiano</value>
+  </data>
+  <data name="Filipino" xml:space="preserve">
+    <value>Filipino</value>
+  </data>
+  <data name="Finnish" xml:space="preserve">
+    <value>Finlandés</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>Francés</value>
+  </data>
+  <data name="Gabonese" xml:space="preserve">
+    <value>Gabonés</value>
+  </data>
+  <data name="Gambian" xml:space="preserve">
+    <value>Gambiano</value>
+  </data>
+  <data name="Georgian" xml:space="preserve">
+    <value>Georgiano</value>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="Ghanaian" xml:space="preserve">
+    <value>Ghanés</value>
+  </data>
+  <data name="Greek" xml:space="preserve">
+    <value>Griego</value>
+  </data>
+  <data name="Grenadian" xml:space="preserve">
+    <value>Granadino</value>
+  </data>
+  <data name="Guatemalan" xml:space="preserve">
+    <value>Guatemalteco</value>
+  </data>
+  <data name="Guinea-Bissauan" xml:space="preserve">
+    <value>Guineano ecuatorial</value>
+  </data>
+  <data name="Guinean" xml:space="preserve">
+    <value>Guineano</value>
+  </data>
+  <data name="Guyanese" xml:space="preserve">
+    <value>Guyanés</value>
+  </data>
+  <data name="Haitian" xml:space="preserve">
+    <value>Haitiano</value>
+  </data>
+  <data name="Herzegovinian" xml:space="preserve">
+    <value>Herzegoviniano</value>
+  </data>
+  <data name="Honduran" xml:space="preserve">
+    <value>Hondureño</value>
+  </data>
+  <data name="Hungarian" xml:space="preserve">
+    <value>Húngaro</value>
+  </data>
+  <data name="Icelander" xml:space="preserve">
+    <value>Islandés</value>
+  </data>
+  <data name="Indian" xml:space="preserve">
+    <value>Indio</value>
+  </data>
+  <data name="Indonesian" xml:space="preserve">
+    <value>Indonesio</value>
+  </data>
+  <data name="Iranian" xml:space="preserve">
+    <value>Iraní</value>
+  </data>
+  <data name="Iraqi" xml:space="preserve">
+    <value>Iraquí</value>
+  </data>
+  <data name="Irish" xml:space="preserve">
+    <value>Irlandés</value>
+  </data>
+  <data name="Israeli" xml:space="preserve">
+    <value>Israeli</value>
+  </data>
+  <data name="Italian" xml:space="preserve">
+    <value>Italiano</value>
+  </data>
+  <data name="Ivorian" xml:space="preserve">
+    <value>Marfileño</value>
+  </data>
+  <data name="Jamaican" xml:space="preserve">
+    <value>Jamaicano</value>
+  </data>
+  <data name="Japanese" xml:space="preserve">
+    <value>Japonés</value>
+  </data>
+  <data name="Jordanian" xml:space="preserve">
+    <value>Jordano</value>
+  </data>
+  <data name="Kazakhstani" xml:space="preserve">
+    <value>Kazakhstani</value>
+  </data>
+  <data name="Kenyan" xml:space="preserve">
+    <value>Keniano</value>
+  </data>
+  <data name="Kittian and Nevisian" xml:space="preserve">
+    <value>Kittian and Nevisian</value>
+  </data>
+  <data name="Kuwaiti" xml:space="preserve">
+    <value>Kuwaití</value>
+  </data>
+  <data name="Kyrgyz" xml:space="preserve">
+    <value>Kirguiso</value>
+  </data>
+  <data name="Laotian" xml:space="preserve">
+    <value>Laosiano</value>
+  </data>
+  <data name="Latvian" xml:space="preserve">
+    <value>Letón</value>
+  </data>
+  <data name="Lebanese" xml:space="preserve">
+    <value>Libanés</value>
+  </data>
+  <data name="Lesotho" xml:space="preserve">
+    <value>Lesotense</value>
+  </data>
+  <data name="Liberian" xml:space="preserve">
+    <value>Liberiano</value>
+  </data>
+  <data name="Libyan" xml:space="preserve">
+    <value>Libio</value>
+  </data>
+  <data name="Liechtensteiner" xml:space="preserve">
+    <value>Liechtensteiniano</value>
+  </data>
+  <data name="Lithuanian" xml:space="preserve">
+    <value>Lituano</value>
+  </data>
+  <data name="Luxembourger" xml:space="preserve">
+    <value>Luxemburgués</value>
+  </data>
+  <data name="Macedonian" xml:space="preserve">
+    <value>Macedonio</value>
+  </data>
+  <data name="Malagasy" xml:space="preserve">
+    <value>Malgache</value>
+  </data>
+  <data name="Malawian" xml:space="preserve">
+    <value>Malauí</value>
+  </data>
+  <data name="Malaysian" xml:space="preserve">
+    <value>Malasio</value>
+  </data>
+  <data name="Maldivan" xml:space="preserve">
+    <value>Maldivo</value>
+  </data>
+  <data name="Malian" xml:space="preserve">
+    <value>Maliense</value>
+  </data>
+  <data name="Maltese" xml:space="preserve">
+    <value>Maltés</value>
+  </data>
+  <data name="Marshallese" xml:space="preserve">
+    <value>Marshallese</value>
+  </data>
+  <data name="Mauritanian" xml:space="preserve">
+    <value>Mauriciano</value>
+  </data>
+  <data name="Mauritian" xml:space="preserve">
+    <value>Mauritano</value>
+  </data>
+  <data name="Mexican" xml:space="preserve">
+    <value>Mexicano</value>
+  </data>
+  <data name="Micronesian" xml:space="preserve">
+    <value>Micronesio</value>
+  </data>
+  <data name="Moldovan" xml:space="preserve">
+    <value>Moldavo</value>
+  </data>
+  <data name="Monacan" xml:space="preserve">
+    <value>Monegasco</value>
+  </data>
+  <data name="Mongolian" xml:space="preserve">
+    <value>Mongol</value>
+  </data>
+  <data name="Moroccan" xml:space="preserve">
+    <value>Marroquí</value>
+  </data>
+  <data name="Mosotho" xml:space="preserve">
+    <value>Mosotho</value>
+  </data>
+  <data name="Motswana" xml:space="preserve">
+    <value>Motswana</value>
+  </data>
+  <data name="Mozambican" xml:space="preserve">
+    <value>Mozambiqueño</value>
+  </data>
+  <data name="Namibian" xml:space="preserve">
+    <value>Namibiano</value>
+  </data>
+  <data name="Nauruan" xml:space="preserve">
+    <value>Nauruan</value>
+  </data>
+  <data name="Nepalese" xml:space="preserve">
+    <value>Nepalí</value>
+  </data>
+  <data name="New Zealander" xml:space="preserve">
+    <value>Neozelandés</value>
+  </data>
+  <data name="Ni-Vanuatu" xml:space="preserve">
+    <value>Ni-Vanuatu</value>
+  </data>
+  <data name="Nicaraguan" xml:space="preserve">
+    <value>Nicaragüense</value>
+  </data>
+  <data name="Nigerien" xml:space="preserve">
+    <value>Nigeriano</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="North Korean" xml:space="preserve">
+    <value>Norcoreano</value>
+  </data>
+  <data name="Norwegian" xml:space="preserve">
+    <value>Noruego</value>
+  </data>
+  <data name="Omani" xml:space="preserve">
+    <value>Omaní</value>
+  </data>
+  <data name="Pakistani" xml:space="preserve">
+    <value>Pakistani</value>
+  </data>
+  <data name="Palauan" xml:space="preserve">
+    <value>Palauan</value>
+  </data>
+  <data name="Panamanian" xml:space="preserve">
+    <value>Panamanian</value>
+  </data>
+  <data name="Papua New Guinean" xml:space="preserve">
+    <value>Papua New Guinean</value>
+  </data>
+  <data name="Paraguayan" xml:space="preserve">
+    <value>Paraguayan</value>
+  </data>
+  <data name="Peruvian" xml:space="preserve">
+    <value>Peruvian</value>
+  </data>
+  <data name="Polish" xml:space="preserve">
+    <value>Polish</value>
+  </data>
+  <data name="Portuguese" xml:space="preserve">
+    <value>Portuguese</value>
+  </data>
+  <data name="Qatari" xml:space="preserve">
+    <value>Qatari</value>
+  </data>
+  <data name="Romanian" xml:space="preserve">
+    <value>Romanian</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Russian</value>
+  </data>
+  <data name="Rwandan" xml:space="preserve">
+    <value>Rwandan</value>
+  </data>
+  <data name="Saint Lucian" xml:space="preserve">
+    <value>Saint Lucian</value>
+  </data>
+  <data name="Salvadoran" xml:space="preserve">
+    <value>Salvadoran</value>
+  </data>
+  <data name="Samoan" xml:space="preserve">
+    <value>Samoan</value>
+  </data>
+  <data name="San Marinese" xml:space="preserve">
+    <value>San Marinese</value>
+  </data>
+  <data name="Sao Tomean" xml:space="preserve">
+    <value>Sao Tomean</value>
+  </data>
+  <data name="Saudi" xml:space="preserve">
+    <value>Saudi</value>
+  </data>
+  <data name="Senegalese" xml:space="preserve">
+    <value>Senegalese</value>
+  </data>
+  <data name="Serbian" xml:space="preserve">
+    <value>Serbian</value>
+  </data>
+  <data name="Seychellois" xml:space="preserve">
+    <value>Seychellois</value>
+  </data>
+  <data name="Sierra Leonean" xml:space="preserve">
+    <value>Sierra Leonean</value>
+  </data>
+  <data name="Singaporean" xml:space="preserve">
+    <value>Singaporean</value>
+  </data>
+  <data name="Slovakian" xml:space="preserve">
+    <value>Slovakian</value>
+  </data>
+  <data name="Slovenian" xml:space="preserve">
+    <value>Slovenian</value>
+  </data>
+  <data name="Solomon Islander" xml:space="preserve">
+    <value>Solomon Islander</value>
+  </data>
+  <data name="Somali" xml:space="preserve">
+    <value>Somali</value>
+  </data>
+  <data name="South African" xml:space="preserve">
+    <value>South African</value>
+  </data>
+  <data name="South Korean" xml:space="preserve">
+    <value>South Korean</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="Sri Lankan" xml:space="preserve">
+    <value>Sri Lankan</value>
+  </data>
+  <data name="Sudanese" xml:space="preserve">
+    <value>Sudanese</value>
+  </data>
+  <data name="Surinamer" xml:space="preserve">
+    <value>Surinamer</value>
+  </data>
+  <data name="Swazi" xml:space="preserve">
+    <value>Swazi</value>
+  </data>
+  <data name="Swedish" xml:space="preserve">
+    <value>Swedish</value>
+  </data>
+  <data name="Swiss" xml:space="preserve">
+    <value>Swiss</value>
+  </data>
+  <data name="Syrian" xml:space="preserve">
+    <value>Syrian</value>
+  </data>
+  <data name="Taiwanese" xml:space="preserve">
+    <value>Taiwanese</value>
+  </data>
+  <data name="Tajik" xml:space="preserve">
+    <value>Tajik</value>
+  </data>
+  <data name="Tanzanian" xml:space="preserve">
+    <value>Tanzanian</value>
+  </data>
+  <data name="Thai" xml:space="preserve">
+    <value>Thai</value>
+  </data>
+  <data name="Togolese" xml:space="preserve">
+    <value>Togolese</value>
+  </data>
+  <data name="Tongan" xml:space="preserve">
+    <value>Tongan</value>
+  </data>
+  <data name="Trinidadian or Tobagonian" xml:space="preserve">
+    <value>Trinidadian or Tobagonian</value>
+  </data>
+  <data name="Tunisian" xml:space="preserve">
+    <value>Tunisian</value>
+  </data>
+  <data name="Turkish" xml:space="preserve">
+    <value>Turkish</value>
+  </data>
+  <data name="Tuvaluan" xml:space="preserve">
+    <value>Tuvaluan</value>
+  </data>
+  <data name="Ugandan" xml:space="preserve">
+    <value>Ugandan</value>
+  </data>
+  <data name="Ukrainian" xml:space="preserve">
+    <value>Ukrainian</value>
+  </data>
+  <data name="Uruguayan" xml:space="preserve">
+    <value>Uruguayan</value>
+  </data>
+  <data name="Uzbekistani" xml:space="preserve">
+    <value>Uzbekistani</value>
+  </data>
+  <data name="Vanuatense" xml:space="preserve">
+    <value>Vanuatense</value>
+  </data>
+  <data name="Venezuelan" xml:space="preserve">
+    <value>Venezuelan</value>
+  </data>
+  <data name="Vietnamese" xml:space="preserve">
+    <value>Vietnamese</value>
+  </data>
+  <data name="Yemenite" xml:space="preserve">
+    <value>Yemenite</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Si</value>
+  </data>
+  <data name="Zambian" xml:space="preserve">
+    <value>Zambian</value>
+  </data>
+  <data name="Zimbabwean" xml:space="preserve">
+    <value>Zimbabwean</value>
+  </data>
 </root>

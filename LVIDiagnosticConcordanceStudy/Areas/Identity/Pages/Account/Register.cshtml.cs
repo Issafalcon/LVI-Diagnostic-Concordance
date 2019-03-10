@@ -22,6 +22,7 @@ using LVIDiagnosticConcordanceStudy.Infrastructure;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
 using System.Globalization;
+using LVIDiagnosticConcordanceStudy.Pages;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 {
@@ -74,7 +75,29 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
                     .ToList();
             }
         }
-            
+        
+        public List<SelectListItem> Nationalities
+        {
+            get
+            {
+                return NationalitySelectList.Nationalities
+                    .Select(n => new SelectListItem { Value = n, Text = _sharedLocalizer[n] })
+                    .ToList();
+            }
+        }
+
+        public List<SelectListItem> YesNoDropDown
+        {
+            get
+            {
+                return new List<SelectListItem>
+                {
+                    new SelectListItem { Value = "true", Text = _sharedLocalizer["Yes"].Value },
+                    new SelectListItem { Value = "false", Text = _sharedLocalizer["No"].Value }
+                };
+            }
+        }
+
         public class InputModel
         {
             [Required(ErrorMessage = "Required_Field_Error")]
