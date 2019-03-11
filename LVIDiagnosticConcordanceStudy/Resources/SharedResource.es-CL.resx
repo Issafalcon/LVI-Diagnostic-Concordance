@@ -124,7 +124,7 @@
     <value>Confirme clave</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>Correo</value>
   </data>
   <data name="First Name" xml:space="preserve">
     <value>Nombres</value>
@@ -157,19 +157,19 @@
     <value>Perfil</value>
   </data>
   <data name="Confirm new password" xml:space="preserve">
-    <value>Confirme clave</value>
+    <value>Confirme nueva clave</value>
   </data>
   <data name="Confirm your email" xml:space="preserve">
     <value>Confirme su email</value>
   </data>
   <data name="Current password" xml:space="preserve">
-    <value>Contraseña actual</value>
+    <value>Clave actual</value>
   </data>
   <data name="Email_Confirmation_Message_Text" xml:space="preserve">
     <value>Por favor confirme su cuenta haciendo &lt;a href='{0}'&gt;clic aquí&lt;/a&gt;.</value>
   </data>
   <data name="New password" xml:space="preserve">
-    <value>Nueva contraseña</value>
+    <value>Nueva clave</value>
   </data>
   <data name="New_Password_Error" xml:space="preserve">
     <value>La Clave debe tener al menos {2} y como máximo {1} caracteres.</value>

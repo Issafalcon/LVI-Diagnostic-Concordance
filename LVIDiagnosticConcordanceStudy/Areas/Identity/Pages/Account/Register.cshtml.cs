@@ -159,7 +159,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 
             [PersonalData]
             [Required(ErrorMessage = "Required_Field_Error")]
-            [Display(Name = "Breast Subspecialty ?", Description = "Check the box if you subspecialise in breast pathology")]
+            [Display(Name = "Breast Subspecialty ?")]
             public bool IsBreastSpecialist { get; set; }
         }
 

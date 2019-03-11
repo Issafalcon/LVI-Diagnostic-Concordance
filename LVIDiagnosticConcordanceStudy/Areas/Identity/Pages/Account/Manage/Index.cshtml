@@ -1,16 +1,12 @@
 ﻿@page
 @model IndexModel
-@{
-    ViewData["Title"] = "Profile";
-}
+
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
 
 @{
-    List<SelectListItem> YesNoDropDown = new List<SelectListItem>
-{
-    new SelectListItem { Value = "", Text = "" },
-    new SelectListItem { Value = "true", Text = "Yes" },
-    new SelectListItem { Value = "false", Text = "No" }
-};
+    ViewData["Title"] = Localizer["Profile"];
 }
 
 <h4>@ViewData["Title"]</h4>
@@ -36,7 +32,7 @@
                 else
                 {
                     <input asp-for="Input.Email" class="form-control" />
-                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">@Localizer["Send verification email"]</button>
                 }
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
@@ -59,7 +55,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.Nationality"></label>
-                <input asp-for="Input.Nationality" class="form-control" />
+                <select asp-for="Input.Nationality" class="form-control" asp-items="@Model.Nationalities">
+                    <option value=""></option>
+                </select>
                 <span asp-validation-for="Input.Nationality" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -86,10 +84,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.IsBreastSpecialist"></label>
-                <select asp-for="Input.IsBreastSpecialist" class="form-control" asp-items="YesNoDropDown"></select>
+                <select asp-for="Input.IsBreastSpecialist" class="form-control" asp-items="@Model.YesNoDropDown">
+                    <option value=""></option>
+                </select>
                 <span asp-validation-for="Input.IsBreastSpecialist" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-outline-secondary intro-btn">Save</button>
+            <button type="submit" class="btn btn-outline-secondary intro-btn">@Localizer["Save"]</button>
         </form>
     </div>
 </div>
