@@ -28,8 +28,9 @@ namespace LVIDiagnosticConcordanceStudy.Models.ViewModels
         [Display(Name = "Subspecialty In Breast Pathology")]
         public bool IsBreastSpecialist { get; set; }
 
-        [Display(Name = "Participant Code")]
-        public string Code { get; set; }
+        //CODE_FEATURE
+        //[Display(Name = "Participant Code")]
+        //public string Code { get; set; }
 
         [Display(Name = "Completed Study")]
         public bool CompleteStudy { get; set; } = false;

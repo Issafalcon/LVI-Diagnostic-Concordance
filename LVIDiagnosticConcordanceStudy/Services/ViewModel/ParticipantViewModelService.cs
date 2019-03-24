@@ -33,7 +33,7 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
                     YearsInPath = user.YearsInPath,
                     IsBreastSpecialist = user.IsBreastSpecialist,
                     InControlGroup = user.InControlGroup,
-                    Code = user.Code,
+                    //Code = user.Code,
                     CompleteStudy = user.CompleteStudy
                 };
 

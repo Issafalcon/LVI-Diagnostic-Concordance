@@ -15,14 +15,15 @@ namespace LVIDiagnosticConcordanceStudy.Pages.Admin.Participants
     public class IndexModel : PageModel
     {
         private readonly IParticipantViewModelService _participantService;
-        private readonly IAsyncRepository<ParticipantCode> _participantCodeRepository;
+        //CODE_FEATURE
+        //private readonly IAsyncRepository<ParticipantCode> _participantCodeRepository;
 
         public IndexModel(
-            IParticipantViewModelService participantService,
-            IAsyncRepository<ParticipantCode> participantCodeRepository)
+            IParticipantViewModelService participantService)
+            //IAsyncRepository<ParticipantCode> participantCodeRepository)
         {
             _participantService = participantService;
-            _participantCodeRepository = participantCodeRepository;
+            //_participantCodeRepository = participantCodeRepository;
         }
 
         public IReadOnlyList<ParticipantViewModel> Participants { get; set; }
@@ -32,28 +33,29 @@ namespace LVIDiagnosticConcordanceStudy.Pages.Admin.Participants
             Participants = await _participantService.GetParticipantListAsync();
         }
 
-        public async Task<IActionResult> OnPostGenerateParticipantCodeAsync()
-        {
-            string newCode = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 10);
-            IReadOnlyList<ParticipantCode> existingParticipantCodes = await _participantCodeRepository.ListAllAsync();
+        //CODE_FEATURE
+        //public async Task<IActionResult> OnPostGenerateParticipantCodeAsync()
+        //{
+        //    string newCode = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 10);
+        //    IReadOnlyList<ParticipantCode> existingParticipantCodes = await _participantCodeRepository.ListAllAsync();
 
-            var existingCodes = from code in existingParticipantCodes
-                                select code.Code;
+        //    var existingCodes = from code in existingParticipantCodes
+        //                        select code.Code;
 
-            while (existingCodes.Contains(newCode))
-            {
-                newCode = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 10);
-            }
+        //    while (existingCodes.Contains(newCode))
+        //    {
+        //        newCode = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 10);
+        //    }
 
-            ParticipantCode newParticipantCode = new ParticipantCode
-            {
-                Code = newCode,
-                IsUsed = false
-            };
+        //    ParticipantCode newParticipantCode = new ParticipantCode
+        //    {
+        //        Code = newCode,
+        //        IsUsed = false
+        //    };
 
-            await _participantCodeRepository.AddAsync(newParticipantCode);
+        //    await _participantCodeRepository.AddAsync(newParticipantCode);
 
-            return RedirectToPage("Index");
-        }
+        //    return RedirectToPage("Index");
+        //}
     }
 }

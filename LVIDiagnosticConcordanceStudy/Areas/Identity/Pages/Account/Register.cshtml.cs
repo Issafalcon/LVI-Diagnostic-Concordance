@@ -35,7 +35,8 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
-        private readonly IAsyncRepository<ParticipantCode> _codeRepository;
+        //CODE_FEATURE
+        //private readonly IAsyncRepository<ParticipantCode> _codeRepository;
         private readonly RequestLocalizationOptions _locOptions;
         private readonly StudyOptions _studyOptions;
 
@@ -46,7 +47,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             IStringLocalizer<SharedResource> sharedLocalizer,
-            IAsyncRepository<ParticipantCode> codeRepository,
+            //IAsyncRepository<ParticipantCode> codeRepository,
             IOptions<RequestLocalizationOptions> locOptions,
             IOptions<StudyOptions> studyOptions)
         {
@@ -56,7 +57,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _sharedLocalizer = sharedLocalizer;
-            _codeRepository = codeRepository;
+            //_codeRepository = codeRepository;
             _locOptions = locOptions.Value;
             _studyOptions = studyOptions.Value;
         }
@@ -105,9 +106,10 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "Required_Field_Error")]
-            [Display(Name = "Participant Code", Description = "The 10 character code provided to you by the study administrator.")]
-            public string Code { get; set; }
+            //CODE_FEATURE
+            //[Required(ErrorMessage = "Required_Field_Error")]
+            //[Display(Name = "Participant Code", Description = "The 10 character code provided to you by the study administrator.")]
+            //public string Code { get; set; }
 
             [Required(ErrorMessage = "Password_Required_Field_Error")]
             [StringLength(100, ErrorMessage = "New_Password_Error", MinimumLength = 6)]
@@ -208,12 +210,13 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             }
         }
 
-        private async Task<ParticipantCode> GetMatchingCode(string code)
-        {
-            var validCodes = await _codeRepository.ListAsync(new ParticipantCodeSpecification(null, false));
+        //CODE_FEATURE
+        //private async Task<ParticipantCode> GetMatchingCode(string code)
+        //{
+        //    var validCodes = await _codeRepository.ListAsync(new ParticipantCodeSpecification(null, false));
 
-            return validCodes.FirstOrDefault(pc => pc.Code == code);
-        }
+        //    return validCodes.FirstOrDefault(pc => pc.Code == code);
+        //}
 
         public void OnGet(string returnUrl = null)
         {
@@ -230,13 +233,14 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 
                 await TryUpdateModelAsync<LVIStudyUser>(user, "input");
 
-                var matchingCode = await GetMatchingCode(user.Code);
+                //CODE_FEATURE
+                //var matchingCode = await GetMatchingCode(user.Code);
 
-                if (matchingCode == null)
-                {
-                    ModelState.AddModelError("ParticipantCode", "The Participant Code you have provided is not valid");
-                    return Page();
-                }
+                //if (matchingCode == null)
+                //{
+                //    ModelState.AddModelError("ParticipantCode", "The Participant Code you have provided is not valid");
+                //    return Page();
+                //}
 
                 await RandomizeIntoGroup(user);
 
@@ -270,9 +274,10 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
                     await _emailSender.SendEmailAsync(Input.Email, _sharedLocalizer
                         .WithCulture(new CultureInfo(selectedCulture))["Confirm your email"], emailBody);
 
+                    //CODE_FEATURE
                     // Set the existing code status to 'Used' and update the DB
-                    matchingCode.IsUsed = true;
-                    await _codeRepository.UpdateAsync(matchingCode);
+                    //matchingCode.IsUsed = true;
+                    //await _codeRepository.UpdateAsync(matchingCode);
 
                     return RedirectToPage("./RegisterConfirmation");
                 }

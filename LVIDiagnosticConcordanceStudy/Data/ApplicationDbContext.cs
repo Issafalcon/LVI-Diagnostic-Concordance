@@ -17,7 +17,7 @@ namespace LVIDiagnosticConcordanceStudy.Data
 
         public DbSet<Case> Case { get; set; }
         public DbSet<Report> Report { get; set; }
-        public DbSet<ParticipantCode> ParticipantCode { get; set; }
+        //public DbSet<ParticipantCode> ParticipantCode { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -39,10 +39,11 @@ namespace LVIDiagnosticConcordanceStudy.Data
                 .WithOne(r => r.LVIStudyUser)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(u => u.ParticipantCode)
-                .WithOne(pc => pc.LVIStudyUser)
-                .HasForeignKey<LVIStudyUser>(u => u.Code)
-                .HasPrincipalKey<ParticipantCode>(pc => pc.Code);
+            //CODE_FEATURE
+            //builder.HasOne(u => u.ParticipantCode)
+            //    .WithOne(pc => pc.LVIStudyUser)
+            //    .HasForeignKey<LVIStudyUser>(u => u.Code)
+            //    .HasPrincipalKey<ParticipantCode>(pc => pc.Code);
         }
 
         private void ConfigureCase(EntityTypeBuilder<Case> builder)
@@ -62,14 +63,14 @@ namespace LVIDiagnosticConcordanceStudy.Data
             });
         }
 
-        private void ConfigureCase(EntityTypeBuilder<ParticipantCode> builder)
-        {
-            builder.ToTable("ParticipantCodes");
+        //private void ConfigureCase(EntityTypeBuilder<ParticipantCode> builder)
+        //{
+        //    builder.ToTable("ParticipantCodes");
 
-            //builder.HasOne(pc => pc.LVIStudyUser)
-            //    .WithOne(su => su.ParticipantCode)
-            //    .HasPrincipalKey<ParticipantCode>(pc => pc.Code)
-            //    .HasForeignKey<LVIStudyUser>(su => su.Code);
-        }
+        //    //builder.HasOne(pc => pc.LVIStudyUser)
+        //    //    .WithOne(su => su.ParticipantCode)
+        //    //    .HasPrincipalKey<ParticipantCode>(pc => pc.Code)
+        //    //    .HasForeignKey<LVIStudyUser>(su => su.Code);
+        //}
     }
 }

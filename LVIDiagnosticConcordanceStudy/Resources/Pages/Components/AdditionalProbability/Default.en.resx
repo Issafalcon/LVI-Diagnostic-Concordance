@@ -139,7 +139,7 @@
     <value>According to our calculations, the LVI number you have provided is unlikely. We recommend you change your answer. Otherwise, please confirm.</value>
   </data>
   <data name="Post-Test Probability" xml:space="preserve">
-    <value>LVI Pre-Seen Slide Probability</value>
+    <value>LVI Post-Seen Slide Probability</value>
   </data>
   <data name="Post-test_Probability_Tooltip" xml:space="preserve">
     <value>The chance of finding an LVI after you examined the histological slide and gave your first impression to the computer</value>

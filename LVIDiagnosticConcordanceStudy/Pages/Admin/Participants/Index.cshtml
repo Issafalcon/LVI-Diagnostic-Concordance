@@ -36,9 +36,10 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Participants[0].IsBreastSpecialist)
                     </th>
-                    <th>
+                    @*CODE_FEATURE*@
+                    @*<th>
                         @Html.DisplayNameFor(model => model.Participants[0].Code)
-                    </th>
+                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.Participants[0].CompleteStudy)
                     </th>
@@ -69,9 +70,9 @@
                     <td>
                         @(item.IsBreastSpecialist ? "Yes" : "No")
                     </td>
-                    <td>
+                    @*<td>
                         @Html.DisplayFor(modelItem => item.Code)
-                    </td>
+                    </td>*@
                     <td>
                         @(item.CompleteStudy ? "Yes" : "No")
                     </td>
@@ -81,6 +82,7 @@
         </table>
     </div>
 
-    @await Component.InvokeAsync("ParticipantCodes")
+    @*CODE_FEATURE*@
+    @*@await Component.InvokeAsync("ParticipantCodes")*@
 
 </div>

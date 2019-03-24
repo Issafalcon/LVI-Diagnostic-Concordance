@@ -17,20 +17,20 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<LVIStudyUser> _userManager;
         private readonly SignInManager<LVIStudyUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
-        private readonly IRepository<ParticipantCode> _participantCodeRepository;
+        //private readonly IRepository<ParticipantCode> _participantCodeRepository;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
         public DeletePersonalDataModel(
             UserManager<LVIStudyUser> userManager,
             SignInManager<LVIStudyUser> signInManager,
             ILogger<DeletePersonalDataModel> logger,
-            IRepository<ParticipantCode> participantCodeRepository,
+            //IRepository<ParticipantCode> participantCodeRepository,
             IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _participantCodeRepository = participantCodeRepository;
+            //_participantCodeRepository = participantCodeRepository;
             _sharedLocalizer = sharedLocalizer;
         }
 
@@ -93,7 +93,8 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
 
         private async Task<IdentityResult> AnonymiseUserAsync(LVIStudyUser user)
         {
-            FreeUpParticipantCode(user.Code);
+            //CODE_FEATURE
+            //FreeUpParticipantCode(user.Code);
 
             user.UserName = Guid.NewGuid().ToString();
             user.NormalizedUserName = "";
@@ -103,7 +104,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             user.Culture = null;
             user.FirstName = "Withdrawn";
             user.Gender = GenderEnum.Other;
-            user.ParticipantCode = null;
+            //user.ParticipantCode = null;
             user.LastName = "Withdrawn";
             user.Nationality = "Withdrawn";
             user.PlaceOfWork = "Withdrawn";
@@ -111,14 +112,14 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             return await _userManager.UpdateAsync(user);
         }
 
-        private void FreeUpParticipantCode(string code)
-        {
-            var participantCode = _participantCodeRepository.GetSingleBySpec(new ParticipantCodeSpecification(code, null));
+        //private void FreeUpParticipantCode(string code)
+        //{
+        //    var participantCode = _participantCodeRepository.GetSingleBySpec(new ParticipantCodeSpecification(code, null));
 
-            participantCode.IsUsed = false;
+        //    participantCode.IsUsed = false;
 
-            _participantCodeRepository.Update(participantCode);
+        //    _participantCodeRepository.Update(participantCode);
 
-        }
+        //}
     }
 }

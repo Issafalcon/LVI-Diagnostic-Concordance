@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 {
@@ -17,11 +18,16 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
     {
         private readonly UserManager<LVIStudyUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
-        public ForgotPasswordModel(UserManager<LVIStudyUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(
+            UserManager<LVIStudyUser> userManager, 
+            IEmailSender emailSender, 
+            IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [BindProperty]
@@ -56,8 +62,8 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    _sharedLocalizer["Reset Password"],
+                    string.Format(_sharedLocalizer["Password_Reset_Message_Text"], HtmlEncoder.Default.Encode(callbackUrl)));
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

@@ -243,4 +243,10 @@
   <data name="Password_Required_Field_Error" xml:space="preserve">
     <value>Password is required</value>
   </data>
+  <data name="Password_Reset_Message_Text" xml:space="preserve">
+    <value>Please reset your password by &lt;a href='{0}'&gt;clicking here&lt;/a&gt;.</value>
+  </data>
+  <data name="Reset Password" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
 </root>

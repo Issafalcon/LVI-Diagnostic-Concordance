@@ -6,21 +6,22 @@ using System.Threading.Tasks;
 
 namespace LVIDiagnosticConcordanceStudy.Models.ViewComponents
 {
-    public class ParticipantCodesViewComponent : ViewComponent
-    {
-        private IAsyncRepository<ParticipantCode> _participantCodeRepository;
+    //CODE_FEATURE
+    //public class ParticipantCodesViewComponent : ViewComponent
+    //{
+    //    private IAsyncRepository<ParticipantCode> _participantCodeRepository;
 
-        public ParticipantCodesViewComponent(
-            IAsyncRepository<ParticipantCode> participantCodeRepository)
-        {
-            _participantCodeRepository = participantCodeRepository;
-        }
+    //    public ParticipantCodesViewComponent(
+    //        IAsyncRepository<ParticipantCode> participantCodeRepository)
+    //    {
+    //        _participantCodeRepository = participantCodeRepository;
+    //    }
 
-        public async Task<IViewComponentResult> InvokeAsync()
-        {
-            IReadOnlyList<ParticipantCode> codes = await _participantCodeRepository.ListAllAsync();
+    //    public async Task<IViewComponentResult> InvokeAsync()
+    //    {
+    //        IReadOnlyList<ParticipantCode> codes = await _participantCodeRepository.ListAllAsync();
 
-            return View(codes);
-        }
-    }
+    //        return View(codes);
+    //    }
+    //}
 }

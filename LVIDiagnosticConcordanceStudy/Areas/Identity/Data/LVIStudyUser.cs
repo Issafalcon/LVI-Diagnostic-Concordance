@@ -39,8 +39,9 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Data
         [PersonalData]
         public bool IsBreastSpecialist { get; set; }
 
-        public string Code { get; set; }
-        public ParticipantCode ParticipantCode { get; set; }
+        //CODE_FEATURE
+        //public string Code { get; set; }
+        //public ParticipantCode ParticipantCode { get; set; }
 
         public List<Report> Reports { get; set; }
 

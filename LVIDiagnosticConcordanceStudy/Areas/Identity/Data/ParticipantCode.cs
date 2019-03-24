@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Data
 {
-    public class ParticipantCode : BaseEntity
-    {
-        [Required]
-        [Display(Name = "Participant Code")]
-        public string Code { get; set; }
+    //public class ParticipantCode : BaseEntity
+    //{
+    //    [Required]
+    //    [Display(Name = "Participant Code")]
+    //    public string Code { get; set; }
 
-        [Display(Name = "In Use")]
-        public bool IsUsed { get; set; }
+    //    [Display(Name = "In Use")]
+    //    public bool IsUsed { get; set; }
 
-        public LVIStudyUser LVIStudyUser { get; set; }
-    }
+    //    public LVIStudyUser LVIStudyUser { get; set; }
+    //}
 }

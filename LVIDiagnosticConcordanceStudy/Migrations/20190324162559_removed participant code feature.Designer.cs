@@ -4,14 +4,16 @@ using LVIDiagnosticConcordanceStudy.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LVIDiagnosticConcordanceStudy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190324162559_removed participant code feature")]
+    partial class removedparticipantcodefeature
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,6 +95,26 @@ namespace LVIDiagnosticConcordanceStudy.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("LVIStudyUser");
+                });
+
+            modelBuilder.Entity("LVIDiagnosticConcordanceStudy.Areas.Identity.Data.ParticipantCode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .IsRequired();
+
+                    b.Property<bool>("IsUsed");
+
+                    b.Property<string>("LVIStudyUserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LVIStudyUserId");
+
+                    b.ToTable("ParticipantCode");
                 });
 
             modelBuilder.Entity("LVIDiagnosticConcordanceStudy.Models.Case", b =>
@@ -256,6 +278,13 @@ namespace LVIDiagnosticConcordanceStudy.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("LVIDiagnosticConcordanceStudy.Areas.Identity.Data.ParticipantCode", b =>
+                {
+                    b.HasOne("LVIDiagnosticConcordanceStudy.Areas.Identity.Data.LVIStudyUser", "LVIStudyUser")
+                        .WithMany()
+                        .HasForeignKey("LVIStudyUserId");
                 });
 
             modelBuilder.Entity("LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate.Report", b =>

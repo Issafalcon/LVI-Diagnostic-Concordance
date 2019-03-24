@@ -828,4 +828,10 @@
   <data name="Zimbabwean" xml:space="preserve">
     <value>Zimbabwean</value>
   </data>
+  <data name="Password_Reset_Message_Text" xml:space="preserve">
+    <value>Por favor restablecer su contraseña &lt;a href='{0}'&gt;clic aquí&lt;/a&gt;.</value>
+  </data>
+  <data name="Reset Password" xml:space="preserve">
+    <value>Restablecer la contraseña</value>
+  </data>
 </root>

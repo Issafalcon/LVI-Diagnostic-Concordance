@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     // For use with simple phrase localization in JS
     // Would need to add more extensive solution for additional languages /  larger app, but this will do for a few phrases
-    var culture = /c=(.+-.+)\|/.exec("c=es-CL|uic=es-CL")[1];
+    var culture = /c=(.+-.+)\|/.exec(getCookie(".AspNetCore.Culture"))[1];
 
     /***************************************************************/
     /*              Pre-Test Probability Calls                     */
@@ -266,7 +266,22 @@ $(document).ready(function () {
         return $(element)[0].dataset.isForced !== "true";
     });
     
-
+    // Get specified cookies
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
     /***************************************************************/
     /*              Chart Functions                                */
     /***************************************************************/
@@ -280,8 +295,8 @@ $(document).ready(function () {
                 labels: data.chartXAxis,
                 datasets: [{
                     label: culture === "en-GB"
-                        ? 'Theoretical Probability of LVI'
-                        : 'Spanish: Theoretical Probability of LVI',
+                        ? 'Theoretical probability to every possible combination'
+                        : 'Probabilidad teórica para todas las combinaciones combinaciones posibles',
                     data: data.theoreticalYValues,
                     backgroundColor: 'rgba(34, 167, 240, 0.5)',
                     borderColor: 'rgba(34, 167, 240, 0.5)',
@@ -289,8 +304,8 @@ $(document).ready(function () {
                 },
                 {
                     label: culture === "en-GB"
-                        ? 'Observed Probability of LVI'
-                        : 'Spanish: Observed Probability of LVI',
+                        ? 'Probability based on LVI positive cases reported by the user'
+                        : 'Probabilidad basada en Casos PV positivos ingresados por el usuario',
                     data: data.observedYValues,
                     backgroundColor: 'rgba(165, 55, 253, 0.5)',
                     borderColor: 'rgba(165, 55, 253, 0.5)',
@@ -303,13 +318,12 @@ $(document).ready(function () {
                     display: true,
                     text: culture === "en-GB"
                         ? "Probability Based On Cumulative LVI"
-                        : "Spanish: Probability Based On Cumulative LVI"
+                        : "Probability Based On Cumulative LVI"
                 },
                 tooltips: {
                     enabled: true
                 },
                 legend: {
-                    // TODO: Add explanations for observed and theoretical probability
                     display: true
                 },
                 scales: {
@@ -321,7 +335,7 @@ $(document).ready(function () {
                             display: true,
                             labelString: culture === "en-GB"
                                 ? "Probability of Having LVI"
-                                : "Spanish: Probability of Having LVI"
+                                : "Probability of Having LVI"
                         }
                     }],
                     xAxes: [{
@@ -332,7 +346,7 @@ $(document).ready(function () {
                             display: true,
                             labelString: culture === "en-GB"
                                 ? "Cumulative Cases Reported As LVI Positive"
-                                : "Spanish: Cumulative Cases Reported As LVI Positive"
+                                : "Cumulative Cases Reported As LVI Positive"
                         }
                     }]
                 }
