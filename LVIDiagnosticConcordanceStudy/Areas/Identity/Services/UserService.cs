@@ -23,5 +23,13 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Services
             return await _dbContext.Users.Where(u => u.IsAdmin == false).ToListAsync();
         }
 
+        public async Task<List<LVIStudyUser>> GetAllUserData()
+        {
+            return await _dbContext.Users.Where(u => !u.IsAdmin)
+                                    .Include(u => u.Reports)
+                                    .OrderBy(u => u.LastName)
+                                    .ToListAsync();
+        }
+
     }
 }

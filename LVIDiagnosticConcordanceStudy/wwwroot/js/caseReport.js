@@ -189,7 +189,7 @@ $(document).ready(function () {
             } else {
                 $("#codeInputError").text(culture === "en-GB"
                     ? "The code does not match. Please try again."
-                    : "Spanish: The code does not match. Please try again");
+                    : "El codigo ingresado no coincide con el suministrado. Intente nuevamente");
             }
         } else {
             submitCaseReport();
@@ -242,7 +242,7 @@ $(document).ready(function () {
         if (!Number.isInteger(Number($("#CaseReportViewModel_NumberofLVI")[0].value))) {
             forceError($("#CaseReportViewModel_NumberofLVI"), culture === "en-GB" 
                 ? "The Number Of LVI must be an integer of 0 or greater"
-                : "Spanish: The Number Of LVI must be an integer of 0 or greater");
+                : "El numero de PV debe ser un numero entero mayor o igual a 0");
         } else {
             forceError($("#CaseReportViewModel_NumberofLVI"), "");
         }
@@ -317,8 +317,8 @@ $(document).ready(function () {
                 title: {
                     display: true,
                     text: culture === "en-GB"
-                        ? "Probability Based On Cumulative LVI"
-                        : "Probability Based On Cumulative LVI"
+                        ? "Chance of a correct answer considering the number of LVI cases reported as positive by the user"
+                        : "Probabilidad de que sus respuesta sean correctas según numero de casos informados como positivos para permeación vascular (pv)"
                 },
                 tooltips: {
                     enabled: true

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
 using LVIDiagnosticConcordanceStudy.Areas.Identity.Services;
+using LVIDiagnosticConcordanceStudy.Data.Repository;
+using LVIDiagnosticConcordanceStudy.Infrastructure.Specifications;
 using LVIDiagnosticConcordanceStudy.Models.ViewModels;
 
 namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
@@ -10,10 +13,12 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
     public class ParticipantViewModelService : IParticipantViewModelService
     {
         private readonly IUserService _userService;
+        private readonly IExcelWriter _excelWriter;
 
-        public ParticipantViewModelService(IUserService userService)
+        public ParticipantViewModelService(IUserService userService, IExcelWriter excelWriter)
         {
             _userService = userService;
+            _excelWriter = excelWriter;
         }
 
         public async Task<IReadOnlyList<ParticipantViewModel>> GetParticipantListAsync()
@@ -41,6 +46,13 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
             }
 
             return participants;
+        }
+
+        public async Task<Byte[]> DownloadStudyDataAsync()
+        {
+            var data = await _userService.GetAllUserData();
+
+            return _excelWriter.WriteToExcel<LVIStudyUser>(data);
         }
     }
 }

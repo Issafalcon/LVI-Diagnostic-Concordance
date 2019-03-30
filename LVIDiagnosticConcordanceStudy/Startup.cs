@@ -118,6 +118,7 @@ namespace LVIDiagnosticConcordanceStudy
             services.AddScoped<ICaseReportViewModelService, CaseReportViewModelService>();
             services.AddScoped<IParticipantViewModelService, ParticipantViewModelService>();
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddSingleton<IExcelWriter, ExcelWriter>();
             services.Configure<SendGridOptions>(Configuration);
             services.Configure<StudyOptions>(Configuration.GetSection("Study"));
         }

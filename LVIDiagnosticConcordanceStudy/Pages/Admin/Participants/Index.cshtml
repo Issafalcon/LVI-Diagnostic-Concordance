@@ -48,38 +48,41 @@
             <tbody>
                 @foreach (var item in Model.Participants)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FullName)
-                    </td>
-                    <td>
-                        @(item.InControlGroup ? "Control" : "Intervention")
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nationality)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PlaceOfWork)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.YearsQualified)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.YearsInPath)
-                    </td>
-                    <td>
-                        @(item.IsBreastSpecialist ? "Yes" : "No")
-                    </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.Code)
-                    </td>*@
-                    <td>
-                        @(item.CompleteStudy ? "Yes" : "No")
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @(item.InControlGroup ? "Control" : "Intervention")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nationality)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PlaceOfWork)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.YearsQualified)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.YearsInPath)
+                        </td>
+                        <td>
+                            @(item.IsBreastSpecialist ? "Yes" : "No")
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>*@
+                        <td>
+                            @(item.CompleteStudy ? "Yes" : "No")
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
+        <form asp-page="./Index" asp-page-handler="DownloadToExcel">
+            <input type="submit" value="@Localizer["Export Data To Excel"]" class="btn btn-outline-secondary btn intro-btn" />
+        </form>
     </div>
 
     @*CODE_FEATURE*@

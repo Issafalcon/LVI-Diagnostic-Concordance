@@ -9,5 +9,6 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
     public interface IParticipantViewModelService
     {
         Task<IReadOnlyList<ParticipantViewModel>> GetParticipantListAsync();
+        Task<Byte[]> DownloadStudyDataAsync();
     }
 }

@@ -33,6 +33,12 @@ namespace LVIDiagnosticConcordanceStudy.Pages.Admin.Participants
             Participants = await _participantService.GetParticipantListAsync();
         }
 
+        public async Task<IActionResult> OnPostDownloadToExcelAsync()
+        {
+            Byte[] file = await _participantService.DownloadStudyDataAsync();
+            return File(file, "application/ms-excel", $"LVIStudyData.xlsx");
+        }
+
         //CODE_FEATURE
         //public async Task<IActionResult> OnPostGenerateParticipantCodeAsync()
         //{
