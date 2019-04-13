@@ -50,9 +50,9 @@ namespace LVIDiagnosticConcordanceStudy.Services.ViewModel
 
         public async Task<Byte[]> DownloadStudyDataAsync()
         {
-            var data = await _userService.GetAllUserData();
+            var data = _userService.GetUserQueryable();
 
-            return _excelWriter.WriteToExcel<LVIStudyUser>(data);
+            return await _excelWriter.WriteToExcel<LVIStudyUser>(data);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using OfficeOpenXml;
+﻿using LVIDiagnosticConcordanceStudy.Areas.Identity.Data;
+using LVIDiagnosticConcordanceStudy.Models.Entities.ReportAggregate;
+using OfficeOpenXml;
 using OfficeOpenXml.Table;
 using System;
 using System.Collections.Generic;
@@ -14,48 +16,56 @@ namespace LVIDiagnosticConcordanceStudy.Services
     public class ExcelWriter : IExcelWriter
     {
 
-        public Byte[] WriteToExcel<T>(List<T> items)
+        public async Task<Byte[]> WriteToExcel<T>(IQueryable<T> items) where T: LVIStudyUser
         {
-            DataTable data = ListToDataTable(items);
+             var reportData = items
+                .SelectMany(i => i.Reports)
+                .Select(r => new
+                {
+                    Name = r.LVIStudyUser.FirstName + " " + r.LVIStudyUser.LastName,
+                    UserID = r.LVIStudyUserID,
+                    UserReportNumber = r.UserReportNumber,
+                    CaseNumber = r.Case.CaseNumber,
+                    Grade = r.TumourGrade,
+                    LVINumber = r.NumberofLVI,
+                    CaseComplete = r.IsSubmitted,
+                    r.Statistics.ProbLVINeg50Plus,
+                    r.Statistics.ProbLVIPos50Plus,
+                    r.Statistics.BayesForAge,
+                    r.Statistics.ProbLVINegSize,
+                    r.Statistics.ProbLVIPosSize,
+                    r.Statistics.BayesForSize,
+                    r.Statistics.ProbLVIPosGrade,
+                    r.Statistics.ProbLVINegGrade,
+                    PreTestProbability = r.Statistics.BayesForGrade,
+                    r.Statistics.ProbLVIPosNumberOfLVI,
+                    r.Statistics.ProbLVINegNumberOfLVI,
+                    PostTestProbability = r.Statistics.BayesForNumberOfLVI,
+                    r.Statistics.LVIPresent,
+                    r.Statistics.CumulativeCasesWithLVIPos,
+                    r.Statistics.CumulativeBayesForGrade,
+                    r.Statistics.CumulativeAverageBayesForGrade
+                })
+                .OrderBy(r => r.Name)
+                .ThenBy(r => r.UserReportNumber);
+
             Byte[] fileBytes;
 
             using (ExcelPackage package = new ExcelPackage())
             {
-                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Study Data");
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Study Users");
 
-                worksheet.Cells["A1"].LoadFromDataTable(data, true, TableStyles.Medium15);
+                worksheet.Cells["A1"].LoadFromCollection(items, true, TableStyles.Medium15);
+                //LoadFromDataTable(data, true, TableStyles.Medium15);
 
+                ExcelWorksheet worksheet2 = package.Workbook.Worksheets.Add("User Reports");
+
+                worksheet2.Cells["A1"].LoadFromCollection(reportData, true, TableStyles.Medium15);
                 fileBytes = package.GetAsByteArray();
             }
 
             return fileBytes;
 
-        }
-
-        private DataTable ListToDataTable<T>(List<T> items)
-        {
-            DataTable dt = new DataTable(typeof(T).Name);
-
-            PropertyInfo[] props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-            foreach (PropertyInfo property in props)
-            {
-                dt.Columns.Add(property.Name);
-            }
-
-            foreach (T item in items)
-            {
-                var values = new object[props.Length];
-
-                for (int i = 0; i < props.Length; i++)
-                {
-                    values[i] = props[i].GetValue(item);
-                }
-
-                dt.Rows.Add(values);
-            }
-
-            return dt;
         }
     }
 }
