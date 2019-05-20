@@ -66,6 +66,7 @@ namespace LVIDiagnosticConcordanceStudy
                 options.SignIn.RequireConfirmedEmail = true;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
             }).AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");

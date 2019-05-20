@@ -32,9 +32,6 @@ namespace LVIDiagnosticConcordanceStudy.Data
         {
             builder.ToTable("LVIStudyUser");
 
-            builder.Property(u => u.Gender)
-                .HasConversion(new EnumToStringConverter<GenderEnum>());
-
             builder.HasMany(u => u.Reports)
                 .WithOne(r => r.LVIStudyUser)
                 .OnDelete(DeleteBehavior.Cascade);

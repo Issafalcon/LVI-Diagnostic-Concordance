@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.Gender"></label>
-                <select asp-for="Input.Gender" class="form-control" asp-items="@Html.GetEnumSelectList<GenderEnum>()">
+                <select asp-for="Input.Gender" class="form-control" asp-items="@Model.GenderSelect">
                     <option value=""></option>
                 </select>
                 <span asp-validation-for="Input.Gender" class="text-danger"></span>
@@ -99,7 +99,7 @@
                 <span asp-validation-for="Input.Code" class="text-danger"></span>
             </div>*@
             <div asp-validation-summary="All" class="text-danger"></div>
-            <button type="submit" class="btn btn-outline-secondary btn-lg intro-btn">Register</button>
+            <button type="submit" class="btn btn-outline-secondary btn-lg intro-btn">@Localizer["Register"]</button>
         </form>
     </div>
 </div>

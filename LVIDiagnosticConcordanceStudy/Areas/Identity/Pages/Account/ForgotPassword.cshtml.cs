@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
+using System.Globalization;
 
 namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 {
@@ -53,6 +54,8 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 
                 // For more information on how to enable account confirmation and password reset please 
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
+                string selectedCulture = user.Culture ?? "en-GB";
+
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var callbackUrl = Url.Page(
                     "/Account/ResetPassword",
@@ -60,10 +63,11 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
                     values: new { code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    _sharedLocalizer["Reset Password"],
-                    string.Format(_sharedLocalizer["Password_Reset_Message_Text"], HtmlEncoder.Default.Encode(callbackUrl)));
+                var emailBody = _sharedLocalizer
+                        .WithCulture(new CultureInfo(selectedCulture))["Password_Reset_Message_Text", HtmlEncoder.Default.Encode(callbackUrl)];
+
+                await _emailSender.SendEmailAsync(Input.Email, _sharedLocalizer
+                        .WithCulture(new CultureInfo(selectedCulture))["Reset Password"], emailBody);
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

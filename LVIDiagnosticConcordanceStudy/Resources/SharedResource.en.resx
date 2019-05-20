@@ -220,7 +220,7 @@
     <value>The Number Of LVI must be an integer of 0 or greater</value>
   </data>
   <data name="Tumour Size in cm" xml:space="preserve">
-    <value>Tumour Size in cm</value>
+    <value>Tumour Size (cm)</value>
   </data>
   <data name="Female" xml:space="preserve">
     <value>Female</value>
@@ -248,5 +248,20 @@
   </data>
   <data name="Reset Password" xml:space="preserve">
     <value>Reset Password</value>
+  </data>
+  <data name="Current password is required" xml:space="preserve">
+    <value>Current password is required</value>
+  </data>
+  <data name="Email_Validation_Error" xml:space="preserve">
+    <value>The e-mail address is not valid</value>
+  </data>
+  <data name="New password is required" xml:space="preserve">
+    <value>New password is required</value>
+  </data>
+  <data name="YearsInPath_Field_Error" xml:space="preserve">
+    <value>Please enter the number of years you have been a Pathologist for</value>
+  </data>
+  <data name="YearsQualified_Field_Error" xml:space="preserve">
+    <value>Please enter the number of years you have been a qualified Doctor for</value>
   </data>
 </root>

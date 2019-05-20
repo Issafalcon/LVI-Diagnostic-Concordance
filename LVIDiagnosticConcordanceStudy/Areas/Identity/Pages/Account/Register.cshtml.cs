@@ -87,6 +87,19 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             }
         }
 
+        public List<SelectListItem> GenderSelect
+        {
+            get
+            {
+                return new List<SelectListItem>
+                {
+                    new SelectListItem { Value = "Female", Text = _sharedLocalizer["Female"].Value },
+                    new SelectListItem { Value = "Male", Text = _sharedLocalizer["Male"].Value },
+                    new SelectListItem { Value = "Other", Text = _sharedLocalizer["Other"].Value }
+                };
+            }
+        }
+
         public List<SelectListItem> YesNoDropDown
         {
             get
@@ -98,11 +111,10 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
                 };
             }
         }
-
         public class InputModel
         {
             [Required(ErrorMessage = "Required_Field_Error")]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Email_Validation_Error")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -133,7 +145,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             [PersonalData]
             [Display(Name = "Gender")]
             [Required(ErrorMessage = "Required_Field_Error")]
-            public GenderEnum Gender { get; set; }
+            public string Gender { get; set; }
 
             [PersonalData]
             [Required(ErrorMessage = "Required_Field_Error")]
@@ -150,12 +162,12 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
             public string PlaceOfWork { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage = "Required_Field_Error")]
+            [Required(ErrorMessage = "YearsQualified_Field_Error")]
             [Display(Name = "Years Qualified", Description = "The number of years you have been qualified as a doctor")]
             public int YearsQualified { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage = "Required_Field_Error")]
+            [Required(ErrorMessage = "YearsInPath_Field_Error")]
             [Display(Name = "Years in Histopathology", Description = "The number of years you have been working in the specialty of histopathology")]
             public int YearsInPath { get; set; }
 

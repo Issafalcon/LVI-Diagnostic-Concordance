@@ -60,7 +60,7 @@
                 {
                     <li>
                         <a asp-route-id="@(item.Id)">
-                            Case @item.CaseNumber
+                            @Localizer["Case"] @item.CaseNumber
                             @if (Model.SubmittedReports.Contains(item.Id))
                             {
                                 <span class="text-right text-success">@Localizer["Complete"]</span>

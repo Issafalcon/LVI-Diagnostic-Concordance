@@ -36,12 +36,12 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Current password is required")]
             [DataType(DataType.Password)]
             [Display(Name = "Current password")]
             public string OldPassword { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "New password is required")]
             [StringLength(100, ErrorMessage = "New_Password_Error", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "New password")]

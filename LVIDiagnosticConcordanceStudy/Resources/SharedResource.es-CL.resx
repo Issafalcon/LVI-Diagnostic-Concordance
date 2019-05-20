@@ -148,7 +148,7 @@
     <value>Años de entrenamiento en patología</value>
   </data>
   <data name="Years Qualified" xml:space="preserve">
-    <value>Años de entrenamiento</value>
+    <value>Años de entrenamiento para convertirse en patologo</value>
   </data>
   <data name="Personal Data" xml:space="preserve">
     <value>Información Personal</value>
@@ -205,10 +205,10 @@
     <value>Su perfil ha sido actualizado</value>
   </data>
   <data name="Age" xml:space="preserve">
-    <value>Años</value>
+    <value>Edad (Años)</value>
   </data>
   <data name="Case Link" xml:space="preserve">
-    <value>Case Link</value>
+    <value>Hipervínculo del caso</value>
   </data>
   <data name="Grade" xml:space="preserve">
     <value>Grado</value>
@@ -220,7 +220,7 @@
     <value>El Número de permeaciones vasculares (PV) debe ser un número entero de 0 o mayor</value>
   </data>
   <data name="Tumour Size in cm" xml:space="preserve">
-    <value>Tamaño del tumor en cm</value>
+    <value>Tamaño del tumor (cm)</value>
   </data>
   <data name="Female" xml:space="preserve">
     <value>Feminino</value>
@@ -232,7 +232,7 @@
     <value>Otro</value>
   </data>
   <data name="Please confirm your e-mail before logging in." xml:space="preserve">
-    <value>Please confirm your e-mail before logging in.</value>
+    <value>Por favor confirme su correo antes de ingresar.</value>
   </data>
   <data name="Remember me?" xml:space="preserve">
     <value>¿Recordarme?</value>
@@ -833,5 +833,20 @@
   </data>
   <data name="Reset Password" xml:space="preserve">
     <value>Restablecer la contraseña</value>
+  </data>
+  <data name="Current password is required" xml:space="preserve">
+    <value>Se requiere que complete el campo clave actual.</value>
+  </data>
+  <data name="Email_Validation_Error" xml:space="preserve">
+    <value>La información ingresada no corresponde a un correo valido</value>
+  </data>
+  <data name="New password is required" xml:space="preserve">
+    <value>Se requiere que complete el campo nueva clave.</value>
+  </data>
+  <data name="YearsInPath_Field_Error" xml:space="preserve">
+    <value>Se requiere que rellene la casilla años de entrenamiento en patología</value>
+  </data>
+  <data name="YearsQualified_Field_Error" xml:space="preserve">
+    <value>Se requiere que rellene la casilla años de entrenamiento para convertirse en patologo</value>
   </data>
 </root>

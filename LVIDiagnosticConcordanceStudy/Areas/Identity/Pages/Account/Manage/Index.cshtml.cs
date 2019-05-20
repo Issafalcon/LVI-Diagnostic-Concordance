@@ -52,7 +52,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             get
             {
                 return _locOptions.SupportedUICultures
-                    .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+                    .Select(c => new SelectListItem { Value = c.Name, Text = _sharedLocalizer[c.DisplayName] })
                     .ToList();
             }
         }
@@ -64,6 +64,19 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
                 return NationalitySelectList.Nationalities
                     .Select(n => new SelectListItem { Value = n, Text = _sharedLocalizer[n] })
                     .ToList();
+            }
+        }
+
+        public List<SelectListItem> GenderSelect
+        {
+            get
+            {
+                return new List<SelectListItem>
+                {
+                    new SelectListItem { Value = "Female", Text = _sharedLocalizer["Female"].Value },
+                    new SelectListItem { Value = "Male", Text = _sharedLocalizer["Male"].Value },
+                    new SelectListItem { Value = "Other", Text = _sharedLocalizer["Other"].Value }
+                };
             }
         }
 
@@ -104,7 +117,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             [PersonalData]
             [Required(ErrorMessage = "Required_Field_Error")]
             [Display(Name = "Gender")]
-            public GenderEnum Gender { get; set; }
+            public string Gender { get; set; }
 
             [PersonalData]
             [Display(Name = "Nationality")]
@@ -121,12 +134,12 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
             public string PlaceOfWork { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage = "Required_Field_Error")]
+            [Required(ErrorMessage = "YearsQualified_Field_Error")]
             [Display(Name = "Years Qualified", Description = "The number of years you have been qualified as a doctor")]
             public int YearsQualified { get; set; }
 
             [PersonalData]
-            [Required(ErrorMessage = "Required_Field_Error")]
+            [Required(ErrorMessage = "YearsInPath_Field_Error")]
             [Display(Name = "Years In Histopathology", Description = "The number of years you have been working in the specialty of histopathology")]
             public int YearsInPath { get; set; }
 

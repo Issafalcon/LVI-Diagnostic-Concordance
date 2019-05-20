@@ -335,7 +335,7 @@ $(document).ready(function () {
                             display: true,
                             labelString: culture === "en-GB"
                                 ? "Probability of Having LVI"
-                                : "Probability of Having LVI"
+                                : "Probabilidad de presentar PV"
                         }
                     }],
                     xAxes: [{
@@ -346,7 +346,7 @@ $(document).ready(function () {
                             display: true,
                             labelString: culture === "en-GB"
                                 ? "Cumulative Cases Reported As LVI Positive"
-                                : "Cumulative Cases Reported As LVI Positive"
+                                : "Acumulado de casos respondidos como positivos por el usuario"
                         }
                     }]
                 }

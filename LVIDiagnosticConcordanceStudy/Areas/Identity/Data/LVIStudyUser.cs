@@ -19,7 +19,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Data
         public string LastName { get; set; }
 
         [PersonalData]
-        public GenderEnum Gender { get; set; }
+        public string Gender { get; set; }
 
         [PersonalData]
         public string Nationality { get; set; }
@@ -46,15 +46,5 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Data
         public List<Report> Reports { get; set; }
 
         public bool CompleteStudy { get; set; } = false;
-    }
-
-    public enum GenderEnum
-    {
-        [Display(Name = "Female")]
-        Female,
-        [Display(Name = "Male")]
-        Male,
-        [Display(Name = "Other")]
-        Other
     }
 }

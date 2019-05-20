@@ -121,15 +121,15 @@
     <value>Eliminar</value>
   </data>
   <data name="Delete_data_warning" xml:space="preserve">
-    <value>Al eliminar estos datos su cuenta sera eliminada de manera irreversible.</value>
+    <value>La eliminación de esta información es permanente y no puede recuperarse posteriormente.</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>Descargar</value>
   </data>
   <data name="Personal Data" xml:space="preserve">
-    <value>Personal Data</value>
+    <value>Datos personales</value>
   </data>
   <data name="Personal_data_message" xml:space="preserve">
-    <value>Tu cuenta contiene información personal que usted nos ha confiado. Esta pagina le permite descargarla o eliminar.</value>
+    <value>Su cuenta contiene información personal que usted nos ha confiado. Esta página le permite descargarla o eliminarla.</value>
   </data>
 </root>
