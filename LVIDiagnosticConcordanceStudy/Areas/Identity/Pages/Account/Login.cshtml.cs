@@ -42,11 +42,11 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Required_Field_Error")]
+            [EmailAddress(ErrorMessage = "Email_Validation_Error")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Required_Field_Error")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }

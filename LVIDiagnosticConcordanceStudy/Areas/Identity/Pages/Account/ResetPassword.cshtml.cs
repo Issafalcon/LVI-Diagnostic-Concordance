@@ -26,11 +26,11 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Required_Field_Error")]
+            [EmailAddress(ErrorMessage = "Email_Validation_Error")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Required_Field_Error")]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             public string Password { get; set; }

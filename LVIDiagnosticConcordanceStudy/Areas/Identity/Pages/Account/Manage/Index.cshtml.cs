@@ -101,7 +101,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Required(ErrorMessage = "Required_Field_Error")]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Email_Validation_Error")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -140,7 +140,7 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account.Manage
 
             [PersonalData]
             [Required(ErrorMessage = "YearsInPath_Field_Error")]
-            [Display(Name = "Years In Histopathology", Description = "The number of years you have been working in the specialty of histopathology")]
+            [Display(Name = "Years in Histopathology", Description = "The number of years you have been working in the specialty of histopathology")]
             public int YearsInPath { get; set; }
 
             [PersonalData]

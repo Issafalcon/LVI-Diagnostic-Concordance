@@ -36,8 +36,9 @@ namespace LVIDiagnosticConcordanceStudy.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Required_Field_Error")]
+            [EmailAddress(ErrorMessage = "Email_Validation_Error")]
+            [Display(Name = "Email")]
             public string Email { get; set; }
         }
 
