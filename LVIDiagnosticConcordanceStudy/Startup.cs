@@ -49,7 +49,7 @@ namespace LVIDiagnosticConcordanceStudy
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("MyDvConnection")));
+                    options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
             }
             else
             {
